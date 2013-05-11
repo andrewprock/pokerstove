@@ -7,4 +7,5 @@ include_directories(".")
 #add_definitions ("-ansi -pedantic -Wall -Wextra")
 add_definitions ("-ansi -Wall")
 
-add_subdirectory (pokerstove/peval)
+add_subdirectory(pokerstove/peval)
+add_subdirectory(ext/gtest)
