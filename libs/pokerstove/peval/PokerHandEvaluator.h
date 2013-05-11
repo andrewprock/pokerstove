@@ -96,7 +96,7 @@ namespace pokerstove
       return evaluateHand(hand, board);
     }
     virtual size_t handSize () const = 0;            //!< return the maximum size of a players hand
-    virtual size_t boardSize () const = 0;           //!< return the maximum size of the community cards
+    virtual size_t boardSize () const = 0;           //!< return the maximum size of the board
     virtual size_t evaluationSize () const = 0;      //!< return 1 for high only, 2 for high low
     virtual size_t numDraws () const { return 0; }   //!< return the maximum size of a players hand
 

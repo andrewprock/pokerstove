@@ -1171,7 +1171,7 @@ static inline bool badugiless (int c1, int c2)
 PokerEvaluation CardSet::evaluateBadugi () const
 {
   // get our ranks orgainzed in lowball order by suit
-  array<int,4> suits = 
+	boost::array<int,4> suits = 
     {{ 
       LOWBALL_ROTATE_RANKS(C()),
       LOWBALL_ROTATE_RANKS(D()),
@@ -1182,7 +1182,7 @@ PokerEvaluation CardSet::evaluateBadugi () const
   // We try to save some time by being smart about which suits we loop
   // over.  Empty suits are ignored, and suits with one rank are used
   // as is.  At the end we sort to make next_permutation to work properly.
-  array<int,4> ind;
+	boost::array<int,4> ind;
   int bmust = 0;
   size_t k=0;
   for (size_t i=0; i<suits.size(); i++)

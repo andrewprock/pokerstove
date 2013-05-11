@@ -18,12 +18,11 @@
 #include "UniversalHandEvaluator.h"
 
 using namespace std;
-using namespace boost;
 using namespace pokerstove;
 
-shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc (const string & strid)
+boost::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc (const string & strid)
 {
-  shared_ptr<PokerHandEvaluator> ret;
+	boost::shared_ptr<PokerHandEvaluator> ret;
   switch (strid[0])
     {
     case 'h':		//     hold'em
