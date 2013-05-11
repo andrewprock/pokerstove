@@ -21,7 +21,5 @@ poker.
 
 A basic evaluation tool which demonstrates how to use the peval library.
 
-- Andrew
-
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/andrewprock/pokerstove/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
