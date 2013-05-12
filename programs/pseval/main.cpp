@@ -13,38 +13,38 @@ using namespace pokerstove;
 class EvalDriver
 {
 public:
-	EvalDriver(const string& game, 
-			   const vector<string>& hands, 
-			   const string& board)
-		: _peval(PokerHandEvaluator::alloc (game))
-		, _hands(hands)
-		, _board(board)
-	{
-	}
+    EvalDriver(const string& game, 
+               const vector<string>& hands, 
+               const string& board)
+        : _peval(PokerHandEvaluator::alloc (game))
+        , _hands(hands)
+        , _board(board)
+    {
+    }
 
-	void evaluate()
-	{
-		for (string& hand: _hands)
-		{
-			_results[hand] = _peval->evaluate(hand, _board);
-		}
-	}
+    void evaluate()
+    {
+        for (string& hand: _hands)
+        {
+            _results[hand] = _peval->evaluate(hand, _board);
+        }
+    }
 
-	string str() const
-	{
-		string ret;
-		for (const string& hand: _hands)
-		{
-			ret += (boost::format("%10s: %s\n") % hand % _results.at(hand).str()).str();
-		}
-		return ret;
-	}
+    string str() const
+    {
+        string ret;
+        for (const string& hand: _hands)
+        {
+            ret += (boost::format("%10s: %s\n") % hand % _results.at(hand).str()).str();
+        }
+        return ret;
+    }
 
 private:
-	boost::shared_ptr<PokerHandEvaluator> _peval;
-	vector<string> _hands;
-	string _board;
-	map<string,PokerHandEvaluation> _results;
+    boost::shared_ptr<PokerHandEvaluator> _peval;
+    vector<string> _hands;
+    string _board;
+    map<string,PokerHandEvaluation> _results;
 };
 
 int main (int argc, char ** argv)
@@ -67,24 +67,25 @@ int main (int argc, char ** argv)
         "     3     three-card poker\n"
         "\n"
         "   examples:\n"
-		"		./pstove/eval acas\n"
-		"		./pstove/eval AcAs Kh4d --board 5c8s9h\n"
-		"		./pstove/eval AcAs Kh4d --board 5c8s9h\n"
-		"		./pstove/eval --game l 7c5c4c3c2c\n"
-		"		./pstove/eval --game k 7c5c4c3c2c\n"
-		"		./pstove/eval --game kansas-city-lowball 7c5c4c3c2c\n"
+        "       pseval acas\n"
+        "       pseval AcAs Kh4d --board 5c8s9h\n"
+        "       pseval AcAs Kh4d --board 5c8s9h\n"
+        "       pseval --game l 7c5c4c3c2c\n"
+        "       pseval --game k 7c5c4c3c2c\n"
+        "       pseval --game kansas-city-lowball 7c5c4c3c2c\n"
         "\n"
         ;
 
     try 
     {
         // set up the program options, handle the help case, and extract the values
-		po::options_description desc("Allowed options");
+        po::options_description desc("Allowed options");
         desc.add_options()
-            ("help,?", "produce help message")
+            ("help,?",	  "produce help message")
             ("game,g",    po::value<string>()->default_value("h"), "game to use for evaluation")
             ("board,b",   po::value<string>()->default_value(""),  "community cards for he/o/o8")
             ("hand,h",    po::value< vector<string> >(),           "a hand for evaluation")
+			("quiet,q",	  "produce no output")
             ;
       
         po::positional_options_description p;
@@ -97,7 +98,7 @@ int main (int argc, char ** argv)
                    .run(), vm);
         po::notify (vm);
 
-		// check for help
+        // check for help
         if (vm.count("help") || argc == 1)
         {
             cout << desc << extendedHelp << endl;
@@ -106,10 +107,11 @@ int main (int argc, char ** argv)
 
         // extract the options
         EvalDriver driver(vm["game"].as<string>(),
-						  vm["hand"].as< vector<string> >(),
-						  vm["board"].as<string>());
+                          vm["hand"].as< vector<string> >(),
+                          vm["board"].as<string>());
 		driver.evaluate();
-		cout << driver.str();
+		if (vm.count("quiet") == 0)
+			cout << driver.str();
     }
     catch(std::exception& e) 
     {
