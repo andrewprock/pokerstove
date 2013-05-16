@@ -114,7 +114,7 @@ namespace pokerstove
       int bmask = flipAce(board.rankMask () & 0x107F);
       if (nRanksTable[bmask] >= 3)
         {
-          for (uint i=0; i<hand_candidates.size(); i++)
+          for (size_t i=0; i<hand_candidates.size(); i++)
             {
               int hmask = flipAce(hand_candidates[i].rankMask () & 0x107F);
               if (nRanksTable[hmask] < 2)
@@ -153,7 +153,7 @@ namespace pokerstove
       int bmask = flipAce(board.rankMask () & 0x107F);
       if (nRanksTable[bmask] >= 3)
         {
-          for (uint i=0; i<hand_candidates.size(); i++)
+          for (size_t i=0; i<hand_candidates.size(); i++)
             {
               int hmask = flipAce(hand_candidates[i].rankMask () & 0x107F);
               if (nRanksTable[hmask] < 2)
