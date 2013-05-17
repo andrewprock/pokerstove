@@ -87,14 +87,14 @@ string PokerHand::preflopstr () const
 void PokerHand::fromString (const string & instr)
 {
   clear ();
-  uint slen = (uint)instr.length ();
+  size_t slen = (size_t)instr.length ();
   if (slen == 0)
     return;
   if (slen == 1)
     return;
     //throw std::invalid_argument (string("PokerHand parse error: " + instr).c_str());
 
-  for (uint i=0; i<slen-1; i++)
+  for (size_t i=0; i<slen-1; i++)
     {
       Card c;
       if (c.fromString (instr.substr(i)))

@@ -24,8 +24,9 @@ public:
 
     void evaluate()
     {
-        for (string& hand: _hands)
+        for (auto it=_hands.begin(); it!=_hands.end(); it++)
         {
+			string& hand = *it;
             _results[hand] = _peval->evaluate(hand, _board);
         }
     }
@@ -33,8 +34,9 @@ public:
     string str() const
     {
         string ret;
-        for (const string& hand: _hands)
+        for (auto it=_hands.begin(); it!=_hands.end(); it++)
         {
+			auto hand = *it;
             ret += (boost::format("%10s: %s\n") % hand % _results.at(hand).str()).str();
         }
         return ret;
