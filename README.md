@@ -85,9 +85,11 @@ example:
 
 Getting boost to work under windows can be a bit of a challenge.
 One of the easier ways is to install precompiled librares.  There
-is a batch of them available at sourceforge: [boost precomplied
-libraries]
+is a batch of them available at sourceforge. If you're working
+with Visual Studio 2010, you will probably need the 32 bit
+libraries.  [boost precomplied libraries]
 (http://sourceforge.net/projects/boost/files/boost-binaries/1.53.0/)
+
 
 Under windows, the cmake gui can be used to construct solution
 and project files for Visual Studio 2010.  To do this, browse
