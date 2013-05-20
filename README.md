@@ -105,6 +105,21 @@ Once you've done that, you should be able to select
 
 to build the sample program.
 
+### OSX
+
+In order to build under Max OSX, you'll need to install XCode,
+git, cmake, macports, and boost.  The first for can be installed
+in the convention manner, with XCode coming form the App Store, cmake,
+git and macports downloaded from the web.  The macports package is a
+typical unix package management utility and is required to install boost.
+Once you've installed and selfupdate'd macports, you can install boost:
+
+    sudo port install boost
+    
+From there you can run the cmake gui as in windows.  This will create
+an XCode project which should comile the sample utility.
+
+install boost as you 
 
 [![Bitdeli Badge]
 (https://d2weczhvl823v0.cloudfront.net/andrewprock/pokerstove/trend.png)]
