@@ -10,57 +10,57 @@
 
 namespace pokerstove
 {
-  /**
-   * A rank class.  We take great care to manage the type to limit the
-   * values of Ranks that can be created.  There is some leakage in
-   * the fact that certain classes have to be friends to use the more
-   * powerfull methods.
-   */
-  class Rank
-  {
-  public:
+/**
+ * A rank class.  We take great care to manage the type to limit the
+ * values of Ranks that can be created.  There is some leakage in
+ * the fact that certain classes have to be friends to use the more
+ * powerfull methods.
+ */
+class Rank
+{
+public:
     static const unsigned int NUM_RANK = 13;
     static const unsigned int cardianlity = 13;
 
     // manage the values of possible ranks strictly
-    static const Rank Two()   { return Rank(RANK_TWO  ); }
+    static const Rank Two()   { return Rank(RANK_TWO); }
     static const Rank Three() { return Rank(RANK_THREE); }
-    static const Rank Four()  { return Rank(RANK_FOUR ); }
-    static const Rank Five()  { return Rank(RANK_FIVE ); }
-    static const Rank Six()   { return Rank(RANK_SIX  ); }
+    static const Rank Four()  { return Rank(RANK_FOUR); }
+    static const Rank Five()  { return Rank(RANK_FIVE); }
+    static const Rank Six()   { return Rank(RANK_SIX); }
     static const Rank Seven() { return Rank(RANK_SEVEN); }
     static const Rank Eight() { return Rank(RANK_EIGHT); }
-    static const Rank Nine()  { return Rank(RANK_NINE ); }
-    static const Rank Ten()   { return Rank(RANK_TEN  ); }
-    static const Rank Jack()  { return Rank(RANK_JACK ); }
+    static const Rank Nine()  { return Rank(RANK_NINE); }
+    static const Rank Ten()   { return Rank(RANK_TEN); }
+    static const Rank Jack()  { return Rank(RANK_JACK); }
     static const Rank Queen() { return Rank(RANK_QUEEN); }
-    static const Rank King()  { return Rank(RANK_KING ); }
-    static const Rank Ace()   { return Rank(RANK_ACE  ); }
- 
+    static const Rank King()  { return Rank(RANK_KING); }
+    static const Rank Ace()   { return Rank(RANK_ACE); }
+
     /**
      * Default constructor initializes suit to Rank::Two()
      */
-    Rank () : _rank(RANK_TWO) {}
+    Rank() : _rank(RANK_TWO) {}
 
     /**
-     * Create from input string.  
+     * Create from input string.
      * @see fromString
      */
-    explicit Rank (const std::string& str);
-    explicit Rank (uint8_t c) : _rank(c%NUM_RANK) {}  //!< breaks encapsulation (for HoldemHandBalancer) TODO: fix this!
+    explicit Rank(const std::string& str);
+    explicit Rank(uint8_t c) : _rank(c%NUM_RANK) {}   //!< breaks encapsulation (for HoldemHandBalancer) TODO: fix this!
 
     /**
      * Encode rank as a string.  A string of length one from [2-9TJQKA]
      * will be returned.
-     */ 
-    std::string str () const;
+     */
+    std::string str() const;
 
     /**
      * Parse from input string. Only the first letter of the input
      * string is examined, and must be in [2-9tTjJqQkKaA] for a valid
      * Rank object to be created.
      */
-    void fromString (const std::string& s);
+    void fromString(const std::string& s);
 
     /**
      * Give access to the operators that one might use if one knew the
@@ -76,7 +76,7 @@ namespace pokerstove
     void operator++()                    { ++_rank; }
     void operator--()                    { --_rank; }
 
-  private:
+private:
     /**
      * We break encapsulation with these private methods.  The
      * semantics are that the card rank is encoded as
@@ -86,12 +86,12 @@ namespace pokerstove
      * a last resort.  Probably the best solution is to limit access
      * to these functions to friends.
      */
-    void    encode (uint8_t c) { _rank = c%NUM_RANK; }         // was encode
-    uint8_t code () const      { return _rank; }
-    int     rankBit () const   { return 0x01 << _rank; }
+    void    encode(uint8_t c) { _rank = c%NUM_RANK; }          // was encode
+    uint8_t code() const      { return _rank; }
+    int     rankBit() const   { return 0x01 << _rank; }
 
-    static bool isRankChar (char c);
-    
+    static bool isRankChar(char c);
+
     friend class Card;
     friend class CardSet;
     friend class PokerEvaluation;
@@ -126,7 +126,7 @@ namespace pokerstove
     static const int RANK_QUEEN        =10;
     static const int RANK_KING         =11;
     static const int RANK_ACE          =12;
-  };
+};
 
 }
 

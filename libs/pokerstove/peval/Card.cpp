@@ -11,62 +11,62 @@ using pokerstove::Suit;
 using pokerstove::Rank;
 using pokerstove::Card;
 
-Card::Card ()
-  : _card(0)
+Card::Card()
+    : _card(0)
 {}
 
-Card::Card (const std::string& str)
-  : _card(0)
+Card::Card(const std::string& str)
+    : _card(0)
 {
-  fromString (str);
+    fromString(str);
 }
 
-Card::Card (const Rank& r, const Suit& s)
-  : _card(encode(r,s))
+Card::Card(const Rank& r, const Suit& s)
+    : _card(encode(r,s))
 {}
 
-Card::Card (uint8_t cindex)
-  : _card(cindex)
+Card::Card(uint8_t cindex)
+    : _card(cindex)
 {}
 
-Rank Card::rank () const
+Rank Card::rank() const
 {
-  return Rank (_card%Rank::NUM_RANK);
+    return Rank(_card%Rank::NUM_RANK);
 }
 
-Suit Card::suit () const
+Suit Card::suit() const
 {
-  return Suit (_card/Rank::NUM_RANK);
+    return Suit(_card/Rank::NUM_RANK);
 }
 
-std::string Card::str () const
+std::string Card::str() const
 {
-  return rank().str()+suit().str();
+    return rank().str()+suit().str();
 }
 
-bool Card::fromString (const std::string & str)
+bool Card::fromString(const std::string& str)
 {
-  if (Rank::isRankChar (str[0]) && Suit::isSuitChar (str[1]))
+    if (Rank::isRankChar(str[0]) && Suit::isSuitChar(str[1]))
     {
-      _card = encode (Rank(str),Suit(str.substr(1)));
-      return true;
+        _card = encode(Rank(str),Suit(str.substr(1)));
+        return true;
     }
-  return false;
+    return false;
 }
 
-int Card::code () const
+int Card::code() const
 {
-  return _card;
+    return _card;
 }
 
-uint8_t Card::encode (Rank r, Suit s)
+uint8_t Card::encode(Rank r, Suit s)
 {
-  return r.code () + s.code () * Rank::NUM_RANK;
+    return r.code() + s.code() * Rank::NUM_RANK;
 }
 
-bool Card::operator<  (const Card& r) const
-{ 
-  if ((_card%Rank::NUM_RANK) == (r._card%Rank::NUM_RANK))
-    return _card/Rank::NUM_RANK < r._card/Rank::NUM_RANK;
-  return _card%Rank::NUM_RANK < r._card%Rank::NUM_RANK;
+bool Card::operator< (const Card& r) const
+{
+    if ((_card%Rank::NUM_RANK) == (r._card%Rank::NUM_RANK))
+        return _card/Rank::NUM_RANK < r._card/Rank::NUM_RANK;
+    return _card%Rank::NUM_RANK < r._card%Rank::NUM_RANK;
 }

@@ -7,46 +7,46 @@
 
 #include "PokerHandEvaluator.h"
 
-namespace pokerstove 
+namespace pokerstove
 {
-  /**
-   * A specialized hand evaluator for hold'em.  Not as slow.
-   */
-  class DrawHighHandEvaluator : public PokerHandEvaluator
-  {
-  public:
-    DrawHighHandEvaluator () 
-      : PokerHandEvaluator ()
-      , _handSize (5)
+/**
+ * A specialized hand evaluator for hold'em.  Not as slow.
+ */
+class DrawHighHandEvaluator : public PokerHandEvaluator
+{
+public:
+    DrawHighHandEvaluator()
+        : PokerHandEvaluator()
+        , _handSize(5)
     {}
 
-    virtual PokerHandEvaluation evaluateHand (const CardSet & hand, const CardSet&) const
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand, const CardSet&) const
     {
-      return PokerHandEvaluation(hand.evaluateHigh ());
+        return PokerHandEvaluation(hand.evaluateHigh());
     }
 
-    virtual PokerEvaluation evaluateRanks (const CardSet & hand, const CardSet& board=CardSet(0)) const
+    virtual PokerEvaluation evaluateRanks(const CardSet& hand, const CardSet& board=CardSet(0)) const
     {
-      return hand.evaluateHighRanks ();
+        return hand.evaluateHighRanks();
     }
 
-    virtual PokerEvaluation evaluateSuits (const CardSet & hand, const CardSet& board=CardSet(0)) const
+    virtual PokerEvaluation evaluateSuits(const CardSet& hand, const CardSet& board=CardSet(0)) const
     {
-      return hand.evaluateHighFlush ();
+        return hand.evaluateHighFlush();
     }
 
-    virtual size_t handSize () const { return _handSize; }
-    virtual size_t boardSize () const { return 0; }
-    virtual size_t evaluationSize () const { return 1; }
+    virtual size_t handSize() const { return _handSize; }
+    virtual size_t boardSize() const { return 0; }
+    virtual size_t evaluationSize() const { return 1; }
 
-    virtual void setHandSize (size_t sz)
+    virtual void setHandSize(size_t sz)
     {
-      _handSize = sz;
+        _handSize = sz;
     }
 
-  private:
+private:
     size_t _handSize;
-  };
+};
 
 }
 #endif  // PEVAL_DRAWHIGHHANDEVALUATOR_H_
