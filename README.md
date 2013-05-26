@@ -1,11 +1,11 @@
 PokerStove
 ==========
 
-The core libraries of pokerstove are being open sourced.  The project
-is currently in the process of reviewing the code and evaluating
-licences.  Once a license has been settled on, and the code sanitized
-the first commits can start.  Until then, please find the old
-installer in the win32 directory.
+The core libraries of pokerstove are being open sourced.  The project is
+currently in the process of reviewing the code and evaluating licences.  Once a
+license has been settled on, and the code sanitized the first commits can start.
+Until then, please find the old installer in the win32 directory.  You can also
+find the apk file for the Android version of the utility in the android folder.
 
 ## Libraries
 
@@ -13,13 +13,18 @@ installer in the win32 directory.
 
 This is a basic c++ hand evaluation library with the main goal being generality,
 extensibility, and ease of use.  There are evaluators for fourteen variants of
-poker.
+poker.  Additionally, there are various card manipulation and query tools built
+into the CardSet class.
 
 ## Programs
 
-### eval
+### pseval
 
 A basic evaluation tool which demonstrates how to use the peval library.
+
+### pscolex
+
+A utility for viewing colexicographical index for sets of cards.
 
 ## Building
 
