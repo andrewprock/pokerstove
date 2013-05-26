@@ -152,28 +152,20 @@ size_t CardSet::size () const
 
 void CardSet::fromString (const string& instr)
 {
-  clear ();
-  // we allow spaces but nuke them here
-  string in = erase_all_copy (instr, " ");
+	clear ();
+	// we allow spaces but nuke them here
+	string in = erase_all_copy (instr, " ");
 
-  for (size_t i=0; i<in.size(); i+=2)
+	for (size_t i=0; i<in.size(); i+=2)
     {
-      try
-        {
-          Card c(Rank(in.substr(i)),
-                 Suit(in.substr(i+1)));
-          if (contains(c))
-            {
-              clear();  // card duplication is an error, no hand parsed
-              return;
-            }
-          insert (c);
-        }
-      catch (std::exception&)
-        {
-          // if there is an error in parsing, we are *done*
-          return;
-        }
+		Card c(Rank(in.substr(i)),
+			   Suit(in.substr(i+1)));
+		if (contains(c))
+		{
+			clear();  // card duplication is an error, no hand parsed
+			return;
+		}
+		insert (c);
     }
 }
 

@@ -26,7 +26,7 @@ public:
     {
         for (auto it=_hands.begin(); it!=_hands.end(); it++)
         {
-			string& hand = *it;
+            string& hand = *it;
             _results[hand] = _peval->evaluate(hand, _board);
         }
     }
@@ -36,8 +36,10 @@ public:
         string ret;
         for (auto it=_hands.begin(); it!=_hands.end(); it++)
         {
-			auto hand = *it;
-            ret += (boost::format("%10s: %s\n") % hand % _results.at(hand).str()).str();
+            const string& hand = *it;
+            ret += boost::str(boost::format("%10s: %s\n") 
+                              % hand 
+                              % _results.at(hand).str());
         }
         return ret;
     }
@@ -63,8 +65,6 @@ int main (int argc, char ** argv)
         "     d     draw high\n"
         "     l     lowball (A-5)\n"
         "     k     Kansas City lowball (2-7)\n"
-        "     t     triple draw lowball (2-7)\n"
-        "     T     triple draw lowball (A-5)\n"
         "     b     badugi\n"
         "     3     three-card poker\n"
         "\n"
@@ -83,11 +83,11 @@ int main (int argc, char ** argv)
         // set up the program options, handle the help case, and extract the values
         po::options_description desc("Allowed options");
         desc.add_options()
-            ("help,?",	  "produce help message")
+            ("help,?",    "produce help message")
             ("game,g",    po::value<string>()->default_value("h"), "game to use for evaluation")
             ("board,b",   po::value<string>()->default_value(""),  "community cards for he/o/o8")
             ("hand,h",    po::value< vector<string> >(),           "a hand for evaluation")
-			("quiet,q",	  "produce no output")
+            ("quiet,q",   "produce no output")
             ;
       
         po::positional_options_description p;
@@ -111,9 +111,9 @@ int main (int argc, char ** argv)
         EvalDriver driver(vm["game"].as<string>(),
                           vm["hand"].as< vector<string> >(),
                           vm["board"].as<string>());
-		driver.evaluate();
-		if (vm.count("quiet") == 0)
-			cout << driver.str();
+        driver.evaluate();
+        if (vm.count("quiet") == 0)
+            cout << driver.str();
     }
     catch(std::exception& e) 
     {

@@ -33,3 +33,4 @@ include_directories(../libs)
 
 add_subdirectory(../libs libs)
 add_subdirectory (pseval)
+add_subdirectory (pscolex)
