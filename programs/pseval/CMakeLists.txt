@@ -6,5 +6,5 @@ add_definitions ("-std=c++0x")
 
 target_link_libraries(pseval
         peval
-	${Boost_LIBRARIES}
+        ${Boost_LIBRARIES}
 )

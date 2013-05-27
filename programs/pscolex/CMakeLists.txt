@@ -5,5 +5,5 @@ add_definitions ("-std=c++0x")
 
 target_link_libraries(pscolex
         peval
-	${Boost_LIBRARIES}
+        ${Boost_LIBRARIES}
 )
