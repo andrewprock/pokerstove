@@ -1,6 +1,10 @@
 PokerStove
 ==========
 
+PokerStove is a highly hand optimized poker hand evaluator for the game of Texas
+Hold'em.  It was first released in 2002, and has been available as freeware since
+it's first release.
+
 The core libraries of pokerstove are being open sourced.  The project is
 currently in the process of reviewing the code and evaluating licences.  Once a
 license has been settled on, and the code sanitized the first commits can start.
