@@ -11,9 +11,9 @@ find the apk file for the Android version of the utility in the android folder.
 
 ### peval
 
-This is a basic c++ hand evaluation library with the main goal being generality,
-extensibility, and ease of use.  There are evaluators for fourteen variants of
-poker.  Additionally, there are various card manipulation and query tools built
+This is a basic c++ hand evaluation library.  The main design goals of the library
+are generality, extensibility, and ease of use.  There are evaluators for fourteen
+variants of poker.  Additionally, there are various card manipulation and query tools built
 into the CardSet class.
 
 ## Programs
