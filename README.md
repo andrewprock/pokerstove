@@ -1,8 +1,8 @@
 PokerStove
 ==========
 
-PokerStove is a highly hand optimized poker hand evaluator for the game of Texas
-Hold'em.  It was first released in 2002, and has been available as freeware since
+PokerStove is a highly hand optimized C++ poker hand evaluation library.  The Win32 Hold'em
+GUI was first released in 2002, and has been available as freeware since
 it's first release.
 
 The core libraries of pokerstove are being open sourced.  The project is
