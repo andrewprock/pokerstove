@@ -1,8 +1,8 @@
 PokerStove
 ==========
 
-PokerStove is a highly hand optimized poker hand evaluator for the game of Texas
-Hold'em.  It was first released in 2002, and has been available as freeware since
+PokerStove is a highly hand optimized C++ poker hand evaluation library.  The Win32 Hold'em
+GUI was first released in 2002, and has been available as freeware since
 it's first release.
 
 The core libraries of pokerstove are being open sourced.  The project is
@@ -15,7 +15,7 @@ find the apk file for the Android version of the utility in the android folder.
 
 ### peval
 
-This is a basic c++ hand evaluation library.  The main design goals of the library
+This is a c++ poker hand evaluation library.  The main design goals of the library
 are generality, extensibility, and ease of use.  There are evaluators for fourteen
 variants of poker.  Additionally, there are various card manipulation and query tools built
 into the CardSet class.
@@ -24,7 +24,8 @@ into the CardSet class.
 
 ### pseval
 
-A basic evaluation tool which demonstrates how to use the peval library.
+A tool for poker hand evaluation.  It demonstrates how to use the peval library, and to create
+evaluators for the different variants of poker.
 
 ### pscolex
 
@@ -34,8 +35,8 @@ A utility for viewing colexicographical index for sets of cards.
 
 The pokerstove libraries come with build scripts for cmake.  This
 should allow you to build it on any platform with minimal
-tweaking.  I've only built this project under linux/g++ and
-windows/vc2010 so far.
+tweaking.  I've only built this project under linux/g++,
+windows/vc2010 and OSX/XCode so far.
 
 In order to build the libraries you'll need the following
 installed on your platform of choice:
@@ -99,7 +100,6 @@ with Visual Studio 2010, you will probably need the 32 bit
 libraries.  [boost precomplied libraries]
 (http://sourceforge.net/projects/boost/files/boost-binaries/1.53.0/)
 
-
 Under windows, the cmake gui can be used to construct solution
 and project files for Visual Studio 2010.  To do this, browse
 source to locate the programs directory git/pokerstove/programs.
@@ -113,6 +113,7 @@ Once you've done that, you should be able to select
     Menu->Build->Build Solution
 
 to build the sample program.
+
 
 ### OSX
 
