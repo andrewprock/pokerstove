@@ -263,6 +263,18 @@ bool CardSet::insertRanks(const CardSet& rset)
     return true;
 }
 
+#if 0
+CardSet CardSet::canonizeRanks() const
+{
+    // this is very slow, optimize if it winds up in an inner loop
+    string ranks = rankstr();
+    for(size_t i=0; i<ranks.size(); i++)
+    {
+
+    }
+}
+#endif
+
 CardSet& CardSet::insert(const Card& c)
 {
     _cardmask |= (ONE64 << c.code());

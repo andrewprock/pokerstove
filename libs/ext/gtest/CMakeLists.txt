@@ -11,6 +11,9 @@ ExternalProject_Add(googletest
      PREFIX "${CMAKE_CURRENT_BINARY_DIR}"
 # Disable install step
     INSTALL_COMMAND ""
+# Disable update step
+# This is disabled to allow offline work.
+    UPDATE_COMMAND ""
 )
 
 # Specify include dir

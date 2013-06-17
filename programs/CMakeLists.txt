@@ -31,6 +31,8 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 include_directories(../libs)
 
+enable_testing()
+
 add_subdirectory(../libs libs)
 add_subdirectory (pseval)
 add_subdirectory (pscolex)

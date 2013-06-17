@@ -12,6 +12,25 @@ using namespace std;
 namespace po = boost::program_options;
 using namespace pokerstove;
 
+#if 0
+std::set<CardSet>
+void expandRankSet(size_t numCards)
+{
+    combinations cards(52,numCards);
+    do
+    {
+        CardSet hand;
+        for (size_t i=0; i<num_cards; i++)
+        {
+            hand.insert (Card(cards[i]));
+        }
+        collection.insert(hand.canonize());
+        rankHands[hand.rankstr()] = hand.rankColex();
+    }
+    while (cards.next());
+}
+#endif
+
 int main (int argc, char ** argv)
 {
     try 
