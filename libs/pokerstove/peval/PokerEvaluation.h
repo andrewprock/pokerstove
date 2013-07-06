@@ -47,10 +47,13 @@ class PokerEvaluation
 public:
     PokerEvaluation();
     explicit PokerEvaluation(int ecode);  //!< for codes saved for later use, like in a file
+
+#if 0
     PokerEvaluation(int type,             //!< Manually create high hand evaluation
                     int major,
                     int minor,
                     int kickers);
+#endif
 
     std::string str() const;     //!< semantic meaning of the evaluation
     std::string bitstr() const;  //!< bit string of the evaluation code. debugging.

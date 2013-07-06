@@ -11,6 +11,7 @@ add_subdirectory(ext/gtest)
 find_library(gtest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 link_directories(${GTEST_LIBS_DIR})
+add_definitions ("-fPIC")
 
 add_subdirectory(pokerstove/peval)
 

@@ -131,7 +131,7 @@ public:
     PokerEvaluation evaluateHigh() const;
     PokerEvaluation evaluateHighRanks() const;
     PokerEvaluation evaluateHighFlush() const;
-    PokerEvaluation evaluateHighThreeCard() const;
+    //PokerEvaluation evaluateHighThreeCard() const;
     PokerEvaluation evaluateLowA5() const;
     PokerEvaluation evaluate8LowA5() const;
     PokerEvaluation evaluateLow2to7() const;
