@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
+find_package (Threads)
 
 # peval library
 
@@ -18,6 +19,6 @@ set(test_sources
         CardSet.test.cpp
 )
 add_executable(peval_tests ${test_sources})
-target_link_libraries(peval_tests gtest gtest_main)
+target_link_libraries(peval_tests gtest gtest_main ${CMAKE_THREAD_LIBS_INIT})
 
 add_test(TestPeval peval_tests )
