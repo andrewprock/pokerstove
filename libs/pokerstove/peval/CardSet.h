@@ -181,10 +181,18 @@ private:
     uint64_t _cardmask;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+// Below are standalone methods related to CardSet objects.  They should
+// probably be moved to a separate file as they don't directly manipulate
+// CardSet data.
+////////////////////////////////////////////////////////////////////////////////
+
+
 /**
  * cannonize a hand relative to a board
  */
 CardSet canonizeToBoard(const CardSet& board, const CardSet& hand);
+
 
 std::vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest);
 } // namespace pokerstove

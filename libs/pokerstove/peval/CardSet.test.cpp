@@ -1,30 +1,27 @@
 #include <gtest/gtest.h>
+#include "CardSet.h"
 
-class CardSetTest : public ::testing::Test
+TEST(CardSetTest, StringConstructorToString)
 {
-protected:
-    int x;
+    using namespace pokerstove;
 
-};
-
-TEST_F(CardSetTest, Null) {
-    ASSERT_TRUE(false);
+    EXPECT_EQ("Ac", CardSet("Ac").str());
+    EXPECT_EQ("As", CardSet("As").str());
+    EXPECT_EQ("Qh", CardSet("qh").str());
+    EXPECT_EQ("Td", CardSet("Td").str());
+    EXPECT_EQ("Td", CardSet("td").str());
+    //EXPECT_THROW(CardSet("10d"));
+    //EXPECT_THROW(CardSet("AcAc"));
 }
 
-#if 0
-TEST_F(TestStringConstructorToString)
+TEST(CardSetTest, CanonizeRanks)
 {
-    EXPECT_EQ("Ac", CardSet("Ac").str());
-    EXPECT_EQ("Ac", CardSet("Ac").str());
-    EXPECT_THROW(CardSet("AcAc"));
-}
+    using namespace pokerstove;
 
-TEST_F(TestCanonizeRanks)
-{
-    CardSet AceCanon1("Ac")
-    CardSet AceCanon2("AcAd")
-    CardSet AceCanon3("AcAdAh")
-    CardSet AceCanon4("AcAdAhAs")
+    const CardSet AceCanon1("Ac");
+    const CardSet AceCanon2("AcAd");
+    const CardSet AceCanon3("AcAdAh");
+    const CardSet AceCanon4("AcAdAhAs");
 
     // all combinations of one
     EXPECT_EQ(AceCanon1, CardSet("Ac").canonizeRanks());
@@ -51,7 +48,8 @@ TEST_F(TestCanonizeRanks)
 
     // some multi card exampes
     EXPECT_EQ(CardSet("Ac2c3c4c5c"), CardSet("Ac2d3h4d5s").canonizeRanks());
-    EXPECT_EQ(CardSet("Ac2c3c4c5c"), CardSet("Ac2d3h4d5sAh").canonizeRanks());
+    EXPECT_EQ(CardSet("AcAd2c3c4c5c"), CardSet("Ac2d3h4d5sAh").canonizeRanks());
     EXPECT_EQ(CardSet("AcAd2c3c4c5c"), CardSet("Ac2d3h4d5sAh").canonizeRanks());
 }
-#endif
+
+

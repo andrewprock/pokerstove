@@ -8,6 +8,7 @@
 #include <iostream>
 #include <limits>
 #include <vector>
+#include <set>
 #include <boost/array.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
@@ -263,17 +264,25 @@ bool CardSet::insertRanks(const CardSet& rset)
     return true;
 }
 
-#if 0
 CardSet CardSet::canonizeRanks() const
 {
     // this is very slow, optimize if it winds up in an inner loop
+    CardSet ret;
     string ranks = rankstr();
     for(size_t i=0; i<ranks.size(); i++)
     {
-
+        for (Suit s=Suit::Clubs(); s<=Suit::Spades(); ++s)
+        {
+            Card candidate(Rank(ranks.substr(i,1)),s);
+            if (!ret.contains(candidate))
+            {
+                ret.insert(candidate);
+                break;
+            }
+        }
     }
+    return ret;
 }
-#endif
 
 CardSet& CardSet::insert(const Card& c)
 {
@@ -1397,7 +1406,6 @@ CardSet pokerstove::canonizeToBoard(const CardSet& board, const CardSet& hand)
     CardSet chand = hand.rotateSuits(perms[0],perms[1],perms[2],perms[3]);
     return chand;
 }
-
 
 // some suit mask macros
 #undef C

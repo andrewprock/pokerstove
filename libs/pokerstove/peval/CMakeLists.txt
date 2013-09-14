@@ -6,6 +6,7 @@ find_package (Threads)
 set(sources
         Card.cpp
         CardSet.cpp
+        CardSetGenerators.cpp
         PokerEvaluation.cpp
         PokerHand.cpp
         PokerHandEvaluator.cpp
@@ -17,8 +18,10 @@ add_library(peval ${sources})
 
 set(test_sources
         CardSet.test.cpp
+        CardSetGenerators.test.cpp
 )
 add_executable(peval_tests ${test_sources})
-target_link_libraries(peval_tests gtest gtest_main ${CMAKE_THREAD_LIBS_INIT})
+
+target_link_libraries(peval_tests peval gtest gtest_main)
 
 add_test(TestPeval peval_tests )
