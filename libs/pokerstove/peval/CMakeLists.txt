@@ -22,6 +22,6 @@ set(test_sources
 )
 add_executable(peval_tests ${test_sources})
 
-target_link_libraries(peval_tests peval gtest gtest_main)
+target_link_libraries(peval_tests peval gtest gtest_main ${CMAKE_THREAD_LIBS_INIT})
 
 add_test(TestPeval peval_tests )
