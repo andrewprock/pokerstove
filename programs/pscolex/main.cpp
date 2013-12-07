@@ -14,7 +14,7 @@ using namespace pokerstove;
 
 #if 0
 std::set<CardSet>
-void expandRankSet(size_t numCards)
+expandRankSet(size_t numCards)
 {
     combinations cards(52,numCards);
     do

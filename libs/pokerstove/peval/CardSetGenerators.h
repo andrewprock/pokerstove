@@ -5,6 +5,7 @@
 #define PEVAL_CARDSETGENERATORS_H_
 
 #include <set>
+#include "Card.h"
 #include "CardSet.h"
 
 namespace pokerstove
@@ -14,35 +15,25 @@ namespace pokerstove
  * Create the set of all card sets where the size of each rank set has
  * numCards.  
  *
- * For example, with an argument of 2, the set of all 52c2 two card
- * combinations will be generated.
- */
-std::set<CardSet> createCardSets(size_t numCards);
-
-/**
- * Create the set of all canonical card sets where the size of each rank
- * set has numCards.  These cards are all set to the canonical suit set for
- * the given suit combination, suits matter, but suit permutations do not.
+ * Card::Grouping determines what sort of set is produced.
  *
- * For example, with an argument of 2, the set of all 13c2+13=169 two card
- * combinations will be generated.  These are the same as the 169 preflop
- * hold'em hand types, but with arbitrarily assigned suits.  For example
- * AQs is represented by AcQc
- */
-std::set<CardSet> createCanonSets(size_t numCards);
-
-/**
- * Create the set of all rank sets where the size of each rank set has
- * numCards.  
+ * Card::RANK_SUIT: This is the usual set of cards.  For example, with an
+ * argument of 2, the set of all 52c2 two card combinations will be
+ * generated.
  *
- * For example, with an argument of 2, a set of size 91 will be generated,
- * with each element representing a CardSet with two cards, set to the
- * canonical rank representation.
+ * Card::SuitCanonical: Here suits are mapped to a canonical
+ * representation.  With an argument of 2, the set of all 13c2+13=169 two
+ * card combinations will be generated.  These are the same as the 169
+ * preflop hold'em hand types, but with arbitrarily assigned suits.  For
+ * example AQs is represented by AcQc
  *
- * See also, CardSet::canonizeRanks()
+ * Card::Rank: The set of cards with no suit information.  For example,
+ * with an argument of 2, a set of size 91 will be generated, with each
+ * element representing a CardSet with two cards, set to the canonical rank
+ * representation.
  */
-std::set<CardSet> createRankSets(size_t numCards);
-
+std::set<CardSet>
+createCardSet(size_t numCards, Card::Grouping grouping=Card::RANK_SUIT);
 }
 
 #endif  // PEVAL_CARDSETGENERATORS_H_

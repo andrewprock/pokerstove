@@ -31,6 +31,13 @@ class Rank;
 class Card
 {
 public:
+    enum Grouping
+    {
+        RANK_SUIT,
+        SUIT_CANONICAL,
+        RANK,
+    };
+
     Card();
     explicit Card(const std::string& str);
     explicit Card(const Rank& r, const Suit& s);

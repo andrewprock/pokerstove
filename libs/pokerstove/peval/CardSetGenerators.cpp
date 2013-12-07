@@ -8,26 +8,9 @@
 namespace pokerstove
 {
 
-std::set<CardSet>
-createCardSets(size_t numCards)
-{
-    std::set<CardSet> ret;
-    combinations cards(52,numCards);
-    do
-    {
-        CardSet hand;
-        for (size_t i=0; i<numCards; i++)
-        {
-            hand.insert (Card(cards[i]));
-        }
-        ret.insert(hand);
-    }
-    while (cards.next());
-    return ret;
-}
 
 std::set<CardSet>
-createCanonSets(size_t numCards)
+createCardSet(size_t numCards, Card::Grouping grouping)
 {
     std::set<CardSet> ret;
     combinations cards(52,numCards);
@@ -38,25 +21,19 @@ createCanonSets(size_t numCards)
         {
             hand.insert (Card(cards[i]));
         }
-        ret.insert(hand.canonize());
-    }
-    while (cards.next());
-    return ret;
-}
+        switch (grouping)
+        {
+        case Card::RANK_SUIT:
+            ret.insert(hand);
+            break;
+        case Card::SUIT_CANONICAL:
+            ret.insert(hand.canonize());
+            break;
+        case Card::RANK:
+            ret.insert(hand.canonizeRanks());
+            break;
+        };
 
-std::set<CardSet>
-createRankSets(size_t numCards)
-{
-    std::set<CardSet> ret;
-    combinations cards(52,numCards);
-    do
-    {
-        CardSet hand;
-        for (size_t i=0; i<numCards; i++)
-        {
-            hand.insert (Card(cards[i]));
-        }
-        ret.insert(hand.canonizeRanks());
     }
     while (cards.next());
     return ret;
