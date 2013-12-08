@@ -29,7 +29,7 @@ public:
     virtual PokerEvaluation evaluateRanks(const CardSet& hand, const CardSet& board=CardSet(0)) const
     {
         CardSet h = hand;
-        h.insert(board);
+        h.insertRanks(board);
         return h.evaluateHighRanks();
     }
 

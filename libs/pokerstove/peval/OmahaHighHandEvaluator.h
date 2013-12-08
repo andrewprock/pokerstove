@@ -8,6 +8,7 @@
 #include <boost/math/special_functions/binomial.hpp>
 #include "PokerEvaluationTables.h"
 #include "PokerHandEvaluator.h"
+#include "Holdem.h"
 
 namespace pokerstove
 {
@@ -62,11 +63,12 @@ public:
         std::vector<CardSet> hand_candidates(6);
         fillHands(hand_candidates, hand);
         fillBoards(board_candidates, board);
-
         for (size_t i=0; i<hand_candidates.size(); i++)
             for (size_t j=0; j<board_candidates.size(); j++)
             {
-                PokerEvaluation e = CardSet(hand_candidates[i] | board_candidates[j]).evaluateHighRanks();
+                CardSet meld(hand);
+                meld.insertRanks(board);
+                PokerEvaluation e = meld.evaluateHighRanks();
                 if (e > eval)
                     eval = e;
             }

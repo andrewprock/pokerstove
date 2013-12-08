@@ -12,6 +12,8 @@
 #include "CardSet.h"
 #include "PokerHandEvaluation.h"
 
+const unsigned int BOARD_SIZE = 5;
+
 namespace pokerstove
 {
 /**
@@ -89,7 +91,7 @@ public:
      * @see PokerHandEvaluation
      */
     virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-            const CardSet& board=CardSet(0)) const = 0;
+                                             const CardSet& board=CardSet(0)) const = 0;
     virtual PokerHandEvaluation evaluate(const CardSet& hand,
                                          const CardSet& board=CardSet(0))
     {
