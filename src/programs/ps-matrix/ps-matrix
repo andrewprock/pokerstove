@@ -1,0 +1,206 @@
+#!/usr/bin/python
+# take a list of preflop hand/value pairs and
+# create a 13x13 matrix of the values
+
+import re
+import sys
+import getopt
+import holdem
+
+def is_number(s):
+    try:
+        float(s) # for int, long and float
+    except ValueError:
+        try:
+            complex(s) # for complex
+        except ValueError:
+            return False
+
+def is_number(s):
+    try:
+        float(s) # for int, long and float
+    except ValueError:
+        try:
+            complex(s) # for complex
+        except ValueError:
+            return False
+
+    return True
+
+def normalize(values, norm):
+    for k in values:
+        values[k] /= norm
+
+def preflopNormalize(values):
+    maxval = 0
+    for k in values:
+        tval = values[k]
+        if len(k) == 2:
+            tval *= 2
+        elif k[-1] == 's':
+            tval *= 3
+        if tval > maxval:
+            maxval = tval
+    for k in values:
+        tval = maxval
+        if len(k) == 2:
+            tval /= 2
+        elif k[-1] == 's':
+            tval /= 3
+        values[k] /= tval
+
+def constructMatrix(handvals, threshold):
+    lines = []
+    line = ''
+
+    for i in range(0,169):
+        if i%13 == 0:
+            lines.append(line)
+            line = ''
+
+        h = holdem.pfIndexToPocket[i]
+        if handvals.has_key(h):
+            v = handvals[h]
+        else:
+            v = 0.0
+        if v < threshold:
+            line += '%6s  ' % '-'
+        else:
+            line += '%6.3f  ' % v
+        if i%13 == 4:
+            line += '|'
+
+    lines.append(line)
+
+    header = '  '
+    for rank in holdem.tranks:
+        header += '%8s' % holdem.tranks[rank]
+        if holdem.tranks[rank] == 'T':
+            header += ' '
+    print header
+
+    tpos = header.find('T')
+    border = '-'*(tpos+3)+'+'+'-'*(len(lines[1])-2-tpos)
+    print border
+
+    for i,l in enumerate(lines[1:]):
+        print holdem.tranks[i],  ' ',  l
+        if holdem.tranks[i] == 'T':
+            print border
+
+    print ''
+    line = ''
+    for i in range(0,169):
+        h = holdem.pfIndexToPocket[i]
+        if handvals[h] > threshold:
+            line += '%s=%.4f,' % (h, handvals[h])
+            #print handvals[h]
+    print line
+
+def readHandData(data, handcol, valuecol, norm):
+    """Very tolerant hand/value parsing method
+    """
+    # list of allowable chars in the hand.  Hands can either be
+    # specified by numbers or preflop hand type.  All other characters
+    # are stripped out of the hand token, not the 10 at the end
+    hchars = 'AKQJT98765432so10'
+    handvals = {}
+    tokmap = {}
+    doHand = False
+    for line in data:
+        if ',' in line:
+            toks = line.split(',')
+        else:
+            toks = line.split()
+        hand = ''.join(filter(lambda x : x in hchars, toks[handcol]))
+        if len(hand) == 0:
+            continue
+        if not hand.isdigit():
+            doHand = True
+        val = float(re.sub('[,]','',toks[valuecol]))
+        tokmap[hand] = val
+    for k in tokmap:
+        hand = k
+        if not doHand:
+            hand = holdem.pfIndexToPocket[int(k)]
+        handvals[hand] = tokmap[k]
+    if norm == 'pf':
+        preflopNormalize(handvals)
+    elif norm == 'data':
+        normalize(handvals, max(handvals.values()))
+    elif is_number(norm):
+        normalize(handvals,float(norm))
+    return handvals
+
+
+def usage():
+    print('usage: %s [options]' % sys.argv[0])
+    print('       ')
+    print('       print data values as a preflop holdem matrix')
+    print('       ')
+    print('       options:')
+    print('       --hand-column,h <N>          column number to find hand, default=0')
+    print('       --value-column,v <N>         column number to find value, default=1')
+    print('       --normalize,n <pf|data|none> normalize flag, default=none')
+    print('       --file <filename>            file to find data, default=stdin')
+    print('       ')
+    print('       The columns need to be space separated')
+    print('       ')
+    print('       ')
+    print('       examples:')
+    print('           cat data.txt | ./pfmatrix.py')
+    print('           ./pfmatrix.py --file data.txt')
+    print('           ./pfmatrix.py --normalize --hand-column 2 --data-column 8 --file data.txt')
+
+
+
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+    try:
+        (opts,args) = getopt.getopt(argv[1:], '?h:v:n:f:t:',
+                                    ['help','hand-column=','value-column=','normalize=', 'file=','threshold=',])
+    except getopt.GetoptError, e:
+        print(e)
+        usage()
+        sys.exit(2)
+    if len(sys.argv) == 2 and not '-n' in sys.argv[1]:
+        usage()
+        sys.exit(2)
+
+    # process arugments
+    handcol = 0
+    valcol = 1
+    norm = 'none'
+    dataFile = sys.stdin
+    threshold = .001
+
+    for (opt,param) in opts:
+        if opt in ('-?', '--help'):
+            usage()
+            sys.exit(2)
+        elif opt in ('-h', '--hand-column'):
+            handcol = int(param)
+        elif opt in ('-v', '--value-column'):
+            valcol = int(param)
+        elif opt in ('-n', '--normalize'):
+            norm = param
+        elif opt in ('-f', '--file'):
+            dataFile = open(param)
+        elif opt in ('-t', '--threshold'):
+            threshold = float(param)
+        else:
+            assert False,'unhandled option'
+
+    handvals = readHandData(dataFile, handcol, valcol, norm)
+    matrix = constructMatrix(handvals, threshold)
+    if norm != 'none':
+        print '(%s normalized)' % norm
+
+#
+# launch main
+#
+if __name__ == '__main__':
+    sys.exit(main())
+
+
