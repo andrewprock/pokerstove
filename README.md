@@ -43,6 +43,7 @@ installed on your platform of choice:
 
 * boost, version 1.46 or higher
 * cmake, version 2.4 or higher
+* subversion, version 1.7 or higher
 
 ### Linux
 
