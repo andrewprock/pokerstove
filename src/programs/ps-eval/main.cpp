@@ -69,12 +69,12 @@ int main (int argc, char ** argv)
         "     3     three-card poker\n"
         "\n"
         "   examples:\n"
-        "       pseval acas\n"
-        "       pseval AcAs Kh4d --board 5c8s9h\n"
-        "       pseval AcAs Kh4d --board 5c8s9h\n"
-        "       pseval --game l 7c5c4c3c2c\n"
-        "       pseval --game k 7c5c4c3c2c\n"
-        "       pseval --game kansas-city-lowball 7c5c4c3c2c\n"
+        "       ps-eval acas\n"
+        "       ps-eval AcAs Kh4d --board 5c8s9h\n"
+        "       ps-eval AcAs Kh4d --board 5c8s9h\n"
+        "       ps-eval --game l 7c5c4c3c2c\n"
+        "       ps-eval --game k 7c5c4c3c2c\n"
+        "       ps-eval --game kansas-city-lowball 7c5c4c3c2c\n"
         "\n"
         ;
 

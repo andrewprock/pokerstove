@@ -39,6 +39,7 @@ enable_testing()
 include_directories(lib/)
 
 add_subdirectory(lib/pokerstove/peval)
+add_subdirectory(lib/pokerstove/penum)
 add_subdirectory(programs/ps-colex)
 add_subdirectory(programs/ps-eval)
 add_subdirectory(programs/ps-lut)
