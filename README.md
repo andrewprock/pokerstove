@@ -22,12 +22,12 @@ into the CardSet class.
 
 ## Programs
 
-### pseval
+### ps-eval
 
 A tool for poker hand evaluation.  It demonstrates how to use the peval library, and to create
 evaluators for the different variants of poker.
 
-### pscolex
+### ps-colex
 
 A utility for viewing colexicographical index for sets of cards.
 
@@ -35,7 +35,7 @@ A utility for viewing colexicographical index for sets of cards.
 
 The pokerstove libraries come with build scripts for cmake.  This
 should allow you to build it on any platform with minimal
-tweaking.  I've only built this project under linux/g++,
+tweaking.  This project has been successfully build under linux/g++,
 windows/vc2010 and OSX/XCode so far.
 
 In order to build the libraries you'll need the following
@@ -58,7 +58,7 @@ invoke cmake on the programs directory, then build.
 You should then be able to execute the simple command line
 example:
 
-    ~/cmake/programs$ ./pseval/pseval
+    ~/cmake/programs$ ./programs/ps-eval/ps-eval
     Allowed options:
       -? [ --help ]          produce help message
       -g [ --game ] arg (=h) game to use for evaluation
@@ -84,12 +84,12 @@ example:
          3     three-card poker
     
        examples:
-           pseval acas
-           pseval AcAs Kh4d --board 5c8s9h
-           pseval AcAs Kh4d --board 5c8s9h
-           pseval --game l 7c5c4c3c2c
-           pseval --game k 7c5c4c3c2c
-           pseval --game kansas-city-lowball 7c5c4c3c2c
+           ps-eval acas
+           ps-eval AcAs Kh4d --board 5c8s9h
+           ps-eval AcAs Kh4d --board 5c8s9h
+           ps-eval --game l 7c5c4c3c2c
+           ps-eval --game k 7c5c4c3c2c
+           ps-eval --game kansas-city-lowball 7c5c4c3c2c
 
     
 ### Windows
