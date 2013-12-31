@@ -50,9 +50,10 @@ installed on your platform of choice:
 To build under linux using cmake, create a build directory,
 invoke cmake on the programs directory, then build.
 
-    mkdir -p cmake/programs
-    cd cmake/programs
-    cmake <path-to-programs-dir>
+    git clone https://github.com/andrewprock/pokerstove.git
+    mkdir pokerstove/src/build
+    cd pokerstove/src/build
+    cmake ..
     make
 
 You should then be able to execute the simple command line
