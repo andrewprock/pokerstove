@@ -6,9 +6,11 @@ GUI was first released in 2002, and has been available as freeware since
 it's first release.
 
 The core libraries of pokerstove are being open sourced.  The project is
-currently in the process of reviewing the code and evaluating licences.  Once a
-license has been settled on, and the code sanitized the first commits can start.
-Until then, please find the old installer in the win32 directory.  You can also
+currently in the process of reviewing and publishing the code.  As code is
+reviewed and code sanitized further commits will be added.
+
+Please find the old installer in the win32 directory.  That installer should
+install a version of PokerStove which will not expire at any time.  You can also
 find the apk file for the Android version of the utility in the android folder.
 
 ## Libraries
