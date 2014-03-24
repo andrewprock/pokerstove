@@ -118,11 +118,4 @@ double shares(const PokerHandEvaluation& hero, const PokerHandEvaluation& villai
 }
 }
 
-inline std::ostream& operator<<(std::ostream& sout, const pokerstove::PokerHandEvaluation& e)
-{
-    sout << e.str();
-    return sout;
-}
-
-
 #endif  // PEVAL_POKERHANDEVALUATION_H_

@@ -30,7 +30,7 @@ void display(const vector<CardSet>& hands,
              vector<EquityResult>& result)
 {
     for (size_t i=0; i<hands.size(); i++)
-        cout << hands[i] << " ";
+        cout << hands[i].str() << " ";
     for (size_t i=0; i<result.size(); i++)
         cout << result[i].winShares << " ";
     cout << endl;

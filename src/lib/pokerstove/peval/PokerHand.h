@@ -141,10 +141,4 @@ private:
 
 } // namespace pokerstove
 
-inline std::ostream& operator<<(std::ostream& sout, const pokerstove::PokerHand& h)
-{
-    sout << h.str();
-    return sout;
-}
-
 #endif  // PEVAL_POKERHAND_H_

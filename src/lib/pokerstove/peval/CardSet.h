@@ -197,10 +197,4 @@ CardSet canonizeToBoard(const CardSet& board, const CardSet& hand);
 std::vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest);
 } // namespace pokerstove
 
-
-/**
- * our little printer
- */
-std::ostream& operator<<(std::ostream& sout, const pokerstove::CardSet& e);
-
 #endif  // PEVAL_CARDSET_H_
