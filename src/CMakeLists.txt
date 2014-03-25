@@ -38,6 +38,7 @@ enable_testing()
 
 include_directories(lib/)
 
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(lib/pokerstove/peval)
 add_subdirectory(lib/pokerstove/penum)
 add_subdirectory(programs/ps-colex)
