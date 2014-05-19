@@ -44,7 +44,7 @@ public:
     explicit CardSet(uint64_t mask) : _cardmask(mask) {}
 
     void   clear() { _cardmask = 0; }                          //!< empty the set
-    void   fill()  { _cardmask = 0; _cardmask = ~_cardmask; }  //!< put all cards into the set
+    void   fill()  { _cardmask = ~(0xffffffffffffffff<<STANDARD_DECK_SIZE); }  //!< put all cards into the set
     size_t size() const;                                       //!< return number of cards in set
 
     uint64_t mask() const { return _cardmask; }                //!< 1 bit per card
