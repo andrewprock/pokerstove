@@ -15,4 +15,4 @@ endforeach()
 # peval library
 add_library(peval ${lib_sources})
 
-add_test(TestPeval peval_tests )
+add_test(TestPeval ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/peval_tests)
