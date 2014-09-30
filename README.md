@@ -49,6 +49,10 @@ installed on your platform of choice:
 
 ### Linux
 
+To install the dependencies with apt get:
+
+    apt-get install libboost-all-dev cmake subversion
+    
 To build under linux using cmake, create a build directory,
 invoke cmake on the programs directory, then build.
 
