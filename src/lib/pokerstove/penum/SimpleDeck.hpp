@@ -83,6 +83,20 @@ public:
         return ret;
     }
 
+    pokerstove::CardSet deal (size_t ncards)
+    {
+        // TODO: fix and test this code, edge cases clearly at risk here
+        if (ncards == 0)
+            return pokerstove::CardSet ();
+        _current -= static_cast<uint>(ncards);
+        CardSet * pcur = &_deck[_current];
+        const CardSet * pend = pcur + ncards;
+        CardSet cards (*pcur++);
+        while (pcur < pend)
+            cards |= *pcur++;
+        return cards;
+    }
+
     pokerstove::CardSet dead () const
     {
         pokerstove::CardSet cs;
@@ -107,6 +121,12 @@ public:
     CardSet operator[](size_t i) const
     {
         return _deck[i];
+    }
+
+    void shuffle ()
+    {
+        std::random_shuffle(_deck.begin(), _deck.end());
+        reset (); //_current = 0;
     }
 
     /**
