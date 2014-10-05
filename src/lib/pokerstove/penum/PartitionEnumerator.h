@@ -191,8 +191,11 @@ private:
     // this is meant to simulate an odomoeter running when a slot flips,
     // all slots further along "reset".  If a slot runs out of values,
     // then the slot before it flips
-    bool incr (size_t n)
+    bool incr (int n)
     {
+        // workaround warning in whiel (always true);
+        // TODO: verify not buggies!
+        //int n = num;
         while (n >= 0)
         {
             if (_pcombos[n].next())
