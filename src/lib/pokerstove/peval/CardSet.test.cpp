@@ -14,6 +14,19 @@ TEST(CardSetTest, StringConstructorToString)
     //EXPECT_THROW(CardSet("AcAc"));
 }
 
+TEST(CardSetTest, StringConstructorSize)
+{
+    using namespace pokerstove;
+
+    EXPECT_EQ(1, CardSet("Ac").size());
+    EXPECT_EQ(1, CardSet("qh").size());
+    EXPECT_EQ(13, CardSet("2h3h4h5h6h7h8h9hThJhQhKhAh").size());
+
+    // duplicate cards rolls back all parsing
+    EXPECT_EQ(0, CardSet("2h2h").size());
+}
+
+
 TEST(CardSetTest, CanonizeRanks)
 {
     using namespace pokerstove;
@@ -52,4 +65,10 @@ TEST(CardSetTest, CanonizeRanks)
     EXPECT_EQ(CardSet("AcAd2c3c4c5c"), CardSet("Ac2d3h4d5sAh").canonizeRanks());
 }
 
-
+TEST(CardSetTest, fill)
+{
+    using namespace pokerstove;
+    CardSet all;
+    all.fill();
+    EXPECT_EQ(STANDARD_DECK_SIZE, all.size());
+}

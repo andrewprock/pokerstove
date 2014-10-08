@@ -33,6 +33,9 @@ public:
     static const Suit begin()    { return Suit(0); }
     static const Suit end()      { return Suit(NUM_SUIT); }
 
+    // standalone fast parsting
+    static int suit_code(char c);
+
     /**
      * Default constructor initializes suit to Suit::Clubs()
      */
@@ -124,8 +127,6 @@ private:
     static uint8_t DiamondVal() { return 1; }
     static uint8_t HeartVal()   { return 2; }
     static uint8_t SpadeVal()   { return 3; }
-
-    static int parseSuitChar(char c);
 };
 
 }

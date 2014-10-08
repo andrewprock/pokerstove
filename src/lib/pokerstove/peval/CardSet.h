@@ -18,6 +18,8 @@ namespace pokerstove
 class Card;
 class PokerEvaluation;
 
+const size_t STANDARD_DECK_SIZE = Rank::NUM_RANK* Suit::NUM_SUIT;
+
 /**
  * The CardSet is a compact representation of an unordered set of
  * cards.  All evaluation is done at the CardSet level.
@@ -34,7 +36,6 @@ class PokerEvaluation;
 class CardSet
 {
 public:
-    static const size_t STANDARD_DECK_SIZE = Rank::NUM_RANK* Suit::NUM_SUIT;
 
 public:
     CardSet();                                                 //!< defaults to the empty set

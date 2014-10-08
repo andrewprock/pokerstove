@@ -222,7 +222,7 @@ string Suit::decodeSuit(int c) const
     return "?";
 }
 
-int Suit::parseSuitChar(char c)
+int Suit::suit_code(char c)
 {
     switch (c)
     {
@@ -243,7 +243,7 @@ int Suit::parseSuitChar(char c)
 }
 
 Suit::Suit(const std::string& str)
-    : _suit(parseSuitChar(str[0]))
+    : _suit(suit_code(str[0]))
 {}
 
 
@@ -254,7 +254,7 @@ string Suit::str() const
 
 void Suit::fromString(const string& c)
 {
-    _suit = parseSuitChar(c[0]);
+    _suit = suit_code(c[0]);
 }
 
 bool Suit::isSuitChar(char c)

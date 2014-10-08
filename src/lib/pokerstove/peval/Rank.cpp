@@ -36,43 +36,44 @@ string Rank::str() const
     return "?";
 }
 
-
 void Rank::fromString(const string& c)
 {
-    switch (c[0])
+    int code = rank_code(c[0]);
+    if (code >= 0)
+        _rank = code;
+    else
+        throw std::domain_error(string("rank parse error: " + c).c_str());
+}
+
+int Rank::rank_code(char c)
+{
+    switch (c)
     {
-        case '2':      encode(RANK_TWO);   return;
-        case '3':      encode(RANK_THREE); return;
-        case '4':      encode(RANK_FOUR);  return;
-        case '5':      encode(RANK_FIVE);  return;
-        case '6':      encode(RANK_SIX);   return;
-        case '7':      encode(RANK_SEVEN); return;
-        case '8':      encode(RANK_EIGHT); return;
-        case '9':      encode(RANK_NINE);  return;
-        case 't':      encode(RANK_TEN);   return;
-        case 'T':      encode(RANK_TEN);   return;
+        case '2':      return Rank::RANK_TWO;
+        case '3':      return Rank::RANK_THREE;
+        case '4':      return Rank::RANK_FOUR;
+        case '5':      return Rank::RANK_FIVE;
+        case '6':      return Rank::RANK_SIX;
+        case '7':      return Rank::RANK_SEVEN;
+        case '8':      return Rank::RANK_EIGHT;
+        case '9':      return Rank::RANK_NINE;
+        case 't':
+        case 'T':      return Rank::RANK_TEN;
         case 'j':
-        case 'J':      encode(RANK_JACK);  return;
+        case 'J':      return Rank::RANK_JACK;
         case 'q':
-        case 'Q':      encode(RANK_QUEEN); return;
+        case 'Q':      return Rank::RANK_QUEEN;
         case 'k':
-        case 'K':      encode(RANK_KING);  return;
+        case 'K':      return Rank::RANK_KING;
         case 'a':
-        case 'A':      encode(RANK_ACE);   return;
+        case 'A':      return Rank::RANK_ACE;
     }
-    throw std::domain_error(string("rank parse error: " + c).c_str());
+    return -1;
 }
 
 bool Rank::isRankChar(char c)
 {
-    switch (c)
-    {
-        case '2':    case '3':    case '4':    case '5':
-        case '6':    case '7':    case '8':    case '9':
-        case 't':    case 'T':    case 'j':    case 'J':
-        case 'q':    case 'Q':    case 'k':    case 'K':
-        case 'a':    case 'A':
-            return true;
-    }
+    if (rank_code(c) >= 0)
+        return true;
     return false;
 }

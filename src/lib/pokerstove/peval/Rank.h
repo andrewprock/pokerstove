@@ -37,6 +37,9 @@ public:
     static const Rank King()  { return Rank(RANK_KING); }
     static const Rank Ace()   { return Rank(RANK_ACE); }
 
+    // standalone fast parsting
+    static int rank_code(char c);
+
     /**
      * Default constructor initializes suit to Rank::Two()
      */

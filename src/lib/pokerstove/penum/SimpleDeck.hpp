@@ -17,8 +17,6 @@
 
 namespace pokerstove {
 
-const size_t STANDARD_DECK_SIZE = Rank::NUM_RANK*Suit::NUM_SUIT;
-
 /**
  * used for removing cards from the deck
  */

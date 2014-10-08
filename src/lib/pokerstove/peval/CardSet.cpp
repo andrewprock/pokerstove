@@ -70,25 +70,19 @@ CardSet::CardSet(const string& c)
     fromString(c);
 }
 
-/**
- * members
- */
-
 string CardSet::str() const
 {
     string out = "";
-    for (size_t i=0; i<STANDARD_DECK_SIZE; i++)
-    {
-        uint64_t mask = ONE64 << i;
-        if (_cardmask & mask)
-        {
-            Card c(i);
-            out += c.str();
-        }
+    uint64_t v = _cardmask;
+    while (v) {
+        Card card(lastbit64(v));
+        out += card.str();
+        v &= v - 1; // clear the least significant bit set
     }
     return out;
 }
 
+// TODO: use same loop as in ::str()
 string CardSet::rankstr() const
 {
     string out = "";
@@ -154,19 +148,20 @@ size_t CardSet::size() const
 void CardSet::fromString(const string& instr)
 {
 	clear ();
-	// we allow spaces but nuke them here
-	string in = erase_all_copy (instr, " ");
 
-	for (size_t i=0; i<in.size(); i+=2)
-    {
-		Card c(Rank(in.substr(i)),
-			   Suit(in.substr(i+1)));
-		if (contains(c))
-		{
+	for (size_t i=0; i<instr.size(); i+=2) {
+        // skip whitespace
+        if (instr[i] == ' ') {
+            i -= 1;
+            continue;
+        }
+        int code = Rank::rank_code(instr[i]) + Suit::suit_code(instr[i+1]) * Rank::NUM_RANK;
+        uint64_t mask = (ONE64 << code);
+		if (_cardmask & mask) {
 			clear();  // card duplication is an error, no hand parsed
 			return;
 		}
-		insert (c);
+        _cardmask |= mask;
     }
 }
 
