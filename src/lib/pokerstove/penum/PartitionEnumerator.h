@@ -9,6 +9,8 @@
 #include <boost/lexical_cast.hpp>
 #include <pokerstove/util/combinations.h>
 
+// TODO: wrap in namespace
+
 // see http://cplusplus.com/reference/algorithm/set_difference/
 // for original version.
 // this version is shifted a bit as we use first1+first2 instead of first1
@@ -33,12 +35,7 @@ OutputIterator myset_difference ( InputIterator1 first1, InputIterator1 last1,
     return copy(first1,last1,result);
 }
 
-//#define BITCOMBO
-#ifdef BITCOMBO
-typedef BitCombinations<uint64_t> Combos;
-#else
 typedef pokerstove::combinations Combos;
-#endif
 
 /**
  * this class enumerates over all partistions of a set of data
