@@ -50,7 +50,22 @@ public:
      * @see fromString
      */
     explicit Rank(const std::string& str);
-    explicit Rank(uint8_t c) : _rank(c%NUM_RANK) {}   //!< breaks encapsulation (for HoldemHandBalancer) TODO: fix this!
+
+    /**
+     * This is a bad interface, use at your own risk.  The reason this is
+     * bad is because: - breaks encapsulation, you need to know how the
+     * rank is encoded - conflates ints and chars, and can cause weird
+     * things to happen
+     *
+     * To mitigate this, the input value is interpreted differently for
+     * different values.  In the range of [0,12] it is interprted as an
+     * int.  In the range of ['2','9'] and {'A','K','Q','J','T'} it is
+     * interprted as a char.
+     *
+     * In the case that the input value is not in the ranges given above,
+     * the code is set to an invalid code, probably -1.
+     */
+    explicit Rank(uint8_t c);
 
     /**
      * Encode rank as a string.  A string of length one from [2-9TJQKA]
@@ -98,7 +113,6 @@ private:
     friend class Card;
     friend class CardSet;
     friend class PokerEvaluation;
-
 
     uint8_t _rank;
 

@@ -8,12 +8,18 @@
 using namespace std;
 using namespace pokerstove;
 
-
 Rank::Rank(const string& c)
 {
     fromString(c);
 }
 
+Rank::Rank(uint8_t code)
+{
+    if (code <= RANK_ACE)
+        _rank = code;
+    else
+        _rank = rank_code(code);
+}
 
 string Rank::str() const
 {
