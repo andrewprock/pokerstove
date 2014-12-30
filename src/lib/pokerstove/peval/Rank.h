@@ -53,17 +53,21 @@ public:
 
     /**
      * This is a bad interface, use at your own risk.  The reason this is
-     * bad is because: - breaks encapsulation, you need to know how the
-     * rank is encoded - conflates ints and chars, and can cause weird
-     * things to happen
+     * bad is because:
+     * - breaks encapsulation, you need to know how the rank is encoded
+     * - conflates ints and chars, and can cause weird things to happen
      *
      * To mitigate this, the input value is interpreted differently for
      * different values.  In the range of [0,12] it is interprted as an
-     * int.  In the range of ['2','9'] and {'A','K','Q','J','T'} it is
-     * interprted as a char.
+     * int.  If it is the ascii value for a character in the string:
+     * "23456789TJQKAtjqka", it is interprted as a char.
+     *
+     * Because ascii code 50 is '2' and 51 is '3', the input code cannot
+     * represent arbitrary cards in the range of a 52 card deck.  Thus
+     * integer interpretations are strictly tied to rank.
      *
      * In the case that the input value is not in the ranges given above,
-     * the code is set to an invalid code, probably -1.
+     * the code is set to an invalid code, possibly 0xFF
      */
     explicit Rank(uint8_t c);
 

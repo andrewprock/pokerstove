@@ -68,7 +68,7 @@ public:
      * string according to the table below
      *
      * supported games:
-     * - 'h'    hold'em
+     * - 'h'    hold'em (or high if no board)
      * - 'k'    Kansas City lowball (2-7)
      * - 'l'    lowball (A-5)
      * - '3'    three card poker
@@ -83,7 +83,8 @@ public:
      * - 'e'    stud/8
      * - 'b'    badugi
      */
-    static boost::shared_ptr<PokerHandEvaluator> alloc(const std::string& strid);
+    typedef boost::shared_ptr<PokerHandEvaluator> eval_ptr;
+    static eval_ptr alloc(const std::string& strid);
 
     /**
      * The generic evaluation method.  returns the evaluation for this

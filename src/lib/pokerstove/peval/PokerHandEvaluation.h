@@ -82,19 +82,24 @@ private:
 inline
 double shares(const PokerHandEvaluation& hero, const PokerHandEvaluation& villain)
 {
-    if (!hero.highlow() && !villain.highlow())
-    {
+    // no high/low/split
+    if (!hero.highlow() && !villain.highlow()) {
+        // hero wins
         if (hero.high() > villain.high())
             return 1.0;
+        // villain wins
         if (hero.high() < villain.high())
             return 0.0;
+        // tie
         return 0.5;
     }
-    else  // high/low
-    {
-        // scoop/ed
+    else {  // high/low
+
+        // hero scooped
         if (hero.high() > villain.high() && hero.low() > villain.low())
             return 1.0;
+
+        // villain scooped
         if (hero.high() < villain.high() && hero.low() < villain.low())
             return 0.0;
 
@@ -109,13 +114,14 @@ double shares(const PokerHandEvaluation& hero, const PokerHandEvaluation& villai
             (hero.high() >  villain.high() && hero.low() == villain.low()))
             return 0.75;
 
-        // quartered
+        // hero quartered
         if ((hero.high() == villain.high() && hero.low() <  villain.low()) ||
             (hero.high() <  villain.high() && hero.low() == villain.low()))
             return 0.25;
     }
     return -1.0;
 }
-}
+
+}       // namespace pokerstove
 
 #endif  // PEVAL_POKERHANDEVALUATION_H_
