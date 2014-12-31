@@ -1,10 +1,10 @@
-This is a simple example of how to use the pokerstove peval library.
+# `pokerstove::peval`
 
 The peval library is a simple flexible library for evaluating poker hands.
 There are two main components to the library, the CardSet class and the
 PokerHandEvaluator class.
 
-== CardSet
+## CardSet
 
 The CardSet class is available by including `<pokerstove/peval/CardSet.h>`.
 
@@ -50,7 +50,7 @@ The expected output is:
     AsKs
     AcAs8d8hJs
 
-=== Low level CardSet evaluation
+### Low level CardSet evaluation
 
 Currently the low level evaluation code is bound directly to the CardSet class.
 There is a remarkable number of evaluators that exist, yet none of them
@@ -68,13 +68,13 @@ Plus a couple of others.  These low level evaluators exist for the purposes of
 building evaluations for more complex games, as well as producing partial
 evaluations during optimization.
 
-=== Colex evaluators
+### Colex evaluators
 
 There are two colex evaluators which are designed to map card sets (and rank
 sets) to a unique index.  These again are used for managing complex evaluatins,
 and creating static and dynamic evaluation lookup tables.
 
-=== Printing utilities
+### Printing utilities
 
 There is a small handful of printing utilities, which print out the hand as a
 string.  The rankstr() method prints the hand without suits, whereas
@@ -85,7 +85,7 @@ Of special note is the Suit::setSuitStringType(Suit::display s) method which
 allows suits to be printed in a variety of formats, including html, ansi,
 extended ascii (ibm) with four color options.
 
-== Game evaluation
+## Game evaluation
 
 Specific games use the low level evaluators to contruct evaluations according to
 the rules of the given game.  For example, the HoldemHandEvaluator melds a
