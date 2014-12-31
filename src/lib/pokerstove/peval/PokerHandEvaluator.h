@@ -98,6 +98,17 @@ public:
     {
         return evaluateHand(hand, board);
     }
+
+    /**
+     * This version is for when you know you are only interested in
+     * non-split pot games.
+     */
+    virtual PokerEvaluation eval(const CardSet& hand,
+                                 const CardSet& board=CardSet(0))
+    {
+        return evaluateHand(hand, board).high();
+    }
+
     virtual size_t handSize() const = 0;             //!< return the maximum size of a players hand
     virtual size_t boardSize() const = 0;            //!< return the maximum size of the board
     virtual size_t evaluationSize() const = 0;       //!< return 1 for high only, 2 for high low
@@ -176,6 +187,9 @@ private:
     // we can turn on and off suit evaluation if we choose
     bool _useSuits;
 };
+
+// for planned refactoring
+typedef PokerHandEvaluator GameEvaluator;
 
 }
 

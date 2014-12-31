@@ -185,6 +185,9 @@ private:
     int _evalcode;
 };
 
+// typedef to support refactoring
+typedef PokerEvaluation Evaluation;
+
 }
 
 //
