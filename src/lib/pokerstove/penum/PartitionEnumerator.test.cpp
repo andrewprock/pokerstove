@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include "PartitionEnumerator.h"
 
+using namespace pokerstove;
 using namespace std;
 
 TEST(PartitionEnumerator, tautology) {
