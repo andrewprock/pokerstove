@@ -1,13 +1,13 @@
 #ifndef __LASTBIT_H
 #define __LASTBIT_H
 
+#include <cstdint>
 #include <pokerstove/util/utypes.h>
 
 inline uint firstbit (uint64_t v)
 {
   //unsigned int v;  // 32-bit value to find the log2 of 
-  // TODO: find utype identifier for 8-byte int (uL may not be portable)
-  const uint64_t b[] = {0x2, 0xC, 0xF0, 0xFF00, 0xFFFF0000, 0xFFFFFFFF00000000uLL};
+  const uint64_t b[] = {0x2, 0xC, 0xF0, 0xFF00, 0xFFFF0000, UINT64_C(0xFFFFFFFF00000000)};
   const unsigned int S[] = {1, 2, 4, 8, 16, 32};
   int i;
 
@@ -55,7 +55,7 @@ inline int lastbit (uint64_t v)
       if (lower)
         return lastbit(lower);
       uint32_t upper = static_cast<uint32_t>
-        ((v & 0xFFFFFFFF00000000uLL)>>32);
+        ((v & UINT64_C(0xFFFFFFFF00000000))>>32);
           
       //uint32_t upper = static_cast<uint32_t>((v>>32)&0xFFFFFFFF);
       return lastbit(upper)+32;

@@ -5,6 +5,7 @@
 #ifndef COMMON_ENUM_PARTITIONENUMERATOR_H_
 #define COMMON_ENUM_PARTITIONENUMERATOR_H_
 
+#include <cstdint>
 #include <vector>
 #include <boost/lexical_cast.hpp>
 #include <pokerstove/util/combinations.h>
@@ -179,7 +180,7 @@ private:
             // this loop is very expensive, it accounts for about *half*
             // of the total enumeration time
             for (size_t i=0; i<_parts[partnum]; i++)
-                ret |= 0x01uLL << s[*c++];
+                ret |= UINT64_C(0x01) << s[*c++];
             _masks[partnum] = ret;
         }
     }
