@@ -10,8 +10,8 @@
 #include <boost/lexical_cast.hpp>
 #include <pokerstove/util/combinations.h>
 
-// TODO: wrap in namespace
-
+namespace pokerstove
+{
 // see http://cplusplus.com/reference/algorithm/set_difference/
 // for original version.
 // this version is shifted a bit as we use first1+first2 instead of first1
@@ -36,7 +36,7 @@ OutputIterator myset_difference ( InputIterator1 first1, InputIterator1 last1,
     return copy(first1,last1,result);
 }
 
-typedef pokerstove::combinations Combos;
+typedef combinations Combos;
 
 /**
  * this class enumerates over all partistions of a set of data
@@ -237,6 +237,6 @@ private:
         makeMask (n);
     }
 };
-
+} // namespace pokerstove
 
 #endif  // COMMON_ENUM_PARTITIONENUMERATOR_H_
