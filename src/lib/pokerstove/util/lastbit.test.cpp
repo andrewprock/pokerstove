@@ -14,8 +14,8 @@ TEST(FirstBitTest, firstbit64) {
     EXPECT_EQ(5, firstbit(32));
 
     for (int i = 1; i < 64; i++) {
-        EXPECT_EQ(i - 1, firstbit((1uLL << i) - 1));
-        EXPECT_EQ(i,     firstbit((1uLL << i)));
+        EXPECT_EQ(i - 1, firstbit((UINT64_C(1) << i) - 1));
+        EXPECT_EQ(i,     firstbit((UINT64_C(1) << i)));
     }
 }
 
@@ -32,12 +32,14 @@ TEST(LastBitTest, lastbit32) {
     EXPECT_EQ(2, lastbit(uint32_t(36)));
 
     for (int i = 1; i < 32; i++) {
-        EXPECT_EQ(0, lastbit(uint32_t((1u << i) - 1)));
-        EXPECT_EQ(i, lastbit(uint32_t((1u << i))));
-        EXPECT_EQ(0, lastbit(uint32_t((1u << i) + 1)));
+        EXPECT_EQ(0, lastbit(uint32_t((UINT32_C(1) << i) - 1)));
+        EXPECT_EQ(i, lastbit(uint32_t((UINT32_C(1) << i))));
+        EXPECT_EQ(0, lastbit(uint32_t((UINT32_C(1) << i) + 1)));
         // Set a higher bit also.
-        if (i < 30)
-            EXPECT_EQ(i, lastbit(uint32_t((1u << i) | (1u << (i + 2)))));
+        if (i < 30) {
+            EXPECT_EQ(i, lastbit(uint32_t((UINT32_C(1) << i)
+                                          | (UINT32_C(1) << (i + 2)))));
+        }
     }
 }
 
@@ -54,11 +56,13 @@ TEST(LastBitTest, lastbit16) {
     EXPECT_EQ(2, lastbit(uint16_t(36)));
 
     for (int i = 1; i < 16; i++) {
-        EXPECT_EQ(0, lastbit(uint16_t((1u << i) - 1)));
-        EXPECT_EQ(i, lastbit(uint16_t((1u << i))));
-        EXPECT_EQ(0, lastbit(uint16_t((1u << i) + 1)));
-        if (i < 14)
-            EXPECT_EQ(i, lastbit(uint16_t((1u << i) | (1u << (i + 2)))));
+        EXPECT_EQ(0, lastbit(uint16_t((UINT16_C(1) << i) - 1)));
+        EXPECT_EQ(i, lastbit(uint16_t((UINT16_C(1) << i))));
+        EXPECT_EQ(0, lastbit(uint16_t((UINT16_C(1) << i) + 1)));
+        if (i < 14) {
+            EXPECT_EQ(i, lastbit(uint16_t((UINT16_C(1) << i)
+                                          | (UINT16_C(1) << (i + 2)))));
+        }
     }
 }
 
@@ -75,11 +79,13 @@ TEST(LastBitTest, lastbit64) {
     EXPECT_EQ(2, lastbit(uint64_t(36)));
 
     for (int i = 1; i < 64; i++) {
-        EXPECT_EQ(0, lastbit(uint64_t((1uLL << i) - 1)));
-        EXPECT_EQ(i, lastbit(uint64_t((1uLL << i))));
-        EXPECT_EQ(0, lastbit(uint64_t((1uLL << i) + 1)));
-        if (i < 62)
-            EXPECT_EQ(i, lastbit(uint64_t((1uLL << i) | (1uLL << (i + 2)))));
+        EXPECT_EQ(0, lastbit(uint64_t((UINT64_C(1) << i) - 1)));
+        EXPECT_EQ(i, lastbit(uint64_t((UINT64_C(1) << i))));
+        EXPECT_EQ(0, lastbit(uint64_t((UINT64_C(1) << i) + 1)));
+        if (i < 62) {
+            EXPECT_EQ(i, lastbit(uint64_t((UINT64_C(1) << i)
+                                          | (UINT64_C(1) << (i + 2)))));
+        }
     }
 }
 
@@ -95,10 +101,12 @@ TEST(LastBit64Test, lastbit64) {
     EXPECT_EQ(2, lastbit64(36));
 
     for (int i = 1; i < 64; i++) {
-        EXPECT_EQ(0, lastbit64((1uLL << i) - 1));
-        EXPECT_EQ(i, lastbit64((1uLL << i)));
-        EXPECT_EQ(0, lastbit64((1uLL << i) + 1));
-        if (i < 62)
-            EXPECT_EQ(i, lastbit64((1uLL << i) | (1uLL << (i + 2))));
+        EXPECT_EQ(0, lastbit64((UINT64_C(1) << i) - 1));
+        EXPECT_EQ(i, lastbit64((UINT64_C(1) << i)));
+        EXPECT_EQ(0, lastbit64((UINT64_C(1) << i) + 1));
+        if (i < 62) {
+            EXPECT_EQ(i, lastbit64((UINT64_C(1) << i)
+                                   | (UINT64_C(1) << (i + 2))));
+        }
     }
 }
