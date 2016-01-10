@@ -132,7 +132,7 @@ git and macports downloaded from the web.  The macports package is a
 typical unix package management utility and is required to install boost.
 Once you've installed and selfupdate'd macports, you can install boost:
 
-    sudo port install boost
+    sudo port install boost -no_static
     
 From there you can run the cmake gui as in windows.  This will create
 an XCode project which should compile the sample utility. Alternatively,
