@@ -138,9 +138,8 @@ public:
         #endif
         CardSet ret;
 
-        // TODO: find byte specific replacement for uL
-        uint32_t lower = static_cast<uint32_t>(mask&0xFFFFFFFFuL);
-        uint32_t upper = static_cast<uint32_t>((mask&0xFFFFFFFF00000000uLL)>>32);
+        uint32_t lower = static_cast<uint32_t>(mask&UINT32_C(0xFFFFFFFF));
+        uint32_t upper = static_cast<uint32_t>((mask&UINT64_C(0xFFFFFFFF00000000))>>32);
 
         while (lower)
         {
