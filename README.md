@@ -135,9 +135,8 @@ Once you've installed and selfupdate'd macports, you can install boost:
     sudo port install boost
     
 From there you can run the cmake gui as in windows.  This will create
-an XCode project which should comile the sample utility.
-
-install boost as you 
+an XCode project which should compile the sample utility. Alternatively,
+follow the command  line `cmake` instructions in the [Linux section](#Linux).
 
 [![Bitdeli Badge]
 (https://d2weczhvl823v0.cloudfront.net/andrewprock/pokerstove/trend.png)]
