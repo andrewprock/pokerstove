@@ -36,10 +36,21 @@ link_directories(${GTEST_LIBS_DIR})
 add_definitions ("-fPIC")
 enable_testing()
 
-include_directories(lib/)
+# check_function_exists does not work for builtins, so use try_compile.
+try_compile(HAVE_BUILTIN_BITOPS
+            "${PROJECT_BINARY_DIR}"
+            "${PROJECT_SOURCE_DIR}/TestBuiltinBitops.cpp")
+
+# Set up the configure file.
+configure_file("${PROJECT_SOURCE_DIR}/Config.h.in"
+               "${PROJECT_BINARY_DIR}/Config.h")
+
+# Also search for includes in PROJECT_BINARY_DIR to find config.h.
+include_directories(lib/ "${PROJECT_BINARY_DIR}")
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(lib/pokerstove/peval)
 add_subdirectory(lib/pokerstove/penum)
+add_subdirectory(lib/pokerstove/util)
 add_subdirectory(programs/ps-colex)
 add_subdirectory(programs/ps-eval)
 add_subdirectory(programs/ps-lut)
