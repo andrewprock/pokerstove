@@ -1,129 +1,36 @@
 #include <iostream>
 #include <vector>
-#include <string>
-#include <boost/program_options.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/format.hpp>
-#include <pokerstove/peval/PokerHandEvaluator.h>
+#include <pokerstove/penum/ShowdownEnumerator.h>
 
-using namespace std;
-namespace po = boost::program_options;
+int main() {
+
 using namespace pokerstove;
+using namespace std;
 
-class EvalDriver
-{
-public:
-    EvalDriver(const string& game, 
-               const vector<string>& hands, 
-               const string& board)
-        : _peval(PokerHandEvaluator::alloc (game))
-        , _hands(hands)
-        , _board(board)
-    {
-    }
+CardSet completeDeck;
+completeDeck.fill();
+cout << "The whole deck has " << completeDeck.size() << " cards" << endl;
 
-    void evaluate()
-    {
-        for (auto it=_hands.begin(); it!=_hands.end(); it++)
-        {
-            string& hand = *it;
-            _results[hand] = _peval->evaluate(hand, _board);
-        }
-    }
+CardDistribution anyTwo;
+anyTwo.fill(completeDeck, 2);
+cout << "There are " << anyTwo.size() << " two card combinations"  << endl;
 
-    string str() const
-    {
-        string ret;
-        for (auto it=_hands.begin(); it!=_hands.end(); it++)
-        {
-            const string& hand = *it;
-            ret += boost::str(boost::format("%10s: %s\n") 
-                              % hand 
-                              % _results.at(hand).str());
-        }
-        return ret;
-    }
+CardDistribution holeCards;
+holeCards.parse("As6s");
+cout << "There are " << holeCards.size() << " two card combinations"  << endl;
 
-private:
-    boost::shared_ptr<PokerHandEvaluator> _peval;
-    vector<string> _hands;
-    string _board;
-    map<string,PokerHandEvaluation> _results;
-};
+ShowdownEnumerator showdown;
+vector<EquityResult> result = showdown.calculateEquity(
+    vector<CardDistribution>{anyTwo, holeCards},
+    CardSet(""),
+    PokerHandEvaluator::alloc("h")
+);
 
-int main (int argc, char ** argv)
-{
-    string extendedHelp = "\n"
-        "   For the --game option, one of the follwing games may be specified.\n"
-        "     h     hold'em\n"
-        "     o     omaha/8\n"
-        "     O     omaha high\n"
-        "     r     razz\n"
-        "     s     stud\n"
-        "     e     stud/8\n"
-        "     q     stud high/low no qualifier\n"
-        "     d     draw high\n"
-        "     l     lowball (A-5)\n"
-        "     k     Kansas City lowball (2-7)\n"
-        "     b     badugi\n"
-        "     3     three-card poker\n"
-        "\n"
-        "   examples:\n"
-        "       ps-eval acas\n"
-        "       ps-eval AcAs Kh4d --board 5c8s9h\n"
-        "       ps-eval AcAs Kh4d --board 5c8s9h\n"
-        "       ps-eval --game l 7c5c4c3c2c\n"
-        "       ps-eval --game k 7c5c4c3c2c\n"
-        "       ps-eval --game kansas-city-lowball 7c5c4c3c2c\n"
-        "\n"
-        ;
+double shareRandom = result.at(0).winShares + result.at(0).tieShares;
+double shareHand   = result.at(1).winShares + result.at(1).tieShares;
+double total       = shareRandom + shareHand;
 
-    try 
-    {
-        // set up the program options, handle the help case, and extract the values
-        po::options_description desc("Allowed options");
-        desc.add_options()
-            ("help,?",    "produce help message")
-            ("game,g",    po::value<string>()->default_value("h"), "game to use for evaluation")
-            ("board,b",   po::value<string>()->default_value(""),  "community cards for he/o/o8")
-            ("hand,h",    po::value< vector<string> >(),           "a hand for evaluation")
-            ("quiet,q",   "produce no output")
-            ;
-      
-        po::positional_options_description p;
-        p.add("hand", -1);
-        po::variables_map vm;
-        po::store (po::command_line_parser(argc, argv)
-                   .style(po::command_line_style::unix_style)
-                   .options(desc)
-                   .positional(p)
-                   .run(), vm);
-        po::notify (vm);
+cout << "A random hand has "  << shareRandom / total * 100  << " % equity (" << result.at(0).str() << ")" << endl;
+cout << "The hand As6s has "  << shareHand   / total * 100  << " % equity (" << result.at(1).str() << ")" << endl;
 
-        // check for help
-        if (vm.count("help") || argc == 1)
-        {
-            cout << desc << extendedHelp << endl;
-            return 1;
-        }
-
-        // extract the options
-        EvalDriver driver(vm["game"].as<string>(),
-                          vm["hand"].as< vector<string> >(),
-                          vm["board"].as<string>());
-        driver.evaluate();
-        if (vm.count("quiet") == 0)
-            cout << driver.str();
-    }
-    catch(std::exception& e) 
-    {
-        cerr << "-- caught exception--\n" << e.what() << "\n";
-        return 1;
-    }
-    catch(...) 
-    {
-        cerr << "Exception of unknown type!\n";
-        return 1;
-    }
-    return 0;
 }
