@@ -18,7 +18,7 @@ else()
     set(BOOST_ROOT "E:/code/ext/boost_1_53_0/")
     set(BOOST_LIBRARYDIR "E:/code/ext/boost_1_53_0/lib32-msvc-10.0/")
 endif()
-set(Boost_USE_STATIC_LIBS   ON)
+set(Boost_USE_STATIC_LIBS   OFF)
 set(Boost_USE_MULTITHREADED      ON)
 find_package(Boost COMPONENTS program_options REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
@@ -29,7 +29,7 @@ message(status "** Boost Libraries: ${Boost_LIBRARIES}")
 
 # Set up gtest. This must be set up before any subdirectories are
 # added which will use gtest.
-add_subdirectory(ext/gtest)
+add_subdirectory(ext/googletest)
 find_library(gtest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 link_directories(${GTEST_LIBS_DIR})
