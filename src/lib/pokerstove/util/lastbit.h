@@ -52,7 +52,7 @@ inline uint firstbit (uint64_t v)
   const unsigned int S[] = {1, 2, 4, 8, 16, 32};
   int i;
 
-  register unsigned int r = 0; // result of log2(v) will go here
+  unsigned int r = 0; // result of log2(v) will go here
   for (i = 5; i >= 0; i--) // unroll for speed...
     {
       if (v & b[i])
