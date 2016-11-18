@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 find_package (Threads)
 
 set (CMAKE_CXX_FLAGS "-Wno-deprecated-register -O2")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register -O2")
+
 include(CheckCXXCompilerFlag)
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     CHECK_CXX_COMPILER_FLAG("-std=c++14" HAS_CPP14_FLAG)
