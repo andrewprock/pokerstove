@@ -2,7 +2,7 @@
 #define __LASTBIT_H
 
 #include <cstdint>
-#include <Config.h>
+//#include <Config.h>
 #include <pokerstove/util/utypes.h>
 
 #ifdef HAVE_BUILTIN_BITOPS
