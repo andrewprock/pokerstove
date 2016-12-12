@@ -171,34 +171,31 @@ CardSet& CardSet::insert(const CardSet& c)
     return *this;
 }
 
-CardSet CardSet::rotateSuits(int c, int d, int h, int s) const
-{
+CardSet CardSet::rotateSuits(int c, int d, int h, int s) const {
     return CardSet(
-               static_cast<uint64_t>(suitMask(Suit::Clubs()))    << Rank::NUM_RANK*c |
-               static_cast<uint64_t>(suitMask(Suit::Diamonds())) << Rank::NUM_RANK*d |
-               static_cast<uint64_t>(suitMask(Suit::Hearts()))   << Rank::NUM_RANK*h |
-               static_cast<uint64_t>(suitMask(Suit::Spades()))   << Rank::NUM_RANK*s);
+            static_cast<uint64_t>(suitMask(Suit::Clubs())) << Rank::NUM_RANK * c |
+            static_cast<uint64_t>(suitMask(Suit::Diamonds())) << Rank::NUM_RANK * d |
+            static_cast<uint64_t>(suitMask(Suit::Hearts())) << Rank::NUM_RANK * h |
+            static_cast<uint64_t>(suitMask(Suit::Spades())) << Rank::NUM_RANK * s);
 }
 
-void CardSet::flipSuits()
-{
+void CardSet::flipSuits() {
     *this = rotateSuits(3, 2, 1, 0);
 }
 
-CardSet CardSet::canonize() const
-{
+CardSet CardSet::canonize() const {
     int smasks[Suit::NUM_SUIT];
-    int i=0;
-    for (Suit s=Suit::begin(); s<Suit::end(); ++s)
+    int i = 0;
+    for (Suit s = Suit::begin(); s < Suit::end(); ++s)
         smasks[i++] = suitMask(s);
 
-    sort(smasks, smasks+Suit::NUM_SUIT);
+    sort(smasks, smasks + Suit::NUM_SUIT);
 
     return CardSet(
-               static_cast<uint64_t>(smasks[3])                        |
-               static_cast<uint64_t>(smasks[2]) << Rank::NUM_RANK      |
-               static_cast<uint64_t>(smasks[1]) << Rank::NUM_RANK*2    |
-               static_cast<uint64_t>(smasks[0]) << Rank::NUM_RANK*3);
+            static_cast<uint64_t>(smasks[3]) |
+            static_cast<uint64_t>(smasks[2]) << Rank::NUM_RANK |
+            static_cast<uint64_t>(smasks[1]) << Rank::NUM_RANK * 2 |
+            static_cast<uint64_t>(smasks[0]) << Rank::NUM_RANK * 3);
 }
 
 CardSet CardSet::canonize(const CardSet& other) const
@@ -1369,21 +1366,16 @@ std::ostream& operator<<(std::ostream& sout, const pokerstove::CardSet& e)
     return sout;
 }
 
-vector<int> pokerstove::findSuitPermutation(const CardSet& source, const CardSet& dest)
-{
-    vector<int> rot(4,-1);
-    vector<int> taken(4,0);
+vector<int> pokerstove::findSuitPermutation(const CardSet& source, const CardSet& dest) {
+    vector<int> rot(4, -1);
+    vector<int> taken(4, 0);
 
-    int i=0;
-    for (Suit s=Suit::begin(); s<Suit::end(); ++s, ++i)
-    {
-        int j=0;
-        for (Suit t=Suit::begin(); t<Suit::end(); ++t, ++j)
-        {
-            if (source.suitMask(s) == dest.suitMask(t))
-            {
-                if (taken[j] == 0)
-                {
+    int i = 0;
+    for (Suit s = Suit::begin(); s < Suit::end(); ++s, ++i) {
+        int j = 0;
+        for (Suit t = Suit::begin(); t < Suit::end(); ++t, ++j) {
+            if (source.suitMask(s) == dest.suitMask(t)) {
+                if (taken[j] == 0) {
                     rot[i] = j;
                     taken[j] = 1;
                     break;
@@ -1410,18 +1402,16 @@ CardSet pokerstove::canonizeToBoard(const CardSet& board, const CardSet& hand)
 #undef RMASK
 #undef SUITMASK
 
-size_t CardSet::colex() const
-{
+size_t CardSet::colex() const {
     vector<Card> cards = this->cards();
     size_t value = 0;
-    for (size_t i=0; i<cards.size(); i++)
-    {
+    for (size_t i = 0; i < cards.size(); i++) {
         size_t code = cards[i].code();
 #ifdef __AP_MATH__
         value += tchoose(code, i+1);
 #else
-        if (code >= i+1)
-            value += static_cast<size_t>(boost::math::binomial_coefficient<double>(code, i+1));
+        if (code >= i + 1)
+            value += static_cast<size_t>(boost::math::binomial_coefficient<double>(code, i + 1));
 #endif
     }
     return value;

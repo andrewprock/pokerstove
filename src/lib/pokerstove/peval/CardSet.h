@@ -91,7 +91,7 @@ public:
     int     suitMask(const Suit& s) const;
     CardSet canonize() const;                     //!< transform suits to canonical form
     CardSet canonize(const CardSet& other) const; //!< canonize relative to other hand
-    CardSet rotateSuits(int c, int d, int h, int s) const;
+    CardSet rotateSuits(int c, int d, int h, int s) const; //!< [0..4] for each suit's new suit
     void    flipSuits();                          //!< invert suit order {cdhs} -> {shdc}
 
     /**
