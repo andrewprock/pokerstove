@@ -165,37 +165,41 @@ void CardSet::fromString(const string& instr)
     }
 }
 
-CardSet& CardSet::insert(const CardSet& c)
-{
-    _cardmask |= c._cardmask;
-    return *this;
+CardSet& CardSet::insert(const CardSet& c) {
+  _cardmask |= c._cardmask;
+  return *this;
 }
 
 CardSet CardSet::rotateSuits(int c, int d, int h, int s) const {
-    return CardSet(
-            static_cast<uint64_t>(suitMask(Suit::Clubs())) << Rank::NUM_RANK * c |
-            static_cast<uint64_t>(suitMask(Suit::Diamonds())) << Rank::NUM_RANK * d |
-            static_cast<uint64_t>(suitMask(Suit::Hearts())) << Rank::NUM_RANK * h |
-            static_cast<uint64_t>(suitMask(Suit::Spades())) << Rank::NUM_RANK * s);
+  return CardSet(
+          static_cast<uint64_t>(suitMask(Suit::Clubs())) << Rank::NUM_RANK * c |
+          static_cast<uint64_t>(suitMask(Suit::Diamonds())) << Rank::NUM_RANK * d |
+          static_cast<uint64_t>(suitMask(Suit::Hearts())) << Rank::NUM_RANK * h |
+          static_cast<uint64_t>(suitMask(Suit::Spades())) << Rank::NUM_RANK * s);
 }
 
 void CardSet::flipSuits() {
-    *this = rotateSuits(3, 2, 1, 0);
+  *this = rotateSuits(3, 2, 1, 0);
 }
 
 CardSet CardSet::canonize() const {
-    int smasks[Suit::NUM_SUIT];
-    int i = 0;
-    for (Suit s = Suit::begin(); s < Suit::end(); ++s)
-        smasks[i++] = suitMask(s);
+  int smasks[Suit::NUM_SUIT] = {0};
+  int i = 0;
+  int count = 0;
+  for (Suit s = Suit::begin(); s < Suit::end(); ++s, ++i) {
+    int mask = suitMask(s);
+    if (mask != 0) {
+      smasks[count++] = suitMask(s);
+    }
+  }
 
-    sort(smasks, smasks + Suit::NUM_SUIT);
+  sort(smasks, smasks + count);
 
-    return CardSet(
-            static_cast<uint64_t>(smasks[3]) |
-            static_cast<uint64_t>(smasks[2]) << Rank::NUM_RANK |
-            static_cast<uint64_t>(smasks[1]) << Rank::NUM_RANK * 2 |
-            static_cast<uint64_t>(smasks[0]) << Rank::NUM_RANK * 3);
+  return CardSet(
+          static_cast<uint64_t>(smasks[0]) |
+          static_cast<uint64_t>(smasks[1]) << Rank::NUM_RANK |
+          static_cast<uint64_t>(smasks[2]) << Rank::NUM_RANK * 2 |
+          static_cast<uint64_t>(smasks[3]) << Rank::NUM_RANK * 3);
 }
 
 CardSet CardSet::canonize(const CardSet& other) const
@@ -206,7 +210,6 @@ CardSet CardSet::canonize(const CardSet& other) const
     CardSet chand = hand.rotateSuits(perms[0],perms[1],perms[2],perms[3]);
     return chand;
 }
-
 
 // This is super slow, make it faster
 bool CardSet::insertRanks(const CardSet& rset)
@@ -256,18 +259,14 @@ bool CardSet::insertRanks(const CardSet& rset)
     return true;
 }
 
-CardSet CardSet::canonizeRanks() const
-{
+CardSet CardSet::canonizeRanks() const {
     // this is very slow, optimize if it winds up in an inner loop
     CardSet ret;
     string ranks = rankstr();
-    for(size_t i=0; i<ranks.size(); i++)
-    {
-        for (Suit s=Suit::Clubs(); s<=Suit::Spades(); ++s)
-        {
-            Card candidate(Rank(ranks.substr(i,1)),s);
-            if (!ret.contains(candidate))
-            {
+    for (size_t i = 0; i < ranks.size(); i++) {
+        for (Suit s = Suit::Clubs(); s <= Suit::Spades(); ++s) {
+            Card candidate(Rank(ranks.substr(i, 1)), s);
+            if (!ret.contains(candidate)) {
                 ret.insert(candidate);
                 break;
             }

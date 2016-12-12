@@ -1,8 +1,7 @@
 #include <gtest/gtest.h>
 #include "CardSet.h"
 
-TEST(CardSetTest, StringConstructorToString)
-{
+TEST(CardSetTest, StringConstructorToString) {
     using namespace pokerstove;
 
     EXPECT_EQ("Ac", CardSet("Ac").str());
@@ -14,8 +13,7 @@ TEST(CardSetTest, StringConstructorToString)
     //EXPECT_THROW(CardSet("AcAc"));
 }
 
-TEST(CardSetTest, StringConstructorSize)
-{
+TEST(CardSetTest, StringConstructorSize) {
     using namespace pokerstove;
 
     EXPECT_EQ(1, CardSet("Ac").size());
@@ -26,9 +24,15 @@ TEST(CardSetTest, StringConstructorSize)
     EXPECT_EQ(0, CardSet("2h2h").size());
 }
 
+TEST(CardSetTest, Canonize) {
+  using namespace pokerstove;
 
-TEST(CardSetTest, CanonizeRanks)
-{
+  EXPECT_EQ(CardSet("2c3c"), CardSet("2c3c").canonize());
+  EXPECT_EQ(CardSet("2c3c"), CardSet("2s3s").canonize());
+  EXPECT_EQ(CardSet("2c3d4h"), CardSet("2s3h4c").canonize());
+}
+
+TEST(CardSetTest, CanonizeRanks) {
     using namespace pokerstove;
 
     const CardSet AceCanon1("Ac");
@@ -65,8 +69,7 @@ TEST(CardSetTest, CanonizeRanks)
     EXPECT_EQ(CardSet("AcAd2c3c4c5c"), CardSet("Ac2d3h4d5sAh").canonizeRanks());
 }
 
-TEST(CardSetTest, fill)
-{
+TEST(CardSetTest, fill) {
     using namespace pokerstove;
     CardSet all;
     all.fill();

@@ -78,7 +78,7 @@ public:
     Rank   bottomRank() const;                    //!< return lowest rank in hand (A plays high)
     size_t countMaxRank() const;                  //!< return the number of the most common rank
     bool   insertRanks(const CardSet& rset);      //!< add ranks to hand, any suit
-    CardSet canonizeRanks() const;                //!< create a canonical rank representation
+    CardSet canonizeRanks() const;                //!< create a canonical rank representation, output suits are to be ignored
 
     /**
      * Suit related methods.
