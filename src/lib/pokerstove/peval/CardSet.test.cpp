@@ -29,7 +29,7 @@ TEST(CardSetTest, Canonize) {
 
   EXPECT_EQ(CardSet("2c3c"), CardSet("2c3c").canonize());
   EXPECT_EQ(CardSet("2c3c"), CardSet("2s3s").canonize());
-  EXPECT_EQ(CardSet("2c3d4h"), CardSet("2s3h4c").canonize());
+  EXPECT_EQ(CardSet("4c3d2h"), CardSet("2s3h4c").canonize());
 }
 
 TEST(CardSetTest, CanonizeRanks) {

@@ -183,23 +183,18 @@ void CardSet::flipSuits() {
 }
 
 CardSet CardSet::canonize() const {
-  int smasks[Suit::NUM_SUIT] = {0};
+  int smasks[Suit::NUM_SUIT];
   int i = 0;
-  int count = 0;
-  for (Suit s = Suit::begin(); s < Suit::end(); ++s, ++i) {
-    int mask = suitMask(s);
-    if (mask != 0) {
-      smasks[count++] = suitMask(s);
-    }
-  }
+  for (Suit s = Suit::begin(); s < Suit::end(); ++s)
+    smasks[i++] = suitMask(s);
 
-  sort(smasks, smasks + count);
+  sort(smasks, smasks + Suit::NUM_SUIT);
 
   return CardSet(
-          static_cast<uint64_t>(smasks[0]) |
-          static_cast<uint64_t>(smasks[1]) << Rank::NUM_RANK |
-          static_cast<uint64_t>(smasks[2]) << Rank::NUM_RANK * 2 |
-          static_cast<uint64_t>(smasks[3]) << Rank::NUM_RANK * 3);
+          static_cast<uint64_t>(smasks[3]) |
+          static_cast<uint64_t>(smasks[2]) << Rank::NUM_RANK |
+          static_cast<uint64_t>(smasks[1]) << Rank::NUM_RANK * 2 |
+          static_cast<uint64_t>(smasks[0]) << Rank::NUM_RANK * 3);
 }
 
 CardSet CardSet::canonize(const CardSet& other) const
