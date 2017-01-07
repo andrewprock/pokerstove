@@ -47,7 +47,7 @@ public:
      * object to be created.
      */
     explicit Suit(const std::string& str);
-    explicit Suit(uint8_t c)     : _suit(c) {}
+    explicit Suit(uint8_t c);
 
 
     /**

@@ -246,6 +246,13 @@ Suit::Suit(const std::string& str)
     : _suit(suit_code(str[0]))
 {}
 
+Suit::Suit(uint8_t c)
+{
+    if (isSuitChar(c))
+        _suit = suit_code(c);
+    else
+        _suit = c;
+}
 
 string Suit::str() const
 {
