@@ -40,10 +40,14 @@ int main(int argc, char** argv)
         po::options_description desc(
             "pscolex, a utility which prints all combinations\n"
             "of poker hands, using canonical suits, or only ranks\n");
-        desc.add_options()("help,?", "produce help message")(
-            "num-cards,n", po::value<size_t>()->default_value(2),
-            "number of cards in hands")("ranks",
-                                        "print the set of rank values");
+
+        // clang-format off
+        desc.add_options()
+            ("help,?", "produce help message")
+            ("num-cards,n", po::value<size_t>()->default_value(2),
+             "number of cards in hands")
+            ("ranks", "print the set of rank values");
+        // clang-format on
 
         po::variables_map vm;
         po::store(po::command_line_parser(argc, argv)

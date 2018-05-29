@@ -11,12 +11,15 @@ int main(int argc, char** argv)
 {
     po::options_description desc("ps-eval, a poker hand evaluator\n");
 
-    desc.add_options()("help,?", "produce help message")(
-        "game,g", po::value<string>()->default_value("h"),
-        "game to use for evaluation")("board,b", po::value<string>(),
-                                      "community cards for he/o/o8")(
-        "hand,h", po::value<vector<string>>(),
-        "a hand for evaluation")("quiet,q", "produces no output");
+    // clang-format off
+    desc.add_options()
+        ("help,?", "produce help message")
+        ("game,g", po::value<string>()->default_value("h"),
+         "game to use for evaluation")
+        ("board,b", po::value<string>(), "community cards for he/o/o8")
+        ("hand,h", po::value<vector<string>>(), "a hand for evaluation")
+        ("quiet,q", "produces no output");
+    // clang-format on
 
     // make hand a positional argument
     po::positional_options_description p;
