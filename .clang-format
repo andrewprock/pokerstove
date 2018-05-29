@@ -1,29 +1,5 @@
-BasedOnStyle: llvm
-AccessModifierOffset: -4
-BreakBeforeBinaryOperators: None
-ColumnLimit: 80
-Standard: Cpp11
-IndentWidth: 4
-AlwaysBreakTemplateDeclarations: true
-BreakBeforeBraces: Custom
-BraceWrapping:
-    AfterClass: true
-    AfterStruct: true
-    AfterFunction: true
-    AfterControlStatement: true
-    AfterEnum: true
-    AfterStruct: true
-    AfterUnion: true
-    AfterExternBlock: true
-    BeforeCatch: true
-    BeforeElse: true
-    AfterNamespace: true
-    IndentBraces: false
-    SplitEmptyFunction: false
-AllowShortFunctionsOnASingleLine: All
+Language: Cpp
+BasedOnStyle: Google
 DerivePointerAlignment: false
-PointerAlignment: Left
-SpacesBeforeTrailingComments: 2
-BreakConstructorInitializersBeforeComma: true
-BreakConstructorInitializers: BeforeComma
-IndentCaseLabels: true
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
