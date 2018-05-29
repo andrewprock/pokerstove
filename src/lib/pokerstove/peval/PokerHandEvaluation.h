@@ -5,9 +5,9 @@
 #ifndef PEVAL_POKERHANDEVALUATION_H_
 #define PEVAL_POKERHANDEVALUATION_H_
 
-#include <stdexcept>
-#include <iostream>
 #include "PokerEvaluation.h"
+#include <iostream>
+#include <stdexcept>
 
 namespace pokerstove
 {
@@ -40,31 +40,19 @@ public:
             return eval1.str();
     }
 
-    PokerEvaluation high() const
-    {
-        return eval1;
-    }
+    PokerEvaluation high() const { return eval1; }
 
-    PokerEvaluation low() const
-    {
-        return eval2;
-    }
+    PokerEvaluation low() const { return eval2; }
 
-    bool highlow() const
-    {
-        return eval2 != PokerEvaluation();
-    }
+    bool highlow() const { return eval2 != PokerEvaluation(); }
 
-    bool empty() const
-    {
-        return (eval1 == PokerEvaluation(0));
-    }
+    bool empty() const { return (eval1 == PokerEvaluation(0)); }
 
     /**
      * return the evalution for the hand.  the first evaluation will
      * be returned by default.
      */
-    PokerEvaluation eval(size_t n=0) const
+    PokerEvaluation eval(size_t n = 0) const
     {
         if (n == 0)
             return eval1;
@@ -79,11 +67,12 @@ private:
     PokerEvaluation eval2;
 };
 
-inline
-double shares(const PokerHandEvaluation& hero, const PokerHandEvaluation& villain)
+inline double shares(const PokerHandEvaluation& hero,
+                     const PokerHandEvaluation& villain)
 {
     // no high/low/split
-    if (!hero.highlow() && !villain.highlow()) {
+    if (!hero.highlow() && !villain.highlow())
+    {
         // hero wins
         if (hero.high() > villain.high())
             return 1.0;
@@ -93,7 +82,8 @@ double shares(const PokerHandEvaluation& hero, const PokerHandEvaluation& villai
         // tie
         return 0.5;
     }
-    else {  // high/low
+    else
+    {  // high/low
 
         // hero scooped
         if (hero.high() > villain.high() && hero.low() > villain.low())
@@ -104,24 +94,24 @@ double shares(const PokerHandEvaluation& hero, const PokerHandEvaluation& villai
             return 0.0;
 
         // split pots
-        if ((hero.high() >  villain.high() && hero.low() <  villain.low()) ||
-            (hero.high() <  villain.high() && hero.low() >  villain.low()) ||
+        if ((hero.high() > villain.high() && hero.low() < villain.low()) ||
+            (hero.high() < villain.high() && hero.low() > villain.low()) ||
             (hero.high() == villain.high() && hero.low() == villain.low()))
             return 0.5;
 
         // three quarters
-        if ((hero.high() == villain.high() && hero.low() >  villain.low()) ||
-            (hero.high() >  villain.high() && hero.low() == villain.low()))
+        if ((hero.high() == villain.high() && hero.low() > villain.low()) ||
+            (hero.high() > villain.high() && hero.low() == villain.low()))
             return 0.75;
 
         // hero quartered
-        if ((hero.high() == villain.high() && hero.low() <  villain.low()) ||
-            (hero.high() <  villain.high() && hero.low() == villain.low()))
+        if ((hero.high() == villain.high() && hero.low() < villain.low()) ||
+            (hero.high() < villain.high() && hero.low() == villain.low()))
             return 0.25;
     }
     return -1.0;
 }
 
-}       // namespace pokerstove
+}  // namespace pokerstove
 
 #endif  // PEVAL_POKERHANDEVALUATION_H_

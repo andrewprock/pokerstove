@@ -5,10 +5,10 @@
 #ifndef PEVAL_POKEREVALUATION_H_
 #define PEVAL_POKEREVALUATION_H_
 
-#include <iosfwd>
-#include <climits>
-#include <boost/operators.hpp>
 #include "Rank.h"
+#include <boost/operators.hpp>
+#include <climits>
+#include <iosfwd>
 
 namespace pokerstove
 {
@@ -16,27 +16,27 @@ class PokerHandEvaluator;
 class PokerHand;
 
 // this should probably be a nested enum
-const int NO_PAIR               =  0;
-const int ONE_PAIR              =  1;
-const int THREE_FLUSH           =  2;
-const int THREE_STRAIGHT        =  3;
-const int TWO_PAIR              =  4;
-const int THREE_OF_A_KIND       =  5;
-const int THREE_STRAIGHT_FLUSH  =  6;
-const int STRAIGHT              =  7;
-const int FLUSH                 =  8;
-const int FULL_HOUSE            =  9;
-const int FOUR_OF_A_KIND        = 10;
-const int STRAIGHT_FLUSH        = 11;
+const int NO_PAIR = 0;
+const int ONE_PAIR = 1;
+const int THREE_FLUSH = 2;
+const int THREE_STRAIGHT = 3;
+const int TWO_PAIR = 4;
+const int THREE_OF_A_KIND = 5;
+const int THREE_STRAIGHT_FLUSH = 6;
+const int STRAIGHT = 7;
+const int FLUSH = 8;
+const int FULL_HOUSE = 9;
+const int FOUR_OF_A_KIND = 10;
+const int STRAIGHT_FLUSH = 11;
 
-const int NUM_EVAL_TYPES        = 12;
-const int FULL_HAND_SIZE        =  5;
-const int MAX_EVAL_HAND_SIZE    =  7;
+const int NUM_EVAL_TYPES = 12;
+const int FULL_HAND_SIZE = 5;
+const int MAX_EVAL_HAND_SIZE = 7;
 
 const int VSHIFT = 24;
 const int MAJOR_SHIFT = 20;
 const int MINOR_SHIFT = 16;
-const int ACE_LOW_BIT = 0x01<<Rank::NUM_RANK;
+const int ACE_LOW_BIT = 0x01 << Rank::NUM_RANK;
 
 /**
  * An endocing of poker evaluations which preserves order.
@@ -46,7 +46,8 @@ class PokerEvaluation
 {
 public:
     PokerEvaluation();
-    explicit PokerEvaluation(int ecode);  //!< for codes saved for later use, like in a file
+    explicit PokerEvaluation(
+        int ecode);  //!< for codes saved for later use, like in a file
 
 #if 0
     PokerEvaluation(int type,             //!< Manually create high hand evaluation
@@ -55,9 +56,10 @@ public:
                     int kickers);
 #endif
 
-    std::string str() const;     //!< semantic meaning of the evaluation
-    std::string bitstr() const;  //!< bit string of the evaluation code. debugging.
-    int code() const;            //!< the bit representation
+    std::string str() const;  //!< semantic meaning of the evaluation
+    std::string
+    bitstr() const;    //!< bit string of the evaluation code. debugging.
+    int code() const;  //!< the bit representation
 
     /**
      * This is a showdown code, useful for comparing to other hands instead
@@ -113,27 +115,44 @@ public:
     /**
      * return a bitmask of the kickers for the hand
      */
-    int  kickerBits() const;
+    int kickerBits() const;
 
     // boost/operators.hpp creates closure
-    bool operator==(const PokerEvaluation& e) const { return _evalcode == e._evalcode; }
-    bool operator!=(const PokerEvaluation& e) const { return _evalcode != e._evalcode; }
-    bool operator<=(const PokerEvaluation& e) const { return _evalcode <= e._evalcode; }
-    bool operator< (const PokerEvaluation& e) const { return _evalcode <  e._evalcode; }
-    bool operator> (const PokerEvaluation& e) const { return _evalcode >  e._evalcode; }
-    void operator++()                    { ++_evalcode; }
-    void operator--()                    { --_evalcode; }
+    bool operator==(const PokerEvaluation& e) const
+    {
+        return _evalcode == e._evalcode;
+    }
+    bool operator!=(const PokerEvaluation& e) const
+    {
+        return _evalcode != e._evalcode;
+    }
+    bool operator<=(const PokerEvaluation& e) const
+    {
+        return _evalcode <= e._evalcode;
+    }
+    bool operator<(const PokerEvaluation& e) const
+    {
+        return _evalcode < e._evalcode;
+    }
+    bool operator>(const PokerEvaluation& e) const
+    {
+        return _evalcode > e._evalcode;
+    }
+    void operator++() { ++_evalcode; }
+    void operator--() { --_evalcode; }
 
     std::string toStringCannon() const;
 
 private:
-    // table generation code, these should not be in this class.  make them private for now
+    // table generation code, these should not be in this class.  make them
+    // private for now
     // TODO: find a better place for these
     static void generateLowballLookupA5();
     static void generateBottomRankMask();
 
-    // some of these methods might be useful to expose, but generally the PokerEvaluation is meant to
-    // be just for comparing hands, not classifying them
+    // some of these methods might be useful to expose, but generally the
+    // PokerEvaluation is meant to be just for comparing hands, not classifying
+    // them
     void setKickerBits(int k);
     void setMajorRank(int r);
     void setMinorRank(int r);
@@ -141,9 +160,13 @@ private:
     void playAceHigh();
     bool acePlaysLow() const;
 
-    // the "low" evaluations get flipped so that best hand ordering is maintained
-    void flip()            { _evalcode = INT_MAX - _evalcode; }
-    bool isFlipped() const { return (_evalcode > INT_MAX>>1); }         // should use <numerics>
+    // the "low" evaluations get flipped so that best hand ordering is
+    // maintained
+    void flip() { _evalcode = INT_MAX - _evalcode; }
+    bool isFlipped() const
+    {
+        return (_evalcode > INT_MAX >> 1);
+    }  // should use <numerics>
 
     // this function needs friend access to rank
     std::string makeRankString(int r, bool acelow) const;
@@ -188,11 +211,12 @@ private:
 // typedef to support refactoring
 typedef PokerEvaluation Evaluation;
 
-}
+}  // namespace pokerstove
 
 //
 // Extraction operators.
 //
-std::ostream& operator<<(std::ostream& sout, const pokerstove::PokerEvaluation& e);
+std::ostream& operator<<(std::ostream& sout,
+                         const pokerstove::PokerEvaluation& e);
 
 #endif  // PEVAL_POKEREVALUATION_H_

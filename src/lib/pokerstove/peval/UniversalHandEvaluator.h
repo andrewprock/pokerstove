@@ -16,25 +16,25 @@
 //  eval a: high/low/227/A25/Badugi/3CP
 //  eval b: high/low/227/A25/Badugi/3CP
 
-#include <vector>
-#include <boost/lexical_cast.hpp>
-#include <pokerstove/util/combinations.h>
 #include "Card.h"
 #include "CardSet.h"
 #include "PokerHandEvaluator.h"
+#include <boost/lexical_cast.hpp>
+#include <pokerstove/util/combinations.h>
+#include <vector>
 
 namespace pokerstove
 {
-typedef PokerEvaluation(CardSet::*evalFunction)() const;
+typedef PokerEvaluation (CardSet::*evalFunction)() const;
 
 /**
- * A generic poker game hand evaluator, from which nearly all poker evaluators can be made.  This class
- * is used as the default class type in the PokerHandEvaluator factory.
+ * A generic poker game hand evaluator, from which nearly all poker evaluators
+ * can be made.  This class is used as the default class type in the
+ * PokerHandEvaluator factory.
  */
 class UniversalHandEvaluator : public PokerHandEvaluator
 {
 public:
-
     /**
      * There is only one constructor which takes all the parameters.
      * The evaluation varieties are specified by pointer to member
@@ -48,10 +48,8 @@ public:
      * @param evalA primary evaluation function, all games must have
      * @param evalB secondary evaluation function, most games use none (null)
      */
-    UniversalHandEvaluator(int heromin, int heromax,
-                           int boardmin, int boardmax,
-                           int herouse,
-                           evalFunction evalA, evalFunction evalB)
+    UniversalHandEvaluator(int heromin, int heromax, int boardmin, int boardmax,
+                           int herouse, evalFunction evalA, evalFunction evalB)
 
         : PokerHandEvaluator()
         , _heromin(heromin)
@@ -63,7 +61,8 @@ public:
         , _evalB(evalB)
     {
         if (evalA == evalFunction(NULL))
-            throw std::invalid_argument("UnivHandEval: first evaluator (A) must be non-null");
+            throw std::invalid_argument(
+                "UnivHandEval: first evaluator (A) must be non-null");
 
         if (evalB == evalFunction(NULL))
             _evalsperhand = 1;
@@ -71,7 +70,7 @@ public:
             _evalsperhand = 2;
     }
 
-    virtual size_t handSize() const  { return _heromax;  }
+    virtual size_t handSize() const { return _heromax; }
     virtual size_t boardSize() const { return _boardmax; }
 
     virtual size_t evaluationSize() const
@@ -81,16 +80,17 @@ public:
         return 2;
     }
 
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand, const CardSet& board) const
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                             const CardSet& board) const
     {
         PokerEvaluation eval[2];
 
         // check to see if the input hand is consistent with the game
-        if (hand.size() < _heromin ||
-            hand.size() > _heromax)
-            throw std::invalid_argument(std::string("UnivHandEval: "
-                                                    + boost::lexical_cast<std::string>(uint(hand.size()))
-                                                    + ": invalid number of pocket cards"));
+        if (hand.size() < _heromin || hand.size() > _heromax)
+            throw std::invalid_argument(std::string(
+                "UnivHandEval: " +
+                boost::lexical_cast<std::string>(uint(hand.size())) +
+                ": invalid number of pocket cards"));
         CardSet h = hand;
 
         std::vector<CardSet> hand_candidates;
@@ -99,24 +99,26 @@ public:
 
         // now check the board, it's a distribution
         size_t bz = board.size();
-        if ((bz < _boardmin && bz > 0) ||
-            bz > _boardmax)
-            throw std::invalid_argument(std::string("UnivHandEval: "
-                                                    + boost::lexical_cast<std::string>((uint)board.size())
-                                                    + " unsupported number of board cards"));
+        if ((bz < _boardmin && bz > 0) || bz > _boardmax)
+            throw std::invalid_argument(std::string(
+                "UnivHandEval: " +
+                boost::lexical_cast<std::string>((uint)board.size()) +
+                " unsupported number of board cards"));
 
         // generate the possible sub parts, the reference example is omaha
         // where a player must use two cards from their hand, and three
         // from the board.
         fillSubsets(hand_candidates, _herouse, h);
-        fillSubsets(board_candidates, boardSize()-_herouse, board);
+        fillSubsets(board_candidates, boardSize() - _herouse, board);
 
-        // combine the subset candidates to create all possible sets of evaluations
-        // at the river in omaha, this should produce (4c2)*(5c3) = 6*10 = 60 candidates
-        for (uint i=0; i<hand_candidates.size(); i++)
-            for (uint j=0; j<board_candidates.size(); j++)
+        // combine the subset candidates to create all possible sets of
+        // evaluations at the river in omaha, this should produce (4c2)*(5c3) =
+        // 6*10 = 60 candidates
+        for (uint i = 0; i < hand_candidates.size(); i++)
+            for (uint j = 0; j < board_candidates.size(); j++)
             {
-                eval_candidates.push_back(hand_candidates[i] | board_candidates[j]);
+                eval_candidates.push_back(hand_candidates[i] |
+                                          board_candidates[j]);
             }
 
         // evaluation of the first type.  we do a quick evaluation
@@ -124,7 +126,7 @@ public:
         // there are more candidates, we just run through them updating
         // as we find better ones.
         eval[0] = ((eval_candidates[0]).*(_evalA))();
-        for (uint i=1; i<eval_candidates.size(); i++)
+        for (uint i = 1; i < eval_candidates.size(); i++)
         {
             PokerEvaluation e = ((eval_candidates[i]).*(_evalA))();
             if (e > eval[0])
@@ -134,9 +136,10 @@ public:
         // if it's a one dimensional evaluation we are done
         if (_evalB != evalFunction(NULL))
         {
-            // second dimension of the evaulation, usually low in a high/low game.
+            // second dimension of the evaulation, usually low in a high/low
+            // game.
             eval[1] = PokerEvaluation();
-            for (uint i=0; i<eval_candidates.size(); i++)
+            for (uint i = 0; i < eval_candidates.size(); i++)
             {
                 PokerEvaluation e = ((eval_candidates[i]).*(_evalB))();
                 if (e > eval[1])
@@ -145,10 +148,11 @@ public:
                 }
             }
         }
-        return PokerHandEvaluation(eval[0],eval[1]);
+        return PokerHandEvaluation(eval[0], eval[1]);
     }
 
-    void fillSubsets(std::vector<CardSet> & candidates, size_t subsetsize, CardSet cards) const
+    void fillSubsets(std::vector<CardSet>& candidates, size_t subsetsize,
+                     CardSet cards) const
     {
         if (subsetsize > cards.size())
         {
@@ -162,17 +166,17 @@ public:
         }
 
         std::vector<Card> clist = cards.cards();
-        pokerstove::combinations cc(static_cast<uint>(clist.size()), static_cast<uint>(subsetsize));
+        pokerstove::combinations cc(static_cast<uint>(clist.size()),
+                                    static_cast<uint>(subsetsize));
         do
         {
             CardSet cand;
-            for (size_t i=0; i<subsetsize; i++)
+            for (size_t i = 0; i < subsetsize; i++)
             {
                 cand.insert(clist[cc[static_cast<uint>(i)]]);
             }
             candidates.push_back(cand);
-        }
-        while (cc.nextcomb());
+        } while (cc.nextcomb());
     }
 
     virtual size_t evalsPerHand() const { return _evalsperhand; }
@@ -188,6 +192,6 @@ private:
     int _evalsperhand;
 };
 
-}
+}  // namespace pokerstove
 
 #endif  // PEVAL_UNIVERSALHANDEVALUATOR_H_

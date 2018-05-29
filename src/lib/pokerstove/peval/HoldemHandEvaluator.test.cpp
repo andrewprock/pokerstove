@@ -1,6 +1,6 @@
+#include "HoldemHandEvaluator.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "HoldemHandEvaluator.h"
 
 using namespace pokerstove;
 using namespace std;

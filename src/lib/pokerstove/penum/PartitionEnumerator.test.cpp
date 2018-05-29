@@ -1,15 +1,14 @@
-#include <iostream>
-#include <gtest/gtest.h>
 #include "PartitionEnumerator.h"
+#include <gtest/gtest.h>
+#include <iostream>
 
 using namespace pokerstove;
 using namespace std;
 
-TEST(PartitionEnumerator, tautology) {
-    EXPECT_EQ(1,1);
-}
+TEST(PartitionEnumerator, tautology) { EXPECT_EQ(1, 1); }
 
-TEST(PartitionEnumerator, chinese_settings) {
+TEST(PartitionEnumerator, chinese_settings)
+{
     // compute the number of ways to set a chinese poker hand
     std::vector<size_t> partitions(3);
     partitions[0] = 3;
@@ -18,14 +17,15 @@ TEST(PartitionEnumerator, chinese_settings) {
 
     int visits = 0;
     PartitionEnumerator2 walker(13, partitions);
-    do {
+    do
+    {
         visits += 1;
-    }
-    while (walker.next());
+    } while (walker.next());
     EXPECT_EQ(72072, visits);
 }
 
-TEST(PartitionEnumerator, DISABLED_slow_all_ofcp_draws) {
+TEST(PartitionEnumerator, DISABLED_slow_all_ofcp_draws)
+{
     // ofcp = open face chinese poker
     // compute the number of possible draw sets in open face chinese poker
     // This amounts to enumerating over all 47c8 sets.  This is set to
@@ -35,34 +35,36 @@ TEST(PartitionEnumerator, DISABLED_slow_all_ofcp_draws) {
 
     uint64_t visits = 0;
     PartitionEnumerator2 walker(47, partitions);
-    do {
+    do
+    {
         if (visits % 10000000 == 0)
             cout << visits << endl;
         visits += 1;
-    }
-    while (walker.next());
-    EXPECT_EQ(314457495, visits);       // 314,457,495
+    } while (walker.next());
+    EXPECT_EQ(314457495, visits);  // 314,457,495
 }
 
-TEST(PartitionEnumerator, some_ofcp_draws) {
+TEST(PartitionEnumerator, some_ofcp_draws)
+{
     // ofcp = open face chinese poker
     // Iterate over all possible settings with 36 cards left, player has
     // three hands with open cards, 1, 2, 2 slots respectively.
     std::vector<size_t> partitions;
-    partitions.push_back(1);    // one card left
+    partitions.push_back(1);  // one card left
     partitions.push_back(2);
     partitions.push_back(2);
 
     uint64_t visits = 0;
     PartitionEnumerator2 walker(36, partitions);
-    do {
+    do
+    {
         visits += 1;
-    }
-    while (walker.next());
-    EXPECT_EQ(11309760, visits);        // 11,309,760
+    } while (walker.next());
+    EXPECT_EQ(11309760, visits);  // 11,309,760
 }
 
-TEST(PartitionEnumerator, end_game_ofcp_draws_A) {
+TEST(PartitionEnumerator, end_game_ofcp_draws_A)
+{
     // ofcp = open face chinese poker
     // Iterate over all end game scenarios.
     // Player A: one hand with two open cards.
@@ -76,9 +78,9 @@ TEST(PartitionEnumerator, end_game_ofcp_draws_A) {
 
     uint64_t visits = 0;
     PartitionEnumerator2 walker(30, partitions);
-    do {
+    do
+    {
         visits += 1;
-    }
-    while (walker.next());
-    EXPECT_EQ(328860, visits);        // 328,860
+    } while (walker.next());
+    EXPECT_EQ(328860, visits);  // 328,860
 }

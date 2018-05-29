@@ -2,26 +2,20 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Suit.cpp 2649 2012-06-30 04:53:24Z prock $
  */
+#include "Suit.h"
+#include "Card.h"
+#include <boost/format.hpp>
 #include <iostream>
 #include <stdexcept>
-#include <boost/format.hpp>
-#include "Card.h"
-#include "Suit.h"
 
 using namespace std;
 using namespace pokerstove;
 
 Suit::display Suit::__suitStringType = SUIT_ASCII;
 
-void Suit::setSuitStringType(Suit::display s)
-{
-    __suitStringType = s;
-}
+void Suit::setSuitStringType(Suit::display s) { __suitStringType = s; }
 
-Suit::display Suit::getSuitStringType()
-{
-    return __suitStringType;
-}
+Suit::display Suit::getSuitStringType() { return __suitStringType; }
 
 string Suit::decodeSuitANSI_EXT(int c) const
 {
@@ -46,7 +40,6 @@ string Suit::decodeSuitANSI_EXT(int c) const
     return "?";
 }
 
-
 string Suit::decodeSuitUnicode(int c) const
 {
     if (c < 0)
@@ -55,16 +48,16 @@ string Suit::decodeSuitUnicode(int c) const
     switch (c)
     {
         case 0:
-            //return "\033[32m\2663\033[0m";
+            // return "\033[32m\2663\033[0m";
             return "\033[32mc\033[0m";
         case 1:
-            //return "\033[36m\2666\033[0m";
+            // return "\033[36m\2666\033[0m";
             return "\033[36md\033[0m";
         case 2:
-            //return "\033[31m\2665\033[0m";
+            // return "\033[31m\2665\033[0m";
             return "\033[31mh\033[0m";
         case 3:
-            //return "\033[33m\2660\033[0m";
+            // return "\033[33m\2660\033[0m";
             return "\033[33ms\033[0m";
         default:
             return "#";
@@ -98,7 +91,7 @@ string Suit::decodeSuitASCII_EXT(int card) const
     if (card < 0)
         return "x";
 
-    int c='?';
+    int c = '?';
     switch (card)
     {
         case 0:
@@ -117,7 +110,8 @@ string Suit::decodeSuitASCII_EXT(int card) const
             c = '?';
     }
 
-    string buf = (boost::format("%c") % c).str();         // boost::format may be overkill
+    string buf =
+        (boost::format("%c") % c).str();  // boost::format may be overkill
     return buf;
 }
 
@@ -217,7 +211,8 @@ string Suit::decodeSuit(int c) const
             return decodeSuitUnicode(c);
 
         case SUIT_PREFLOP_CANNON:
-            throw std::domain_error("direct suit decoding not supported for SUIT_PREFLOP_CANNON");
+            throw std::domain_error(
+                "direct suit decoding not supported for SUIT_PREFLOP_CANNON");
     }
     return "?";
 }
@@ -254,24 +249,22 @@ Suit::Suit(uint8_t c)
         _suit = c;
 }
 
-string Suit::str() const
-{
-    return decodeSuit(_suit);
-}
+string Suit::str() const { return decodeSuit(_suit); }
 
-void Suit::fromString(const string& c)
-{
-    _suit = suit_code(c[0]);
-}
+void Suit::fromString(const string& c) { _suit = suit_code(c[0]); }
 
 bool Suit::isSuitChar(char c)
 {
     switch (c)
     {
-        case 'c':    case 'C':
-        case 'd':    case 'D':
-        case 'h':    case 'H':
-        case 's':    case 'S':
+        case 'c':
+        case 'C':
+        case 'd':
+        case 'D':
+        case 'h':
+        case 'H':
+        case 's':
+        case 'S':
             return true;
     };
     return false;

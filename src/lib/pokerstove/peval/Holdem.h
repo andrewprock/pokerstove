@@ -19,6 +19,6 @@ const unsigned int NUM_TURN_CARDS = 4;
 const unsigned int NUM_RIVER_CARDS = 5;
 const unsigned int NUM_HOLDEM_POCKET = 2;
 const unsigned int NUM_HOLDEM_ROUNDS = 4;
-}
+}  // namespace pokerstove
 
 #endif  // PEVAL_HOLDEM_H_

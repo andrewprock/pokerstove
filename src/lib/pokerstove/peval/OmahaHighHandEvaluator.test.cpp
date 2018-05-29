@@ -1,6 +1,6 @@
+#include "OmahaHighHandEvaluator.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "OmahaHighHandEvaluator.h"
 
 using namespace pokerstove;
 using namespace std;

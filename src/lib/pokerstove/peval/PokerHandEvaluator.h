@@ -5,12 +5,12 @@
 #ifndef PEVAL_POKERHANDEVALUATOR_H_
 #define PEVAL_POKERHANDEVALUATOR_H_
 
-#include <vector>
-#include <string>
-#include <boost/shared_ptr.hpp>
-#include <boost/lexical_cast.hpp>
 #include "CardSet.h"
 #include "PokerHandEvaluation.h"
+#include <boost/lexical_cast.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
+#include <vector>
 
 const unsigned int BOARD_SIZE = 5;
 
@@ -43,11 +43,10 @@ struct EquityResult
 
     std::string str() const
     {
-        std::string ret =
-            boost::lexical_cast<std::string>(winShares) + " " +
-            boost::lexical_cast<std::string>(tieShares) + " " +
-            boost::lexical_cast<std::string>(equity) + " " +
-            boost::lexical_cast<std::string>(equity2);
+        std::string ret = boost::lexical_cast<std::string>(winShares) + " " +
+                          boost::lexical_cast<std::string>(tieShares) + " " +
+                          boost::lexical_cast<std::string>(equity) + " " +
+                          boost::lexical_cast<std::string>(equity2);
         return ret;
     }
 };
@@ -91,10 +90,11 @@ public:
      * hand.
      * @see PokerHandEvaluation
      */
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                             const CardSet& board=CardSet(0)) const = 0;
+    virtual PokerHandEvaluation
+    evaluateHand(const CardSet& hand,
+                 const CardSet& board = CardSet(0)) const = 0;
     virtual PokerHandEvaluation evaluate(const CardSet& hand,
-                                         const CardSet& board=CardSet(0))
+                                         const CardSet& board = CardSet(0))
     {
         return evaluateHand(hand, board);
     }
@@ -104,37 +104,37 @@ public:
      * non-split pot games.
      */
     virtual PokerEvaluation eval(const CardSet& hand,
-                                 const CardSet& board=CardSet(0))
+                                 const CardSet& board = CardSet(0))
     {
         return evaluateHand(hand, board).high();
     }
 
-    virtual size_t handSize() const = 0;             //!< return the maximum size of a players hand
-    virtual size_t boardSize() const = 0;            //!< return the maximum size of the board
-    virtual size_t evaluationSize() const = 0;       //!< return 1 for high only, 2 for high low
-    virtual size_t numDraws() const { return 0; }    //!< return the maximum size of a players hand
+    virtual size_t
+    handSize() const = 0;  //!< return the maximum size of a players hand
+    virtual size_t
+    boardSize() const = 0;  //!< return the maximum size of the board
+    virtual size_t
+    evaluationSize() const = 0;  //!< return 1 for high only, 2 for high low
+    virtual size_t numDraws() const
+    {
+        return 0;
+    }  //!< return the maximum size of a players hand
 
-    virtual PokerEvaluation evaluateRanks(const CardSet& hand,
-                                          const CardSet& board=CardSet(0)) const
+    virtual PokerEvaluation
+    evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
         return evaluateHand(hand, board).eval(0);
     }
 
-    virtual PokerEvaluation evaluateSuits(const CardSet& hand,
-                                          const CardSet& board=CardSet(0)) const
+    virtual PokerEvaluation
+    evaluateSuits(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
         return evaluateHand(hand, board).eval(0);
     }
 
-    virtual bool usesSuits() const
-    {
-        return _useSuits;
-    }
+    virtual bool usesSuits() const { return _useSuits; }
 
-    void useSuits(bool use)
-    {
-        _useSuits = use;
-    }
+    void useSuits(bool use) { _useSuits = use; }
 
     /**
      * used to add "draws" to draw games
@@ -170,8 +170,7 @@ public:
                           const pokerstove::CardSet& board,
                           std::vector<PokerHandEvaluation>& evals,
                           std::vector<EquityResult>& result,
-                          double weight=1.0) const;
-
+                          double weight = 1.0) const;
 
 protected:
     PokerHandEvaluator();
@@ -191,6 +190,6 @@ private:
 // for planned refactoring
 typedef PokerHandEvaluator GameEvaluator;
 
-}
+}  // namespace pokerstove
 
 #endif  // PEVAL_POKERHANDEVALUATOR_H_

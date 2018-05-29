@@ -5,9 +5,9 @@
 #ifndef PEVAL_POKERHAND_H_
 #define PEVAL_POKERHAND_H_
 
-#include <boost/array.hpp>
 #include "Card.h"
 #include "CardSet.h"
+#include <boost/array.hpp>
 
 #define MUTABLE
 
@@ -66,10 +66,12 @@ public:
      */
     std::string preflopstr() const;
 
-    size_t  size() const;                                //!< return the number of cards in hand
-    CardSet cardSet() const;                          //!< sometimes we want to work with the compact set
-    CardSet cardSet(size_t first, size_t len) const;  //!< return a subset of the cards
-    std::vector<Card> cards() const;                  //!< extract cards in generic format
+    size_t size() const;  //!< return the number of cards in hand
+    CardSet
+    cardSet() const;  //!< sometimes we want to work with the compact set
+    CardSet cardSet(size_t first,
+                    size_t len) const;  //!< return a subset of the cards
+    std::vector<Card> cards() const;    //!< extract cards in generic format
 
     bool contains(const Card& c) const;
 
@@ -79,7 +81,8 @@ public:
     void append(const Card& c);
 
     /**
-     * Append Cards in CardSet to hand.  Order appended is arbitrary. Duplicates not appended.
+     * Append Cards in CardSet to hand.  Order appended is arbitrary. Duplicates
+     * not appended.
      */
     void append(const CardSet& cs);
 
@@ -94,17 +97,19 @@ public:
     void remove(const Card& c);
 
     /**
-     * If Card is in hand, remove it.  Shift cards to fill in hole.  O(this.size*cs.size)
+     * If Card is in hand, remove it.  Shift cards to fill in hole.
+     * O(this.size*cs.size)
      */
     void remove(const CardSet& cs);
 
     /**
-     * If Card is in hand, remove it.  Shift cards to fill in hole.  O(this.size*h.size)
+     * If Card is in hand, remove it.  Shift cards to fill in hole.
+     * O(this.size*h.size)
      */
     void remove(const PokerHand& h);
 
-    const Card& operator[](size_t index) const;         //!< get const card by index,
-    Card& operator[](size_t index);               //!< get card by index,
+    const Card& operator[](size_t index) const;  //!< get const card by index,
+    Card& operator[](size_t index);              //!< get card by index,
 
     /**
      * Re-order the hand. This changes the order, but are considered
@@ -123,22 +128,22 @@ public:
 
 protected:
     /**
-     * Parse a poker hand from a string.  All card tokens found in the entire string will
-     * be added to the hand.  This allows for embeded spaces, or other embeded characters.
-     * Strings of zero length will create an empty hand, strings of length 1 will raise an
-     * exception.
+     * Parse a poker hand from a string.  All card tokens found in the entire
+     * string will be added to the hand.  This allows for embeded spaces, or
+     * other embeded characters. Strings of zero length will create an empty
+     * hand, strings of length 1 will raise an exception.
      */
     void fromString(const std::string& s);
 
-
 private:
 #ifdef MUTABLE
-    mutable             //!< _cards can be mutable to handle sorts, better solution?
+    mutable  //!< _cards can be mutable to handle sorts, better solution?
 #endif
-    boost::array<Card,MAX_PHCARDS> _cards;
-    uint8_t   _ncards;
+        boost::array<Card, MAX_PHCARDS>
+            _cards;
+    uint8_t _ncards;
 };
 
-} // namespace pokerstove
+}  // namespace pokerstove
 
 #endif  // PEVAL_POKERHAND_H_

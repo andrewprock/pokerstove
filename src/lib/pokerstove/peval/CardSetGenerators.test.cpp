@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "CardSetGenerators.h"
+#include <gtest/gtest.h>
 
 using namespace pokerstove;
 
@@ -23,4 +23,3 @@ TEST(CardSetGeneratorsTest, RankSetSizes)
     EXPECT_EQ(91, pokerstove::createCardSet(2, Card::RANK).size());
     EXPECT_EQ(455, pokerstove::createCardSet(3, Card::RANK).size());
 }
-

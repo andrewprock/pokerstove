@@ -4,16 +4,16 @@
 #ifndef PEVAL_CARDSETGENERATORS_H_
 #define PEVAL_CARDSETGENERATORS_H_
 
-#include <set>
 #include "Card.h"
 #include "CardSet.h"
+#include <set>
 
 namespace pokerstove
 {
 
 /**
  * Create the set of all card sets where the size of each rank set has
- * numCards.  
+ * numCards.
  *
  * Card::Grouping determines what sort of set is produced.
  *
@@ -32,8 +32,8 @@ namespace pokerstove
  * element representing a CardSet with two cards, set to the canonical rank
  * representation.
  */
-std::set<CardSet>
-createCardSet(size_t numCards, Card::Grouping grouping=Card::RANK_SUIT);
-}
+std::set<CardSet> createCardSet(size_t numCards,
+                                Card::Grouping grouping = Card::RANK_SUIT);
+}  // namespace pokerstove
 
 #endif  // PEVAL_CARDSETGENERATORS_H_

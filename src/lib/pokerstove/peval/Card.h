@@ -5,8 +5,8 @@
 #ifndef PEVAL_CARD_H_
 #define PEVAL_CARD_H_
 
-#include <string>
 #include <boost/cstdint.hpp>
+#include <string>
 
 namespace pokerstove
 {
@@ -71,20 +71,20 @@ public:
     /**
      * required for storage in STL containers
      */
-    bool operator== (const Card& r) const { return _card == r._card; }
+    bool operator==(const Card& r) const { return _card == r._card; }
 
     /**
      * required for storage in STL containers
      */
-    bool operator< (const Card& r) const;
+    bool operator<(const Card& r) const;
 
 private:
-    static uint8_t  encode(Rank r, Suit s);
+    static uint8_t encode(Rank r, Suit s);
 
     friend class CardSet;
 
     uint8_t _card;
 };
-}
+}  // namespace pokerstove
 
 #endif  // PEVAL_CARD_H_
