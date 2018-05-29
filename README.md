@@ -45,14 +45,13 @@ installed on your platform of choice:
 
 * boost, version 1.46 or higher
 * cmake, version 2.4 or higher
-* subversion, version 1.7 or higher
 
 ### Linux
 
 To install the dependencies with apt get:
 
-    apt-get install libboost-all-dev cmake subversion
-    
+    apt-get install libboost-all-dev cmake
+
 To build under linux using cmake, create a build directory,
 invoke cmake on the programs directory, then build.
 
@@ -72,7 +71,7 @@ example:
       -b [ --board ] arg     community cards for he/o/o8
       -h [ --hand ] arg      a hand for evaluation
       -q [ --quiet ]         produce no output
-    
+
        For the --game option, one of the follwing games may be
        specified.
          h     hold'em
@@ -89,7 +88,7 @@ example:
          T     triple draw lowball (A-5)
          b     badugi
          3     three-card poker
-    
+
        examples:
            ps-eval acas
            ps-eval AcAs Kh4d --board 5c8s9h
@@ -98,7 +97,7 @@ example:
            ps-eval --game k 7c5c4c3c2c
            ps-eval --game kansas-city-lowball 7c5c4c3c2c
 
-    
+
 ### Windows
 
 Getting boost to work under windows can be a bit of a challenge.
@@ -116,7 +115,7 @@ gui click Configure, then Generate.  You may have to edit the
 git/pokerstove/programs/CMakeLists.txt to point cmake to your
 installation of boost.
 
-Once you've done that, you should be able to select 
+Once you've done that, you should be able to select
 
     Menu->Build->Build Solution
 
@@ -133,11 +132,7 @@ typical unix package management utility and is required to install boost.
 Once you've installed and selfupdate'd macports, you can install boost:
 
     sudo port install boost -no_static
-    
+
 From there you can run the cmake gui as in windows.  This will create
 an XCode project which should compile the sample utility. Alternatively,
 follow the command  line `cmake` instructions in the [Linux section](#linux).
-
-[![Bitdeli Badge]
-(https://d2weczhvl823v0.cloudfront.net/andrewprock/pokerstove/trend.png)]
-(https://bitdeli.com/free "Bitdeli Badge")
