@@ -1,0 +1,24 @@
+sudo: false
+dist: trusty
+
+language: cpp
+
+os: linux
+
+compiler:
+    - gcc
+    - clang
+
+addons:
+    apt:
+        packages:
+            - libboost-all-dev
+
+before_script:
+    - mkdir build
+
+script:
+    - cd build
+    - cmake -DCMAKE_CXX_FLAGS='-std=c++11' -DCMAKE_VERBOSE_MAKEFILE=ON ../src
+    - make -j 2
+    - make test
