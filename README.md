@@ -9,10 +9,6 @@ The core libraries of pokerstove are being open sourced.  The project is
 currently in the process of reviewing and publishing the code.  As code is
 reviewed and code sanitized further commits will be added.
 
-Please find the old installer in the win32 directory.  That installer should
-install a version of PokerStove which will not expire at any time.  You can also
-find the apk file for the Android version of the utility in the android folder.
-
 ## Libraries
 
 ### peval
