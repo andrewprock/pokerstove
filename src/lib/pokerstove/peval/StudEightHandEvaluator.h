@@ -7,23 +7,20 @@
 
 #include "PokerHandEvaluator.h"
 
-namespace pokerstove
-{
+namespace pokerstove {
 /**
  * A specialized hand evaluator for hold'em.  Not as slow.
  */
-class StudEightHandEvaluator : public PokerHandEvaluator
-{
-public:
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                             const CardSet&) const
-    {
-        return PokerHandEvaluation(hand.evaluateHigh(), hand.evaluate8LowA5());
-    }
+class StudEightHandEvaluator : public PokerHandEvaluator {
+ public:
+  virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                           const CardSet&) const {
+    return PokerHandEvaluation(hand.evaluateHigh(), hand.evaluate8LowA5());
+  }
 
-    virtual size_t handSize() const { return 7; }
-    virtual size_t boardSize() const { return 0; }
-    virtual size_t evaluationSize() const { return 2; }
+  virtual size_t handSize() const { return 7; }
+  virtual size_t boardSize() const { return 0; }
+  virtual size_t evaluationSize() const { return 2; }
 };
 
 }  // namespace pokerstove

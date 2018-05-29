@@ -5,8 +5,7 @@
 #ifndef PEVAL_HOLDEM_H_
 #define PEVAL_HOLDEM_H_
 
-namespace pokerstove
-{
+namespace pokerstove {
 
 // Facts about holdem.
 const unsigned int PREFLOP = 0;

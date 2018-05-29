@@ -4,25 +4,22 @@
 #ifndef PENUM_SHOWDOWNENUMERATOR_H_
 #define PENUM_SHOWDOWNENUMERATOR_H_
 
-#include "CardDistribution.h"
-#include <boost/shared_ptr.hpp>
 #include <pokerstove/peval/PokerHandEvaluator.h>
+#include <boost/shared_ptr.hpp>
 #include <vector>
+#include "CardDistribution.h"
 
-namespace pokerstove
-{
-class ShowdownEnumerator
-{
-public:
-    ShowdownEnumerator();
+namespace pokerstove {
+class ShowdownEnumerator {
+ public:
+  ShowdownEnumerator();
 
-    /**
-     * enumerate a poker scenario, with board support
-     */
-    std::vector<EquityResult>
-    calculateEquity(const std::vector<CardDistribution>& dists,
-                    const CardSet& board,
-                    boost::shared_ptr<PokerHandEvaluator> peval) const;
+  /**
+   * enumerate a poker scenario, with board support
+   */
+  std::vector<EquityResult> calculateEquity(
+      const std::vector<CardDistribution>& dists, const CardSet& board,
+      boost::shared_ptr<PokerHandEvaluator> peval) const;
 };
 }  // namespace pokerstove
 

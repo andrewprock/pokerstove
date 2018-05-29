@@ -7,8 +7,7 @@
 
 #include <boost/cstdint.hpp>
 
-namespace pokerstove
-{
+namespace pokerstove {
 
 /* the tables defined in this file:
  *
