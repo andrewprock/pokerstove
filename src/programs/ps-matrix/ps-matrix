@@ -22,16 +22,6 @@ def is_number(s):
         except ValueError:
             return False
 
-
-def is_number(s):
-    try:
-        float(s)  # for int, long and float
-    except ValueError:
-        try:
-            complex(s)  # for complex
-        except ValueError:
-            return False
-
     return True
 
 
@@ -69,7 +59,7 @@ def constructMatrix(handvals, threshold):
             line = ''
 
         h = holdem.pfIndexToPocket[i]
-        if handvals.has_key(h):
+        if h in handvals:
             v = handvals[h]
         else:
             v = 0.0
@@ -123,7 +113,7 @@ def readHandData(data, handcol, valuecol, norm):
         else:
             toks = line.split()
         hand = ''.join(filter(lambda x: x in hchars, toks[handcol]))
-        if len(hand) == 0:
+        if not hand:
             continue
         if not hand.isdigit():
             doHand = True
@@ -177,7 +167,7 @@ def main(argv=None):
     threshold = args.threshold
 
     handvals = readHandData(dataFile, handcol, valcol, norm)
-    matrix = constructMatrix(handvals, threshold)
+    constructMatrix(handvals, threshold)
     if norm != 'none':
         print('(%s normalized)' % norm)
 
