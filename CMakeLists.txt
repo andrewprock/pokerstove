@@ -2,6 +2,13 @@ cmake_minimum_required(VERSION 2.6)
 
 project(pokerstove)
 
+# TODO: Discover C++11 support.
+# TODO: This flags only works for GCC compatible compilers (Clang, Intel).
+#
+# TODO: This, ideally, should be per library requirement,
+#       but since all of them require C++11, the flag is set globally.
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+
 # Set up gtest. This must be set up before any subdirectories are
 # added which will use gtest.
 add_subdirectory(src/ext/googletest)
