@@ -9,6 +9,9 @@ project(pokerstove)
 #       but since all of them require C++11, the flag is set globally.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
+# TODO: Remove the depricated register keywords
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register")
+
 # Set up gtest. This must be set up before any subdirectories are
 # added which will use gtest.
 add_subdirectory(src/ext/googletest)

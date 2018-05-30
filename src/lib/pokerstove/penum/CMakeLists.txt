@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 find_package (Threads)
 
-set (CMAKE_CXX_FLAGS "-O2")
-
 # build the test
 file(GLOB test_sources *.test.cpp)
 add_executable(penum_tests ${test_sources})
