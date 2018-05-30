@@ -9,6 +9,11 @@ compiler:
     - gcc
     - clang
 
+env:
+    matrix:
+        - CONFIG=Debug
+        - CONFIG=Release
+
 addons:
     apt:
         packages:
@@ -19,6 +24,6 @@ before_script:
 
 script:
     - cd build
-    - cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
+    - cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE="${CONFIG}" ..
     - make -j 2
     - make test
