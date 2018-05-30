@@ -29,9 +29,9 @@ set(Boost_USE_MULTITHREADED ON)
 find_package(Boost COMPONENTS program_options REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
-message(status "** Boost Include: ${Boost_INCLUDE_DIR}")
-message(status "** Boost Libraries: ${Boost_LIBRARY_DIRS}")
-message(status "** Boost Libraries: ${Boost_LIBRARIES}")
+message(STATUS "Boost Include: ${Boost_INCLUDE_DIR}")
+message(STATUS "Boost Libraries: ${Boost_LIBRARY_DIRS}")
+message(STATUS "Boost Libraries: ${Boost_LIBRARIES}")
 
 # Also search for includes in PROJECT_BINARY_DIR to find config.h.
 include_directories("${PROJECT_BINARY_DIR}")
