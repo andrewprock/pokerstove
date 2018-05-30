@@ -58,7 +58,7 @@ invoke cmake on the programs directory, then build.
     git clone https://github.com/andrewprock/pokerstove.git
     mkdir pokerstove/build
     cd pokerstove/build
-    cmake ..
+    cmake -DCMAKE_BUILD_TYPE=Release ..
     make
 
 You should then be able to execute the simple command line
