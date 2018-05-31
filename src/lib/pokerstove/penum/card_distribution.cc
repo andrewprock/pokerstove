@@ -1,17 +1,19 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  */
-#include "CardDistribution.h"
+#include "card_distribution.h"
 
-#include <pokerstove/peval/Card.h>
-#include <pokerstove/util/combinations.h>
+#include <iostream>
+#include <vector>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
-#include <iostream>
-#include <vector>
+
+#include <pokerstove/peval/card.h>
+#include <pokerstove/util/combinations.h>
 
 #define boost_foreach BOOST_FOREACH
 

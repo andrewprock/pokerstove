@@ -1,5 +1,6 @@
-#include <gtest/gtest.h>
 #include "lastbit.h"
+
+#include <gtest/gtest.h>
 
 TEST(FirstBitTest, firstbit64) {
   // firstbit arg is uint64_t

@@ -16,12 +16,15 @@
 //  eval a: high/low/227/A25/Badugi/3CP
 //  eval b: high/low/227/A25/Badugi/3CP
 
-#include <pokerstove/util/combinations.h>
-#include <boost/lexical_cast.hpp>
 #include <vector>
-#include "Card.h"
-#include "CardSet.h"
-#include "PokerHandEvaluator.h"
+
+#include <boost/lexical_cast.hpp>
+
+#include <pokerstove/util/combinations.h>
+
+#include "card.h"
+#include "card_set.h"
+#include "poker_hand_evaluator.h"
 
 namespace pokerstove {
 typedef PokerEvaluation (CardSet::*evalFunction)() const;

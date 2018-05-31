@@ -5,7 +5,7 @@
 #ifndef PEVAL_STUDHANDEVALUATOR_H_
 #define PEVAL_STUDHANDEVALUATOR_H_
 
-#include "PokerHandEvaluator.h"
+#include "poker_hand_evaluator.h"
 
 namespace pokerstove {
 /**

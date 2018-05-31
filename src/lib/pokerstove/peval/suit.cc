@@ -2,11 +2,14 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Suit.cpp 2649 2012-06-30 04:53:24Z prock $
  */
-#include "Suit.h"
-#include <boost/format.hpp>
+#include "suit.h"
+
 #include <iostream>
 #include <stdexcept>
-#include "Card.h"
+
+#include <boost/format.hpp>
+
+#include "card.h"
 
 using namespace std;
 using namespace pokerstove;

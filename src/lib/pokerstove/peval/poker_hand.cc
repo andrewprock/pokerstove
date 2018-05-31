@@ -2,14 +2,17 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerHand.cpp 2649 2012-06-30 04:53:24Z prock $
  */
-#include "PokerHand.h"
-#include <algorithm>
+#include "poker_hand.h"
+
 #include <cassert>
+
+#include <algorithm>
 #include <stdexcept>
-#include "CardSet.h"
-#include "Holdem.h"
-#include "PokerEvaluation.h"
-#include "PokerEvaluationTables.h"
+
+#include "card_set.h"
+#include "holdem.h"
+#include "poker_evaluation.h"
+#include "poker_evaluation_tables.h"
 
 using namespace std;
 using namespace pokerstove;

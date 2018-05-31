@@ -1,5 +1,6 @@
+#include "poker_hand_evaluator.h"
+
 #include <gtest/gtest.h>
-#include "PokerHandEvaluator.h"
 
 TEST(PokerHandEvaluator, OmahaHigh) {
   using namespace pokerstove;

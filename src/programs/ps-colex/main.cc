@@ -1,12 +1,14 @@
-#include <pokerstove/peval/Card.h>
-#include <pokerstove/peval/CardSet.h>
-#include <pokerstove/util/combinations.h>
-#include <boost/format.hpp>
-#include <boost/program_options.hpp>
-#include <boost/shared_ptr.hpp>
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include <boost/format.hpp>
+#include <boost/program_options.hpp>
+#include <boost/shared_ptr.hpp>
+
+#include <pokerstove/peval/card.h>
+#include <pokerstove/peval/card_set.h>
+#include <pokerstove/util/combinations.h>
 
 using namespace std;
 namespace po = boost::program_options;

@@ -4,10 +4,13 @@
 #ifndef PENUM_SHOWDOWNENUMERATOR_H_
 #define PENUM_SHOWDOWNENUMERATOR_H_
 
-#include <pokerstove/peval/PokerHandEvaluator.h>
-#include <boost/shared_ptr.hpp>
 #include <vector>
-#include "CardDistribution.h"
+
+#include <boost/shared_ptr.hpp>
+
+#include <pokerstove/peval/poker_hand_evaluator.h>
+
+#include "card_distribution.h"
 
 namespace pokerstove {
 class ShowdownEnumerator {

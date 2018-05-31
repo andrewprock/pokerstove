@@ -5,8 +5,9 @@
 #define PEVAL_CARDSETGENERATORS_H_
 
 #include <set>
-#include "Card.h"
-#include "CardSet.h"
+
+#include "card.h"
+#include "card_set.h"
 
 namespace pokerstove {
 

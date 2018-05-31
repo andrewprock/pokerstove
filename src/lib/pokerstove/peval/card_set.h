@@ -5,12 +5,14 @@
 #ifndef PEVAL_CARDSET_H_
 #define PEVAL_CARDSET_H_
 
-#include <boost/cstdint.hpp>
 #include <iosfwd>
 #include <string>
 #include <vector>
-#include "Rank.h"
-#include "Suit.h"
+
+#include <boost/cstdint.hpp>
+
+#include "rank.h"
+#include "suit.h"
 
 namespace pokerstove {
 // forward declares

@@ -1,14 +1,14 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  */
-#include "ShowdownEnumerator.h"
+#include "showdown_enumerator.h"
 
 #include <string>
 #include <vector>
 
-#include "Odometer.h"
-#include "PartitionEnumerator.h"
-#include "SimpleDeck.hpp"
+#include "odometer.h"
+#include "partition_enumerator.h"
+#include "simple_deck.h"
 
 using std::runtime_error;
 using std::string;

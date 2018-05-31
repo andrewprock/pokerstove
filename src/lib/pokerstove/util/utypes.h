@@ -1,8 +1,9 @@
 #ifndef __UTYPES_H
 #define __UTYPES_H
 
-#include <boost/cstdint.hpp>
 #include <string>
+
+#include <boost/cstdint.hpp>
 
 // extract exactly these types globally
 using boost::int64_t;

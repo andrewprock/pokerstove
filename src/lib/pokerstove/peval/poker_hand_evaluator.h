@@ -5,12 +5,14 @@
 #ifndef PEVAL_POKERHANDEVALUATOR_H_
 #define PEVAL_POKERHANDEVALUATOR_H_
 
-#include <boost/lexical_cast.hpp>
-#include <boost/shared_ptr.hpp>
 #include <string>
 #include <vector>
-#include "CardSet.h"
-#include "PokerHandEvaluation.h"
+
+#include <boost/lexical_cast.hpp>
+#include <boost/shared_ptr.hpp>
+
+#include "card_set.h"
+#include "poker_hand_evaluation.h"
 
 const unsigned int BOARD_SIZE = 5;
 

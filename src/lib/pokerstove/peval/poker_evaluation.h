@@ -5,10 +5,13 @@
 #ifndef PEVAL_POKEREVALUATION_H_
 #define PEVAL_POKEREVALUATION_H_
 
-#include <boost/operators.hpp>
 #include <climits>
+
 #include <iosfwd>
-#include "Rank.h"
+
+#include <boost/operators.hpp>
+
+#include "rank.h"
 
 namespace pokerstove {
 class PokerHandEvaluator;

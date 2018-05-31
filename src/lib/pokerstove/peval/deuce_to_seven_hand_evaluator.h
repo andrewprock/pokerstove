@@ -5,7 +5,7 @@
 #ifndef PEVAL_DEUCETOSEVENHANDEVALUATOR_H_
 #define PEVAL_DEUCETOSEVENHANDEVALUATOR_H_
 
-#include "PokerHandEvaluator.h"
+#include "poker_hand_evaluator.h"
 
 namespace pokerstove {
 /**

@@ -1,5 +1,6 @@
+#include "suit.h"
+
 #include <gtest/gtest.h>
-#include "Suit.h"
 
 using namespace pokerstove;
 

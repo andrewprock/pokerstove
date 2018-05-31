@@ -1,9 +1,11 @@
 /**
  * Copyright (c) 2013 Andrew Prock. All rights reserved.
  */
-#include "CardSetGenerators.h"
+#include "card_set_generators.h"
+
 #include <pokerstove/util/combinations.h>
-#include "Card.h"
+
+#include "card.h"
 
 namespace pokerstove {
 

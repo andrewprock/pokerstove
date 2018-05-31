@@ -6,8 +6,9 @@
 #define PEVAL_POKERHAND_H_
 
 #include <boost/array.hpp>
-#include "Card.h"
-#include "CardSet.h"
+
+#include "card.h"
+#include "card_set.h"
 
 #define MUTABLE
 

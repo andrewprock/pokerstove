@@ -2,13 +2,17 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerEvaluation.cpp 2649 2012-06-30 04:53:24Z prock $
  */
-#include "PokerEvaluation.h"
-#include <pokerstove/util/lastbit.h>
-#include <boost/format.hpp>
+#include "poker_evaluation.h"
+
 #include <iostream>
 #include <stdexcept>
-#include "Card.h"
-#include "PokerEvaluationTables.h"
+
+#include <boost/format.hpp>
+
+#include <pokerstove/util/lastbit.h>
+
+#include "card.h"
+#include "poker_evaluation_tables.h"
 
 using namespace std;
 using namespace pokerstove;

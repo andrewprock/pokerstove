@@ -2,25 +2,30 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: CardSet.cpp 2649 2012-06-30 04:53:24Z prock $
  */
-#include "CardSet.h"
-#include <pokerstove/util/combinations.h>
+#include "card_set.h"
+
+#include <cassert>
+#include <cstdio>
+
 #include <algorithm>
+#include <iostream>
+#include <limits>
+#include <set>
+#include <vector>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/array.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
-#include <cassert>
-#include <cstdio>
-#include <iostream>
-#include <limits>
-#include <set>
-#include <vector>
-#include "Card.h"
-#include "PokerEvaluation.h"
-#include "PokerEvaluationTables.h"
-#include "Rank.h"
-#include "Suit.h"
+
+#include <pokerstove/util/combinations.h>
+
+#include "card.h"
+#include "poker_evaluation.h"
+#include "poker_evaluation_tables.h"
+#include "rank.h"
+#include "suit.h"
 
 using namespace std;
 using namespace boost;

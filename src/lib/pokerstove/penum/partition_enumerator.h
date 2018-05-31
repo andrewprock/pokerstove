@@ -5,10 +5,13 @@
 #ifndef COMMON_ENUM_PARTITIONENUMERATOR_H_
 #define COMMON_ENUM_PARTITIONENUMERATOR_H_
 
-#include <pokerstove/util/combinations.h>
-#include <boost/lexical_cast.hpp>
 #include <cstdint>
+
 #include <vector>
+
+#include <boost/lexical_cast.hpp>
+
+#include <pokerstove/util/combinations.h>
 
 namespace pokerstove {
 // see http://cplusplus.com/reference/algorithm/set_difference/

@@ -2,7 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerHandEvaluator.cpp 2649 2012-06-30 04:53:24Z prock $
  */
-#include "PokerHandEvaluator.h"
+#include "poker_hand_evaluator.h"
+
 #include <iostream>
 
 using namespace std;

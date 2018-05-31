@@ -7,7 +7,8 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "PokerEvaluation.h"
+
+#include "poker_evaluation.h"
 
 namespace pokerstove {
 /**

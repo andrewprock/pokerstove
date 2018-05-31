@@ -3,19 +3,20 @@
  * $Id: PokerHandEvaluator_Alloc.cpp 2649 2012-06-30 04:53:24Z prock $
  */
 #include <stdexcept>
-#include "BadugiHandEvaluator.h"
-#include "DeuceToSevenHandEvaluator.h"
-#include "DrawHighHandEvaluator.h"
-#include "HoldemHandEvaluator.h"
-#include "OmahaEightHandEvaluator.h"
-#include "OmahaHighHandEvaluator.h"
-#include "RazzHandEvaluator.h"
-#include "StudEightHandEvaluator.h"
-#include "StudHandEvaluator.h"
-//#include "LowballA5HandEvaluator.h"
-//#include "ThreeCardPokerHandEvaluator.h"
 
-#include "UniversalHandEvaluator.h"
+#include "badugi_hand_evaluator.h"
+#include "deuce_to_seven_hand_evaluator.h"
+#include "draw_high_hand_evaluator.h"
+#include "holdem_hand_evaluator.h"
+#include "omaha_eight_hand_evaluator.h"
+#include "omaha_high_hand_evaluator.h"
+#include "razz_hand_evaluator.h"
+#include "stud_eight_hand_evaluator.h"
+#include "stud_hand_evaluator.h"
+#include "universal_hand_evaluator.h"
+
+//#include "lowball_a5_hand_evaluator.h"
+//#include "three_card_poker_hand_evaluator.h"
 
 using namespace std;
 using namespace pokerstove;

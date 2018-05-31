@@ -1,5 +1,6 @@
+#include "card_set.h"
+
 #include <gtest/gtest.h>
-#include "CardSet.h"
 
 TEST(CardSetTest, StringConstructorToString) {
   using namespace pokerstove;

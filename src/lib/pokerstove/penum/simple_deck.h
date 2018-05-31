@@ -6,14 +6,16 @@
 #define PENUM_SIMPLE_DECK_H_
 
 #include <algorithm>
-#include <boost/array.hpp>
 #include <functional>
-#include <pokerstove/peval/Card.h>
-#include <pokerstove/peval/CardSet.h>
-#include <pokerstove/peval/Rank.h>  // needed for NUM_RANK
-#include <pokerstove/peval/Suit.h>  // needed for NUM_SUIT
-#include <pokerstove/util/lastbit.h>
 #include <string>
+
+#include <boost/array.hpp>
+
+#include <pokerstove/peval/card.h>
+#include <pokerstove/peval/card_set.h>
+#include <pokerstove/peval/rank.h>  // NUM_RANK
+#include <pokerstove/peval/suit.h>  // NUM_SUIT
+#include <pokerstove/util/lastbit.h>
 
 namespace pokerstove
 {

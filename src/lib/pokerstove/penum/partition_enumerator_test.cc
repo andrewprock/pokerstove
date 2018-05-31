@@ -1,6 +1,8 @@
-#include <gtest/gtest.h>
+#include "partition_enumerator.h"
+
 #include <iostream>
-#include "PartitionEnumerator.h"
+
+#include <gtest/gtest.h>
 
 using namespace pokerstove;
 using namespace std;

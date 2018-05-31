@@ -5,10 +5,11 @@
 #ifndef PENUM_CARDDISTRIBUTION_H_
 #define PENUM_CARDDISTRIBUTION_H_
 
-#include <pokerstove/peval/CardSet.h>
 #include <map>
 #include <string>
 #include <vector>
+
+#include <pokerstove/peval/card_set.h>
 
 namespace pokerstove {
 /**

@@ -5,10 +5,12 @@
 #ifndef COMMON_ENUM_COMBINATIONS_H_
 #define COMMON_ENUM_COMBINATIONS_H_
 
+#include <algorithm>
+
+#include <boost/lexical_cast.hpp>
+
 #include <pokerstove/util/lastbit.h>
 #include <pokerstove/util/utypes.h>
-#include <algorithm>
-#include <boost/lexical_cast.hpp>
 
 namespace pokerstove {
 /**

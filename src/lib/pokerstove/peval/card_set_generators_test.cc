@@ -1,5 +1,6 @@
+#include "card_set_generators.h"
+
 #include <gtest/gtest.h>
-#include "CardSetGenerators.h"
 
 using namespace pokerstove;
 

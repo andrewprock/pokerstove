@@ -5,8 +5,8 @@
 #ifndef PEVAL_HOLDEMHANDEVALUATOR_H_
 #define PEVAL_HOLDEMHANDEVALUATOR_H_
 
-#include "Holdem.h"
-#include "PokerHandEvaluator.h"
+#include "holdem.h"
+#include "poker_hand_evaluator.h"
 
 namespace pokerstove {
 /**

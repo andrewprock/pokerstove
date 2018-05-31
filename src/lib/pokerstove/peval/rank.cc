@@ -2,7 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Rank.cpp 2649 2012-06-30 04:53:24Z prock $
  */
-#include "Rank.h"
+#include "rank.h"
+
 #include <stdexcept>
 
 using namespace std;

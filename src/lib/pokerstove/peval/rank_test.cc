@@ -1,5 +1,6 @@
+#include "rank.h"
+
 #include <gtest/gtest.h>
-#include "Rank.h"
 
 using namespace pokerstove;
 
