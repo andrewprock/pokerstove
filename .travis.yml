@@ -19,6 +19,12 @@ addons:
         packages:
             - libboost-all-dev
 
+matrix:
+    include:
+        - os: osx
+          compiler: clang
+          env: CONFIG=Release
+
 before_script:
     - mkdir build
 
