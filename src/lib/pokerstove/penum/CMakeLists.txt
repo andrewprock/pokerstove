@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 find_package (Threads)
 
 # build the test
-file(GLOB test_sources *.test.cpp)
+file(GLOB test_sources *_test.cpp)
 add_executable(penum_tests ${test_sources})
 target_link_libraries(penum_tests penum peval gtest gtest_main ${CMAKE_THREAD_LIBS_INIT})
 
