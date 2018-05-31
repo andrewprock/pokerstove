@@ -2,13 +2,15 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: combinations.h 2655 2012-06-30 04:58:10Z prock $
  */
-#ifndef COMMON_ENUM_COMBINATIONS_H_
-#define COMMON_ENUM_COMBINATIONS_H_
+#ifndef POKERSTOVE_UTIL_COMBINATIONS_H_
+#define POKERSTOVE_UTIL_COMBINATIONS_H_
+
+#include <algorithm>
+
+#include <boost/lexical_cast.hpp>
 
 #include <pokerstove/util/lastbit.h>
 #include <pokerstove/util/utypes.h>
-#include <algorithm>
-#include <boost/lexical_cast.hpp>
 
 namespace pokerstove {
 /**
@@ -153,4 +155,5 @@ class Combinations {
 };
 
 }  // namespace pokerstove
-#endif  // COMMON_ENUM_COMBINATIONS_H_
+
+#endif  // POKERSTOVE_UTIL_COMBINATIONS_H_

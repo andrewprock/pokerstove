@@ -1,8 +1,9 @@
-#ifndef __UTYPES_H
-#define __UTYPES_H
+#ifndef POKERSTOVE_UTIL_UTYPES_H_
+#define POKERSTOVE_UTIL_UTYPES_H_
+
+#include <string>
 
 #include <boost/cstdint.hpp>
-#include <string>
 
 // extract exactly these types globally
 using boost::int64_t;
@@ -65,4 +66,4 @@ int countbits(T x) {
 
 std::string makeCommaNumStr(int64_t n);
 
-#endif
+#endif  // POKERSTOVE_UTIL_UTYPES_H_
