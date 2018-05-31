@@ -1,21 +1,16 @@
 #!/usr/bin/python
-# take a list of preflop hand/value pairs and
-# create a 13x13 matrix of the values
+"""
+Takes a list of preflop hand/value pairs
+and creates a 13x13 matrix of the values
+"""
 
+from __future__ import print_function
+
+import argparse as ap
 import re
 import sys
-import getopt
+
 import holdem
-
-
-def is_number(s):
-    try:
-        float(s)  # for int, long and float
-    except ValueError:
-        try:
-            complex(s)  # for complex
-        except ValueError:
-            return False
 
 
 def is_number(s):
@@ -64,7 +59,7 @@ def constructMatrix(handvals, threshold):
             line = ''
 
         h = holdem.pfIndexToPocket[i]
-        if handvals.has_key(h):
+        if h in handvals:
             v = handvals[h]
         else:
             v = 0.0
@@ -82,30 +77,29 @@ def constructMatrix(handvals, threshold):
         header += '%8s' % holdem.tranks[rank]
         if holdem.tranks[rank] == 'T':
             header += ' '
-    print header
+    print(header)
 
     tpos = header.find('T')
     border = '-' * (tpos + 3) + '+' + '-' * (len(lines[1]) - 2 - tpos)
-    print border
+    print(border)
 
     for i, l in enumerate(lines[1:]):
-        print holdem.tranks[i], ' ', l
+        print(holdem.tranks[i], ' ', l)
         if holdem.tranks[i] == 'T':
-            print border
+            print(border)
 
-    print ''
+    print('')
     line = ''
     for i in range(0, 169):
         h = holdem.pfIndexToPocket[i]
         if handvals[h] > threshold:
             line += '%s=%.4f,' % (h, handvals[h])
-            #print handvals[h]
-    print line
+            #print(handvals[h])
+    print(line)
 
 
 def readHandData(data, handcol, valuecol, norm):
-    """Very tolerant hand/value parsing method
-    """
+    """Very tolerant hand/value parsing method."""
     # list of allowable chars in the hand.  Hands can either be
     # specified by numbers or preflop hand type.  All other characters
     # are stripped out of the hand token, not the 10 at the end
@@ -119,7 +113,7 @@ def readHandData(data, handcol, valuecol, norm):
         else:
             toks = line.split()
         hand = ''.join(filter(lambda x: x in hchars, toks[handcol]))
-        if len(hand) == 0:
+        if not hand:
             continue
         if not hand.isdigit():
             doHand = True
@@ -139,81 +133,43 @@ def readHandData(data, handcol, valuecol, norm):
     return handvals
 
 
-def usage():
-    print('usage: %s [options]' % sys.argv[0])
-    print('       ')
-    print('       print data values as a preflop holdem matrix')
-    print('       ')
-    print('       options:')
-    print(
-        '       --hand-column,h <N>          column number to find hand, default=0'
-    )
-    print(
-        '       --value-column,v <N>         column number to find value, default=1'
-    )
-    print('       --normalize,n <pf|data|none> normalize flag, default=none')
-    print(
-        '       --file <filename>            file to find data, default=stdin')
-    print('       ')
-    print('       The columns need to be space separated')
-    print('       ')
-    print('       ')
-    print('       examples:')
-    print('           cat data.txt | ./pfmatrix.py')
-    print('           ./pfmatrix.py --file data.txt')
-    print(
-        '           ./pfmatrix.py --normalize --hand-column 2 --data-column 8 --file data.txt'
-    )
-
-
 def main(argv=None):
-    if argv is None:
-        argv = sys.argv
-    try:
-        (opts, args) = getopt.getopt(argv[1:], '?h:v:n:f:t:', [
-            'help',
-            'hand-column=',
-            'value-column=',
-            'normalize=',
-            'file=',
-            'threshold=',
-        ])
-    except getopt.GetoptError, e:
-        print(e)
-        usage()
-        sys.exit(2)
-    if len(sys.argv) == 2 and not '-n' in sys.argv[1]:
-        usage()
-        sys.exit(2)
+    parser = ap.ArgumentParser(
+        description=__doc__,
+        add_help=False,  # We need to hijack '-h' for 'hand-column'.
+        epilog='The columns need to be space separated.',
+        formatter_class=ap.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        '-?', '--help', action='help', help='show this help message and exit')
+    parser.add_argument(
+        '-h',
+        '--hand-column',
+        type=int,
+        metavar='N',
+        default=0,
+        help='column number to find hand')
+    parser.add_argument('-v', '--value-column', type=int, metavar='N',
+                        default=1, help='column number to find value')
+    parser.add_argument('-n', '--normalize', type=str,
+                        choices=['pf', 'data', 'none'],
+                        default='none', help='normalize flag')
+    parser.add_argument('-f', '--file', type=str, metavar='path',
+                        help='file to find data, default=stdin')
+    parser.add_argument('-t', '--threshold', type=float, default=0.001)
+
+    args = parser.parse_args(argv)
 
     # process arugments
-    handcol = 0
-    valcol = 1
-    norm = 'none'
-    dataFile = sys.stdin
-    threshold = .001
-
-    for (opt, param) in opts:
-        if opt in ('-?', '--help'):
-            usage()
-            sys.exit(2)
-        elif opt in ('-h', '--hand-column'):
-            handcol = int(param)
-        elif opt in ('-v', '--value-column'):
-            valcol = int(param)
-        elif opt in ('-n', '--normalize'):
-            norm = param
-        elif opt in ('-f', '--file'):
-            dataFile = open(param)
-        elif opt in ('-t', '--threshold'):
-            threshold = float(param)
-        else:
-            assert False, 'unhandled option'
+    handcol = args.hand_column
+    valcol = args.value_column
+    norm = args.normalize
+    dataFile = sys.stdin if not args.file else open(args.file)
+    threshold = args.threshold
 
     handvals = readHandData(dataFile, handcol, valcol, norm)
-    matrix = constructMatrix(handvals, threshold)
+    constructMatrix(handvals, threshold)
     if norm != 'none':
-        print '(%s normalized)' % norm
+        print('(%s normalized)' % norm)
 
 
 #
