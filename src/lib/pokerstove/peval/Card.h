@@ -5,11 +5,10 @@
 #ifndef PEVAL_CARD_H_
 #define PEVAL_CARD_H_
 
-#include <string>
 #include <boost/cstdint.hpp>
+#include <string>
 
-namespace pokerstove
-{
+namespace pokerstove {
 // forward declarations,
 class Suit;
 class Rank;
@@ -28,63 +27,61 @@ class Rank;
  * apply to string parsing.  Strings may only be parsed from the set
  * of characters: {cdhs}
  */
-class Card
-{
-public:
-    enum Grouping
-    {
-        RANK_SUIT,
-        SUIT_CANONICAL,
-        RANK,
-    };
+class Card {
+ public:
+  enum Grouping {
+    RANK_SUIT,
+    SUIT_CANONICAL,
+    RANK,
+  };
 
-    Card();
-    explicit Card(const std::string& str);
-    explicit Card(const Rank& r, const Suit& s);
+  Card();
+  explicit Card(const std::string& str);
+  explicit Card(const Rank& r, const Suit& s);
 
-    /**
-     * use of this constructor is discouraged, the safest use is to
-     * (re)construct cards from saved codes.
-     */
-    explicit Card(uint8_t cindex);
+  /**
+   * use of this constructor is discouraged, the safest use is to
+   * (re)construct cards from saved codes.
+   */
+  explicit Card(uint8_t cindex);
 
-    Rank rank() const;
-    Suit suit() const;
+  Rank rank() const;
+  Suit suit() const;
 
-    /**
-     * use of this method is discouraged
-     */
-    int code() const;
+  /**
+   * use of this method is discouraged
+   */
+  int code() const;
 
-    /**
-     * string representation of card,
-     * @see Suit::display
-     * @see Suit::setSuitStringType()
-     */
-    std::string str() const;
+  /**
+   * string representation of card,
+   * @see Suit::display
+   * @see Suit::setSuitStringType()
+   */
+  std::string str() const;
 
-    /**
-     * provide checked parsing of the first two chars of the input string.
-     */
-    bool fromString(const std::string& s);
+  /**
+   * provide checked parsing of the first two chars of the input string.
+   */
+  bool fromString(const std::string& s);
 
-    /**
-     * required for storage in STL containers
-     */
-    bool operator== (const Card& r) const { return _card == r._card; }
+  /**
+   * required for storage in STL containers
+   */
+  bool operator==(const Card& r) const { return _card == r._card; }
 
-    /**
-     * required for storage in STL containers
-     */
-    bool operator< (const Card& r) const;
+  /**
+   * required for storage in STL containers
+   */
+  bool operator<(const Card& r) const;
 
-private:
-    static uint8_t  encode(Rank r, Suit s);
+ private:
+  static uint8_t encode(Rank r, Suit s);
 
-    friend class CardSet;
+  friend class CardSet;
 
-    uint8_t _card;
+  uint8_t _card;
 };
-}
+}  // namespace pokerstove
 
 #endif  // PEVAL_CARD_H_

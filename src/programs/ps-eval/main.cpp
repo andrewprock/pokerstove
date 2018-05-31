@@ -1,7 +1,7 @@
+#include <pokerstove/penum/ShowdownEnumerator.h>
+#include <boost/program_options.hpp>
 #include <iostream>
 #include <vector>
-#include <boost/program_options.hpp>
-#include <pokerstove/penum/ShowdownEnumerator.h>
 
 using namespace pokerstove;
 namespace po = boost::program_options;
@@ -10,11 +10,15 @@ using namespace std;
 int main(int argc, char** argv) {
   po::options_description desc("ps-eval, a poker hand evaluator\n");
 
-  desc.add_options()("help,?", "produce help message")
-      ("game,g", po::value<string>()->default_value("h"), "game to use for evaluation")
+  // clang-format off
+  desc.add_options()
+      ("help,?", "produce help message")
+      ("game,g", po::value<string>()->default_value("h"),
+          "game to use for evaluation")
       ("board,b", po::value<string>(), "community cards for he/o/o8")
       ("hand,h", po::value<vector<string>>(), "a hand for evaluation")
       ("quiet,q", "produces no output");
+  // clang-format on
 
   // make hand a positional argument
   po::positional_options_description p;
@@ -68,12 +72,12 @@ int main(int argc, char** argv) {
   }
 
   if (!quiet) {
-      for (size_t i = 0; i < results.size(); ++i) {
-        double equity = (results[i].winShares + results[i].tieShares) / total;
-        string handDesc =
-            (i < hands.size()) ? "The hand " + hands[i] : "A random hand";
-        cout << handDesc << " has " << equity * 100. << " % equity ("
-             << results[i].str() << ")" << endl;
-      }
+    for (size_t i = 0; i < results.size(); ++i) {
+      double equity = (results[i].winShares + results[i].tieShares) / total;
+      string handDesc =
+          (i < hands.size()) ? "The hand " + hands[i] : "A random hand";
+      cout << handDesc << " has " << equity * 100. << " % equity ("
+           << results[i].str() << ")" << endl;
+    }
   }
 }
