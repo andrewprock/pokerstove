@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Card.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_CARD_H_
-#define PEVAL_CARD_H_
+#ifndef POKERSTOVE_PEVAL_CARD_H_
+#define POKERSTOVE_PEVAL_CARD_H_
 
 #include <string>
 
@@ -85,4 +85,4 @@ class Card {
 };
 }  // namespace pokerstove
 
-#endif  // PEVAL_CARD_H_
+#endif  // POKERSTOVE_PEVAL_CARD_H_

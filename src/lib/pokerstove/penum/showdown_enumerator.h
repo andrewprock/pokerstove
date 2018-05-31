@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  */
-#ifndef PENUM_SHOWDOWNENUMERATOR_H_
-#define PENUM_SHOWDOWNENUMERATOR_H_
+#ifndef POKERSTOVE_PENUM_SHOWDOWN_ENUMERATOR_H_
+#define POKERSTOVE_PENUM_SHOWDOWN_ENUMERATOR_H_
 
 #include <vector>
 
@@ -26,4 +26,4 @@ class ShowdownEnumerator {
 };
 }  // namespace pokerstove
 
-#endif  // PENUM_SHOWDOWNENUMERATOR_H_
+#endif  // POKERSTOVE_PENUM_SHOWDOWN_ENUMERATOR_H_

@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: DeuceToSevenHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_DEUCETOSEVENHANDEVALUATOR_H_
-#define PEVAL_DEUCETOSEVENHANDEVALUATOR_H_
+#ifndef POKERSTOVE_PEVAL_DEUCE_TO_SEVEN_HAND_EVALUATOR_H_
+#define POKERSTOVE_PEVAL_DEUCE_TO_SEVEN_HAND_EVALUATOR_H_
 
 #include "poker_hand_evaluator.h"
 
@@ -44,4 +44,5 @@ class DeuceToSevenHandEvaluator : public PokerHandEvaluator {
 };
 
 }  // namespace pokerstove
-#endif  // PEVAL_DEUCETOSEVENHANDEVALUATOR_H_
+
+#endif  // POKERSTOVE_PEVAL_DEUCE_TO_SEVEN_HAND_EVALUATOR_H_

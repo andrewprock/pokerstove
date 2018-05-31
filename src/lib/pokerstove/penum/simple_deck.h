@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id$
  */
-#ifndef PENUM_SIMPLE_DECK_H_
-#define PENUM_SIMPLE_DECK_H_
+#ifndef POKERSTOVE_PENUM_SIMPLE_DECK_H_
+#define POKERSTOVE_PENUM_SIMPLE_DECK_H_
 
 #include <algorithm>
 #include <functional>
@@ -162,4 +162,4 @@ private:
 };
 }  // namespace pokerstove
 
-#endif  // PENUM_SIMPLE_DECK_H_
+#endif  // POKERSTOVE_PENUM_SIMPLE_DECK_H_

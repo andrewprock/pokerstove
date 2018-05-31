@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  */
-#ifndef PEVAL_CARDSETGENERATORS_H_
-#define PEVAL_CARDSETGENERATORS_H_
+#ifndef POKERSTOVE_PEVAL_CARD_SET_GENERATORS_H_
+#define POKERSTOVE_PEVAL_CARD_SET_GENERATORS_H_
 
 #include <set>
 
@@ -36,4 +36,4 @@ std::set<CardSet> createCardSet(size_t numCards,
                                 Card::Grouping grouping = Card::RANK_SUIT);
 }  // namespace pokerstove
 
-#endif  // PEVAL_CARDSETGENERATORS_H_
+#endif  // POKERSTOVE_PEVAL_CARD_SET_GENERATORS_H_

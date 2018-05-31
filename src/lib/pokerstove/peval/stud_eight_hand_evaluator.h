@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: StudEightHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_STUDEIGHTHANDEVALUATOR_H_
-#define PEVAL_STUDEIGHTHANDEVALUATOR_H_
+#ifndef POKERSTOVE_PEVAL_STUD_EIGHT_HAND_EVALUATOR_H_
+#define POKERSTOVE_PEVAL_STUD_EIGHT_HAND_EVALUATOR_H_
 
 #include "poker_hand_evaluator.h"
 
@@ -24,4 +24,5 @@ class StudEightHandEvaluator : public PokerHandEvaluator {
 };
 
 }  // namespace pokerstove
-#endif  // PEVAL_STUDEIGHTHANDEVALUATOR_H_
+
+#endif  // POKERSTOVE_PEVAL_STUD_EIGHT_HAND_EVALUATOR_H_

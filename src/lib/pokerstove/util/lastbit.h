@@ -1,5 +1,5 @@
-#ifndef __LASTBIT_H
-#define __LASTBIT_H
+#ifndef POKERSTOVE_UTIL_LASTBIT_H_
+#define POKERSTOVE_UTIL_LASTBIT_H_
 
 #include <cstdint>
 
@@ -115,4 +115,4 @@ inline int lastbit64(uint64_t v) {
 
 #endif
 
-#endif
+#endif  // POKERSTOVE_UTIL_LASTBIT_H_

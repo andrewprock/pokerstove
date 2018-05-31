@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: HoldemHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_HOLDEMHANDEVALUATOR_H_
-#define PEVAL_HOLDEMHANDEVALUATOR_H_
+#ifndef POKERSTOVE_PEVAL_HOLDEM_HAND_EVALUATOR_H_
+#define POKERSTOVE_PEVAL_HOLDEM_HAND_EVALUATOR_H_
 
 #include "holdem.h"
 #include "poker_hand_evaluator.h"
@@ -44,4 +44,5 @@ class HoldemHandEvaluator : public PokerHandEvaluator {
 };
 
 }  // namespace pokerstove
-#endif  // PEVAL_HOLDEMHANDEVALUATOR_H_
+
+#endif  // POKERSTOVE_PEVAL_HOLDEM_HAND_EVALUATOR_H_

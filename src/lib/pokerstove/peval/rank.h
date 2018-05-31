@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Rank.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_RANK_H_
-#define PEVAL_RANK_H_
+#ifndef POKERSTOVE_PEVAL_RANK_H_
+#define POKERSTOVE_PEVAL_RANK_H_
 
 #include <string>
 
@@ -150,4 +150,4 @@ class Rank {
 
 }  // namespace pokerstove
 
-#endif  // PEVAL_RANK_H_
+#endif  // POKERSTOVE_PEVAL_RANK_H_

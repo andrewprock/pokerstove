@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: RazzHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_RAZZHANDEVALUATOR_H_
-#define PEVAL_RAZZHANDEVALUATOR_H_
+#ifndef POKERSTOVE_PEVAL_RAZZ_HAND_EVALUATOR_H_
+#define POKERSTOVE_PEVAL_RAZZ_HAND_EVALUATOR_H_
 
 #include "poker_hand_evaluator.h"
 
@@ -31,4 +31,5 @@ class RazzHandEvaluator : public PokerHandEvaluator {
 };
 
 }  // namespace pokerstove
-#endif  // PEVAL_RAZZHANDEVALUATOR_H_
+
+#endif  // POKERSTOVE_PEVAL_RAZZ_HAND_EVALUATOR_H_

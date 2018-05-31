@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerEvaluation.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_POKEREVALUATION_H_
-#define PEVAL_POKEREVALUATION_H_
+#ifndef POKERSTOVE_PEVAL_POKER_EVALUATION_H_
+#define POKERSTOVE_PEVAL_POKER_EVALUATION_H_
 
 #include <climits>
 
@@ -214,4 +214,4 @@ typedef PokerEvaluation Evaluation;
 std::ostream& operator<<(std::ostream& sout,
                          const pokerstove::PokerEvaluation& e);
 
-#endif  // PEVAL_POKEREVALUATION_H_
+#endif  // POKERSTOVE_PEVAL_POKER_EVALUATION_H_

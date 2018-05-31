@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id$
  */
-#ifndef COMMON_ENUM_ODOMETER_H_
-#define COMMON_ENUM_ODOMETER_H_
+#ifndef POKERSTOVE_PENUM_ODOMETER_H_
+#define POKERSTOVE_PENUM_ODOMETER_H_
 
 #include <algorithm>
 #include <string>
@@ -81,4 +81,4 @@ class Odometer {
   std::vector<int> _odom;
 };
 
-#endif  // COMMON_ENUM_ODOMETER_H_
+#endif  // POKERSTOVE_PENUM_ODOMETER_H_

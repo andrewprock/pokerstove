@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Holdem.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_HOLDEM_H_
-#define PEVAL_HOLDEM_H_
+#ifndef POKERSTOVE_PEVAL_HOLDEM_H_
+#define POKERSTOVE_PEVAL_HOLDEM_H_
 
 namespace pokerstove {
 
@@ -20,4 +20,4 @@ const unsigned int NUM_HOLDEM_POCKET = 2;
 const unsigned int NUM_HOLDEM_ROUNDS = 4;
 }  // namespace pokerstove
 
-#endif  // PEVAL_HOLDEM_H_
+#endif  // POKERSTOVE_PEVAL_HOLDEM_H_

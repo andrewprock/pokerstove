@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: BadugiHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_BADUGIHANDEVALUATOR_H_
-#define PEVAL_BADUGIHANDEVALUATOR_H_
+#ifndef POKERSTOVE_PEVAL_BADUGI_HAND_EVALUATOR_H_
+#define POKERSTOVE_PEVAL_BADUGI_HAND_EVALUATOR_H_
 
 #include "poker_hand_evaluator.h"
 
@@ -43,4 +43,5 @@ class BadugiHandEvaluator : public PokerHandEvaluator {
 };
 
 }  // namespace pokerstove
-#endif  // PEVAL_BADUGIHANDEVALUATOR_H_
+
+#endif  // POKERSTOVE_PEVAL_BADUGI_HAND_EVALUATOR_H_

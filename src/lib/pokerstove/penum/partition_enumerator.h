@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id$
  */
-#ifndef COMMON_ENUM_PARTITIONENUMERATOR_H_
-#define COMMON_ENUM_PARTITIONENUMERATOR_H_
+#ifndef POKERSTOVE_PENUM_PARTITION_ENUMERATOR_H_
+#define POKERSTOVE_PENUM_PARTITION_ENUMERATOR_H_
 
 #include <cstdint>
 
@@ -197,4 +197,4 @@ class PartitionEnumerator2 {
 };
 }  // namespace pokerstove
 
-#endif  // COMMON_ENUM_PARTITIONENUMERATOR_H_
+#endif  // POKERSTOVE_PENUM_PARTITION_ENUMERATOR_H_

@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: DrawHighHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_DRAWHIGHHANDEVALUATOR_H_
-#define PEVAL_DRAWHIGHHANDEVALUATOR_H_
+#ifndef POKERSTOVE_PEVAL_DRAW_HIGH_HAND_EVALUATOR_H_
+#define POKERSTOVE_PEVAL_DRAW_HIGH_HAND_EVALUATOR_H_
 
 #include "poker_hand_evaluator.h"
 
@@ -41,4 +41,5 @@ class DrawHighHandEvaluator : public PokerHandEvaluator {
 };
 
 }  // namespace pokerstove
-#endif  // PEVAL_DRAWHIGHHANDEVALUATOR_H_
+
+#endif  // POKERSTOVE_PEVAL_DRAW_HIGH_HAND_EVALUATOR_H_

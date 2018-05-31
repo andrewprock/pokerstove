@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerEvaluationTables.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_POKEREVALUATIONTABLES_H_
-#define PEVAL_POKEREVALUATIONTABLES_H_
+#ifndef POKERSTOVE_PEVAL_POKER_EVALUATION_TABLES_H_
+#define POKERSTOVE_PEVAL_POKER_EVALUATION_TABLES_H_
 
 #include <boost/cstdint.hpp>
 
@@ -27566,4 +27566,4 @@ const int bottomRankMask[] = {
 
 }  // namespace pokerstove
 
-#endif  // PEVAL_POKEREVALUATIONTABLES_H_
+#endif  // POKERSTOVE_PEVAL_POKER_EVALUATION_TABLES_H_

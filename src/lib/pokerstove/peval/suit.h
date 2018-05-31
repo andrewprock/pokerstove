@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Suit.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_SUIT_H_
-#define PEVAL_SUIT_H_
+#ifndef POKERSTOVE_PEVAL_SUIT_H_
+#define POKERSTOVE_PEVAL_SUIT_H_
 
 #include <string>
 
@@ -129,4 +129,4 @@ class Suit {
 
 }  // namespace pokerstove
 
-#endif  // PEVAL_SUIT_H_
+#endif  // POKERSTOVE_PEVAL_SUIT_H_

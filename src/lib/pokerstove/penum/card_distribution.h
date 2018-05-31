@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id$
  */
-#ifndef PENUM_CARDDISTRIBUTION_H_
-#define PENUM_CARDDISTRIBUTION_H_
+#ifndef POKERSTOVE_PENUM_CARD_DISTRIBUTION_H_
+#define POKERSTOVE_PENUM_CARD_DISTRIBUTION_H_
 
 #include <map>
 #include <string>
@@ -92,4 +92,4 @@ class CardDistribution {
 };
 }  // namespace pokerstove
 
-#endif  // PENUM_CARDDISTRIBUTION_H_
+#endif  // POKERSTOVE_PENUM_CARD_DISTRIBUTION_H_

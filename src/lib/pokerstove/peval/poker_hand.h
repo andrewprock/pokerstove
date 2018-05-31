@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerHand.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_POKERHAND_H_
-#define PEVAL_POKERHAND_H_
+#ifndef POKERSTOVE_PEVAL_POKER_HAND_H_
+#define POKERSTOVE_PEVAL_POKER_HAND_H_
 
 #include <boost/array.hpp>
 
@@ -144,4 +144,4 @@ class PokerHand {
 
 }  // namespace pokerstove
 
-#endif  // PEVAL_POKERHAND_H_
+#endif  // POKERSTOVE_PEVAL_POKER_HAND_H_

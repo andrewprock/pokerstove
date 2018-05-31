@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: OmahaHighHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_OMAHAHIGHHANDEVALUATOR_H_
-#define PEVAL_OMAHAHIGHHANDEVALUATOR_H_
+#ifndef POKERSTOVE_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_
+#define POKERSTOVE_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_
 
 #include <boost/math/special_functions/binomial.hpp>
 
@@ -138,4 +138,5 @@ class OmahaHighHandEvaluator : public PokerHandEvaluator {
 };
 
 }  // namespace pokerstove
-#endif  // PEVAL_OMAHAHIGHHANDEVALUATOR_H_
+
+#endif  // POKERSTOVE_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_

@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: UniversalHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef PEVAL_UNIVERSALHANDEVALUATOR_H_
-#define PEVAL_UNIVERSALHANDEVALUATOR_H_
+#ifndef POKERSTOVE_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_
+#define POKERSTOVE_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_
 
 // This is a rule based hand evaluator which can be used to construct
 // evalutors for most kinds of poker evaluation types.  Because it is
@@ -181,4 +181,4 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
 
 }  // namespace pokerstove
 
-#endif  // PEVAL_UNIVERSALHANDEVALUATOR_H_
+#endif  // POKERSTOVE_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_
