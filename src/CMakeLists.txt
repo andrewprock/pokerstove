@@ -1,7 +1,7 @@
 # check_function_exists does not work for builtins, so use try_compile.
 try_compile(HAVE_BUILTIN_BITOPS
             "${PROJECT_BINARY_DIR}"
-            "${CMAKE_CURRENT_SOURCE_DIR}/test_builtin_bitops.cpp")
+            "${CMAKE_CURRENT_SOURCE_DIR}/test_builtin_bitops.cc")
 
 # Set up the configure file.
 configure_file(config.h.in config.h)
