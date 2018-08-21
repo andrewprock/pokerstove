@@ -74,10 +74,8 @@ int main(int argc, char** argv) {
   if (!quiet) {
     for (size_t i = 0; i < results.size(); ++i) {
       double equity = (results[i].winShares + results[i].tieShares) / total;
-      string handDesc =
-          (i < hands.size()) ? "The hand " + hands[i] : "A random hand";
-      cout << handDesc << " has " << equity * 100. << " % equity ("
-           << results[i].str() << ")" << endl;
+      string handDesc = (i < hands.size()) ? hands[i] : "A random hand";
+      cout << handDesc << " " << equity * 100. << " (" << results[i].str() << ")" << endl;
     }
   }
 }
