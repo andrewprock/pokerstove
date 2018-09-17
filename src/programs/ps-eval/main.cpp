@@ -1,10 +1,13 @@
 #include <pokerstove/penum/ShowdownEnumerator.h>
 #include <boost/program_options.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include <iostream>
 #include <vector>
 
 using namespace pokerstove;
 namespace po = boost::program_options;
+namespace pt = boost::property_tree;
 using namespace std;
 
 int main(int argc, char** argv) {
@@ -71,13 +74,20 @@ int main(int argc, char** argv) {
     total += result.winShares + result.tieShares;
   }
 
-  if (!quiet) {
+  pt::ptree root;
+  pt::ptree hands_node;
+  
     for (size_t i = 0; i < results.size(); ++i) {
-      double equity = (results[i].winShares + results[i].tieShares) / total;
-      string handDesc =
-          (i < hands.size()) ? "The hand " + hands[i] : "A random hand";
-      cout << handDesc << " has " << equity * 100. << " % equity ("
-           << results[i].str() << ")" << endl;
-    }
+    string handDesc = (hands[i] == ".") ? "random" : hands[i];
+
+    pt::ptree hand_node;
+    hand_node.put("hand", handDesc);
+    hand_node.put("win", results[i].winShares / total * 100);
+    hand_node.put("tie", results[i].tieShares / total * 100);
+
+    hands_node.push_back(make_pair("", hand_node));
   }
+  root.add_child("hands", hands_node);
+  
+  write_json(cout, root);
 }
