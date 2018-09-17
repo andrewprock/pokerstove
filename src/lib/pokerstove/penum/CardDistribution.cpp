@@ -107,7 +107,7 @@ bool CardDistribution::parse(const std::string& input) {
   // has no specific cards, and is equivalent to a "random" dist
   // TODO: verify that this is the internal representation we want for a
   // random hand
-  if (input == "?") {
+  if (input == ".") {
     CardSet hand;
     if (hand.size() != 0)
       return false;
