@@ -4,7 +4,7 @@ try_compile(HAVE_BUILTIN_BITOPS
             "${CMAKE_CURRENT_SOURCE_DIR}/TestBuiltinBitops.cpp")
 
 # Set up the configure file.
-configure_file(Config.h.in Config.h)
+configure_file(Config.h.in "${PROJECT_BINARY_DIR}/Config.h")
 
 include_directories(lib/)
 add_subdirectory(lib/pokerstove/peval)
