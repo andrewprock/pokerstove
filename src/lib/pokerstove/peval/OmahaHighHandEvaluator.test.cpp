@@ -13,7 +13,7 @@ TEST(OmahaHighHandEvaluator, Construct) {
 
 TEST(OmahaHighHandEvaluator, RankEval) {
   OmahaHighHandEvaluator oeval;
-  CardSet hand("2c3c");
+  CardSet hand("2c3cKhQd");
   CardSet board("2c3c4c");
   PokerEvaluation eval = oeval.evaluateRanks(hand, board);
   EXPECT_EQ(TWO_PAIR, eval.type());
