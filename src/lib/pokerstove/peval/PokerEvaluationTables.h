@@ -5,7 +5,7 @@
 #ifndef PEVAL_POKEREVALUATIONTABLES_H_
 #define PEVAL_POKEREVALUATIONTABLES_H_
 
-#include <boost/cstdint.hpp>
+#include <cstdint>
 
 namespace pokerstove {
 

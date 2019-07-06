@@ -5,8 +5,8 @@
 #include "CardSet.h"
 #include <pokerstove/util/combinations.h>
 #include <algorithm>
+#include <array>
 #include <boost/algorithm/string.hpp>
-#include <boost/array.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
@@ -1049,14 +1049,14 @@ static inline bool badugiless(int c1, int c2) {
  */
 PokerEvaluation CardSet::evaluateBadugi() const {
   // get our ranks orgainzed in lowball order by suit
-  boost::array<int, 4> suits = {
+  std::array<int, 4> suits = {
       {LOWBALL_ROTATE_RANKS(C()), LOWBALL_ROTATE_RANKS(D()),
        LOWBALL_ROTATE_RANKS(H()), LOWBALL_ROTATE_RANKS(S())}};
 
   // We try to save some time by being smart about which suits we loop
   // over.  Empty suits are ignored, and suits with one rank are used
   // as is.  At the end we sort to make next_permutation to work properly.
-  boost::array<int, 4> ind;
+  std::array<int, 4> ind;
   int bmust = 0;
   size_t k = 0;
   for (size_t i = 0; i < suits.size(); i++) {

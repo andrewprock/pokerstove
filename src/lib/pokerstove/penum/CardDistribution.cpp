@@ -6,14 +6,11 @@
 #include <pokerstove/peval/Card.h>
 #include <pokerstove/util/combinations.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 #include <iostream>
 #include <vector>
-
-#define boost_foreach BOOST_FOREACH
 
 using namespace std;
 using namespace pokerstove;
@@ -118,7 +115,7 @@ bool CardDistribution::parse(const std::string& input) {
 
   vector<string> hands;
   boost::split(hands, input, boost::is_any_of(","));
-  boost_foreach(const string& h, hands) {
+  for (const string& h : hands) {
     // handle the weight
     double weight = 1.0;
     if (boost::contains(h, "=")) {
@@ -162,7 +159,8 @@ void CardDistribution::removeCards(const CardSet& dead) {
 
 double CardDistribution::weight() const {
   double total = 0.0;
-  std::pair<CardSet, double> w;
-  boost_foreach(w, _weights) { total += w.second; }
+  for (std::pair<CardSet, double> w : _weights) {
+    total += w.second;
+  }
   return total;
 }

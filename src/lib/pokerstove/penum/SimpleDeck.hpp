@@ -6,7 +6,7 @@
 #define PENUM_SIMPLE_DECK_H_
 
 #include <algorithm>
-#include <boost/array.hpp>
+#include <array>
 #include <functional>
 #include <pokerstove/peval/Card.h>
 #include <pokerstove/peval/CardSet.h>
@@ -155,7 +155,7 @@ public:
 
 private:
     // these are the data which track info about the deck
-    boost::array<CardSet, STANDARD_DECK_SIZE> _deck;
+    std::array<CardSet, STANDARD_DECK_SIZE> _deck;
     size_t _current;
 };
 }  // namespace pokerstove

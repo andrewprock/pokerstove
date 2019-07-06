@@ -5,7 +5,7 @@
 #ifndef PEVAL_CARDSET_H_
 #define PEVAL_CARDSET_H_
 
-#include <boost/cstdint.hpp>
+#include <cstdint>
 #include <iosfwd>
 #include <string>
 #include <vector>

@@ -5,7 +5,7 @@
 #ifndef PEVAL_SUIT_H_
 #define PEVAL_SUIT_H_
 
-#include <boost/cstdint.hpp>
+#include <cstdint>
 #include <boost/operators.hpp>
 #include <string>
 
