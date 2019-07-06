@@ -61,7 +61,7 @@ invoke cmake on the programs directory, then build.
     mkdir pokerstove/build
     cd pokerstove/build
     cmake -DCMAKE_BUILD_TYPE=Release ..
-    make
+    make && make test
 
 You should then be able to execute the simple command line
 example:
