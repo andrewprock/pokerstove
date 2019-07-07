@@ -24,8 +24,7 @@ public:
     static const int NUM_OMAHA_HAND_USE = 2;
     static const int NUM_OMAHA_FLUSH_BOARD = 3;
 
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                             const CardSet& board) const
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand, const CardSet& board) const
     {
         PokerEvaluation eval[2];
 
@@ -33,8 +32,7 @@ public:
         // 4c2 combinations of hands cards,
         // board candidates are all Nc3 board candidates, where N is the size
         // of the board
-        double combos =
-            boost::math::binomial_coefficient<double>(board.size(), 3);
+        double combos = boost::math::binomial_coefficient<double>(board.size(), 3);
         std::vector<CardSet> board_candidates(static_cast<size_t>(combos));
         std::vector<CardSet> hand_candidates(6);
         fillHands(hand_candidates, hand);
@@ -43,9 +41,7 @@ public:
         for (size_t i = 0; i < hand_candidates.size(); i++)
             for (size_t j = 0; j < board_candidates.size(); j++)
             {
-                PokerEvaluation e =
-                    CardSet(hand_candidates[i] | board_candidates[j])
-                        .evaluateHigh();
+                PokerEvaluation e = CardSet(hand_candidates[i] | board_candidates[j]).evaluateHigh();
                 if (e > eval[0])
                     eval[0] = e;
             }
@@ -62,8 +58,7 @@ public:
         // 4c2 combinations of hands cards,
         // board candidates are all Nc3 board candidates, where N is the size
         // of the board
-        double combos =
-            boost::math::binomial_coefficient<double>(board.size(), 3);
+        double combos = boost::math::binomial_coefficient<double>(board.size(), 3);
         std::vector<CardSet> board_candidates(static_cast<size_t>(combos));
         std::vector<CardSet> hand_candidates(6);
         fillHands(hand_candidates, hand);
@@ -81,8 +76,7 @@ public:
         return eval;
     }
 
-    virtual PokerEvaluation evaluateSuits(const CardSet& hand,
-                                          const CardSet& board) const
+    virtual PokerEvaluation evaluateSuits(const CardSet& hand, const CardSet& board) const
     {
         PokerEvaluation eval;
 
@@ -90,8 +84,7 @@ public:
         // 4c2 combinations of hands cards,
         // board candidates are all Nc3 board candidates, where N is the size
         // of the board
-        double combos =
-            boost::math::binomial_coefficient<double>(board.size(), 3);
+        double combos = boost::math::binomial_coefficient<double>(board.size(), 3);
         std::vector<CardSet> board_candidates(static_cast<size_t>(combos));
         std::vector<CardSet> hand_candidates(6);
         fillHands(hand_candidates, hand);

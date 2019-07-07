@@ -20,24 +20,19 @@ public:
         , _numDraws(0)
     {}
 
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                             const CardSet&) const
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand, const CardSet&) const
     {
         return PokerHandEvaluation(hand.evaluateBadugi());
     }
 
-    virtual PokerEvaluation
-    evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
-        throw std::runtime_error(
-            "BadugiHandEvaluator::evaluateRanks, not implemented");
+        throw std::runtime_error("BadugiHandEvaluator::evaluateRanks, not implemented");
     }
 
-    virtual PokerEvaluation
-    evaluateSuits(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateSuits(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
-        throw std::runtime_error(
-            "BadugiHandEvaluator::evaluateSuits, not implemented");
+        throw std::runtime_error("BadugiHandEvaluator::evaluateSuits, not implemented");
     }
 
     virtual size_t handSize() const { return 4; }

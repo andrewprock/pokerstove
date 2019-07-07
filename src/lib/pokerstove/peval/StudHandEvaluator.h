@@ -15,21 +15,18 @@ namespace pokerstove
 class StudHandEvaluator : public PokerHandEvaluator
 {
 public:
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                             const CardSet&) const
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand, const CardSet&) const
     {
         // return hand.evaluateHighRanks ();
         return PokerHandEvaluation(hand.evaluateHigh());
     }
 
-    virtual PokerEvaluation
-    evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
         return hand.evaluateHighRanks();
     }
 
-    virtual PokerEvaluation
-    evaluateSuits(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateSuits(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
         return hand.evaluateHighFlush();
     }

@@ -8,9 +8,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 #include <iostream>
+#include <vector>
 #include <pokerstove/peval/Card.h>
 #include <pokerstove/util/combinations.h>
-#include <vector>
 
 using namespace std;
 using namespace pokerstove;
@@ -51,8 +51,8 @@ string CardDistribution::str() const
     string ret;
     for (size_t i = 0; i < _handList.size(); i++) {
         const CardSet& hand = _handList[i];
-        ret += (i > 0 ? "," : "") +
-               (boost::format("%s=%.3f") % hand.str() % weight(hand)).str();
+        ret += (i > 0 ? "," : "")
+            + (boost::format("%s=%.3f") % hand.str() % weight(hand)).str();
     }
     return ret;
 }

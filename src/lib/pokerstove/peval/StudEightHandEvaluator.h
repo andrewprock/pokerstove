@@ -15,8 +15,7 @@ namespace pokerstove
 class StudEightHandEvaluator : public PokerHandEvaluator
 {
 public:
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                             const CardSet&) const
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand, const CardSet&) const
     {
         return PokerHandEvaluation(hand.evaluateHigh(), hand.evaluate8LowA5());
     }

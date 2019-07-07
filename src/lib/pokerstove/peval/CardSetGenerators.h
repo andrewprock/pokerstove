@@ -34,6 +34,7 @@ namespace pokerstove
  */
 std::set<CardSet> createCardSet(size_t numCards,
                                 Card::Grouping grouping = Card::RANK_SUIT);
+
 }  // namespace pokerstove
 
 #endif  // PEVAL_CARDSETGENERATORS_H_

@@ -16,8 +16,7 @@ namespace pokerstove
 class HoldemHandEvaluator : public PokerHandEvaluator
 {
 public:
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                             const CardSet& board) const
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand, const CardSet& board) const
     {
         // if (hand.size () != NUM_HOLDEM_POCKET)
         // throw std::invalid_argument ("HHE: incorrect number of pocket
@@ -27,16 +26,14 @@ public:
         return PokerHandEvaluation(h.evaluateHigh());
     }
 
-    virtual PokerEvaluation
-    evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
         CardSet h = hand;
         h.insertRanks(board);
         return h.evaluateHighRanks();
     }
 
-    virtual PokerEvaluation
-    evaluateSuits(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateSuits(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
         CardSet h = hand;
         h.insert(board);

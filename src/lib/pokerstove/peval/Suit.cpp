@@ -110,8 +110,7 @@ string Suit::decodeSuitASCII_EXT(int card) const
             c = '?';
     }
 
-    string buf =
-        (boost::format("%c") % c).str();  // boost::format may be overkill
+    string buf = (boost::format("%c") % c).str();  // boost::format may be overkill
     return buf;
 }
 
@@ -211,8 +210,7 @@ string Suit::decodeSuit(int c) const
             return decodeSuitUnicode(c);
 
         case SUIT_PREFLOP_CANNON:
-            throw std::domain_error(
-                "direct suit decoding not supported for SUIT_PREFLOP_CANNON");
+            throw std::domain_error("direct suit decoding not supported for SUIT_PREFLOP_CANNON");
     }
     return "?";
 }
@@ -257,14 +255,10 @@ bool Suit::isSuitChar(char c)
 {
     switch (c)
     {
-        case 'c':
-        case 'C':
-        case 'd':
-        case 'D':
-        case 'h':
-        case 'H':
-        case 's':
-        case 'S':
+        case 'c':    case 'C':
+        case 'd':    case 'D':
+        case 'h':    case 'H':
+        case 's':    case 'S':
             return true;
     };
     return false;

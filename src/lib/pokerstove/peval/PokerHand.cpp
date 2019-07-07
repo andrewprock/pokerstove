@@ -60,8 +60,7 @@ string PokerHand::str() const
 string PokerHand::preflopstr() const
 {
     if (_ncards != 2)
-        throw std::runtime_error(
-            "incorrect number of cards for hold'em preflop canon");
+        throw std::runtime_error("incorrect number of cards for hold'em preflop canon");
     Card c0 = Card(_cards[0]);
     Card c1 = Card(_cards[1]);
 

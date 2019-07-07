@@ -16,14 +16,14 @@ PokerHandEvaluator::PokerHandEvaluator()
 
 PokerHandEvaluator::~PokerHandEvaluator() {}
 
-static double INV_LUT[] = {0,       1 / 1.0, 1 / 2.0, 1 / 3.0, 1 / 4.0, 1 / 5.0,
-                           1 / 6.0, 1 / 7.0, 1 / 8.0, 1 / 9.0, 1 / 10.0};
+static double INV_LUT[] = {0,
+                           1/1.0, 1/2.0, 1/3.0, 1/4.0, 1/5.0,
+                           1/6.0, 1/7.0, 1/8.0, 1/9.0, 1/10.0};
 
 /**
  * debugging util
  */
-void display(const vector<CardSet>& hands, const CardSet& board,
-             vector<EquityResult>& result)
+void display(const vector<CardSet>& hands, const CardSet& board, vector<EquityResult>& result)
 {
     for (size_t i = 0; i < hands.size(); i++)
         cout << hands[i].str() << " ";

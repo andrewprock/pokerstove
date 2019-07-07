@@ -15,14 +15,12 @@ namespace pokerstove
 class RazzHandEvaluator : public PokerHandEvaluator
 {
 public:
-    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                             const CardSet&) const
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand, const CardSet&) const
     {
         return PokerHandEvaluation(hand.evaluateLowA5());
     }
 
-    virtual PokerEvaluation
-    evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
     {
         return hand.evaluateLowA5();
     }

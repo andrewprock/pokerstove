@@ -22,7 +22,8 @@ namespace pokerstove
  * used for removing cards from the deck
  */
 struct isLive : public std::binary_function<pokerstove::CardSet,
-                                            pokerstove::CardSet, bool>
+                                            pokerstove::CardSet,
+                                            bool>
 {
     bool operator()(const CardSet& c, const CardSet& dead) const
     {
@@ -123,10 +124,11 @@ public:
      */
     CardSet peek(uint64_t mask) const
     {
-#ifdef WIN32
-// disable the unary negation of unsigned int
-#pragma warning(disable : 4146)
-#endif
+        #ifdef WIN32
+        // disable the unary negation of unsigned int
+        #pragma warning(disable : 4146)
+        #endif
+
         CardSet ret;
 
         uint32_t lower = static_cast<uint32_t>(mask & UINT32_C(0xFFFFFFFF));
@@ -145,10 +147,10 @@ public:
             upper ^= (upper & -upper);
         }
 
-#ifdef WIN32
-// set back to default
-#pragma warning(default : 4146)
-#endif
+        #ifdef WIN32
+        // set back to default
+        #pragma warning(default : 4146)
+        #endif
 
         return ret;
     }

@@ -90,9 +90,9 @@ public:
      * hand.
      * @see PokerHandEvaluation
      */
-    virtual PokerHandEvaluation
-    evaluateHand(const CardSet& hand,
-                 const CardSet& board = CardSet(0)) const = 0;
+    virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                             const CardSet& board = CardSet(0)) const = 0;
+
     virtual PokerHandEvaluation evaluate(const CardSet& hand,
                                          const CardSet& board = CardSet(0))
     {
@@ -109,27 +109,21 @@ public:
         return evaluateHand(hand, board).high();
     }
 
-    virtual size_t
-    handSize() const = 0;  //!< return the maximum size of a players hand
-    virtual size_t
-    boardSize() const = 0;  //!< return the maximum size of the board
-    virtual size_t
-    evaluationSize() const = 0;  //!< return 1 for high only, 2 for high low
-    virtual size_t numDraws() const
-    {
-        return 0;
-    }  //!< return the maximum size of a players hand
+    virtual size_t handSize () const = 0;            //!< return the maximum size of a players hand
+    virtual size_t boardSize () const = 0;           //!< return the maximum size of the community cards
+    virtual size_t evaluationSize () const = 0;      //!< return 1 for high only, 2 for high low
+    virtual size_t numDraws () const { return 0; }   //!< return the maximum size of a players hand
 
-    virtual PokerEvaluation
-    evaluateRanks(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateRanks (const CardSet & hand,
+                                           const CardSet& board=CardSet(0)) const
     {
-        return evaluateHand(hand, board).eval(0);
+      return evaluateHand (hand, board).eval (0);
     }
 
-    virtual PokerEvaluation
-    evaluateSuits(const CardSet& hand, const CardSet& board = CardSet(0)) const
+    virtual PokerEvaluation evaluateSuits (const CardSet & hand,
+                                           const CardSet& board=CardSet(0)) const
     {
-        return evaluateHand(hand, board).eval(0);
+      return evaluateHand (hand, board).eval (0);
     }
 
     virtual bool usesSuits() const { return _useSuits; }

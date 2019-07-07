@@ -21,17 +21,12 @@ int main(int argc, char** argv)
         // set up the program options, handle the help case, and extract the
         // values
         po::options_description desc("create a lookup table for poker hands\n");
-        // clang-format off
         desc.add_options()
             ("help,?", "produce help message")
-            ("pocket-count,p", po::value<size_t>()->default_value(2),
-             "number of pocket cards to use")
-            ("board-count,b", po::value<size_t>()->default_value(3),
-             "number of board cards to use")
-            ("game,g", po::value<string>()->default_value("O"),
-             "game to use for evaluation")
-            ("ranks", "print the set of rank values");
-        // clang-format on
+            ("pocket-count,p",  po::value<size_t>()->default_value(2),  "number of pocket cards to use")
+            ("board-count,b",   po::value<size_t>()->default_value(3),  "number of board cards to use")
+            ("game,g",          po::value<string>()->default_value("O"), "game to use for evaluation")
+            ("ranks",           "print the set of rank values");
 
         po::variables_map vm;
         po::store(po::command_line_parser(argc, argv)
@@ -71,7 +66,6 @@ int main(int argc, char** argv)
                     // cout << boost::format("%s, %s\n") % pit->rankstr() %
                     // bit->rankstr();
 
-                    // clang-format off
                     cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
                                 pit->str() %
                                 bit->str() %
@@ -79,7 +73,6 @@ int main(int argc, char** argv)
                                 bit->rankColex() %
                                 eval.str() %
                                 eval.code();
-                    // clang-format on
                 }
                 else
                 {
@@ -87,7 +80,6 @@ int main(int argc, char** argv)
                     if (pit->intersects(*bit))
                         continue;
                     PokerHandEvaluation eval = evaluator->evaluate(*pit, *bit);
-                    // clang-format off
                     cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
                                 pit->str() %
                                 bit->str() %
@@ -95,7 +87,6 @@ int main(int argc, char** argv)
                                 bit->colex() %
                                 eval.str() %
                                 eval.high().code();
-                    // clang-format on
                 }
             }
     }

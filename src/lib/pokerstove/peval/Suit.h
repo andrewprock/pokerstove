@@ -23,14 +23,14 @@ class Suit
 public:
     // class related constants
     static const unsigned NUM_SUIT = 4;
-    static const Suit Clubs() { return Suit(0); }
-    static const Suit Diamonds() { return Suit(1); }
-    static const Suit Hearts() { return Suit(2); }
-    static const Suit Spades() { return Suit(3); }
+    static const Suit Clubs()       { return Suit(0); }
+    static const Suit Diamonds()    { return Suit(1); }
+    static const Suit Hearts()      { return Suit(2); }
+    static const Suit Spades()      { return Suit(3); }
 
     // for iteration
-    static const Suit begin() { return Suit(0); }
-    static const Suit end() { return Suit(NUM_SUIT); }
+    static const Suit begin()       { return Suit(0); }
+    static const Suit end()         { return Suit(NUM_SUIT); }
 
     // standalone fast parsting
     static int suit_code(char c);
@@ -38,9 +38,7 @@ public:
     /**
      * Default constructor initializes suit to Suit::Clubs()
      */
-    Suit()
-        : _suit(0)
-    {}
+    Suit() : _suit(0) {}
 
     /**
      * Create from input string.  Only the first letter of the input
@@ -91,9 +89,9 @@ public:
      */
     bool operator==(const Suit& s) const { return _suit == s._suit; }
     bool operator<=(const Suit& s) const { return _suit <= s._suit; }
-    bool operator<(const Suit& s) const { return _suit < s._suit; }
-    void operator++() { ++_suit; }
-    void operator--() { --_suit; }
+    bool operator< (const Suit& s) const { return _suit <  s._suit; }
+    void operator++()                    { ++_suit; }
+    void operator--()                    { --_suit; }
 
 private:
     /**
@@ -101,9 +99,9 @@ private:
      * effects of leakage, we limit access to these functions to
      * friends.
      */
-    uint8_t code() const { return _suit; }
-    void encode(uint8_t c) { _suit = c; }
-    int suitBit() const { return 0x01 << _suit * 3; }
+    uint8_t code() const        { return _suit; }
+    void    encode(uint8_t c)   { _suit = c; }
+    int     suitBit() const     { return 0x01 << _suit * 3; }
 
     void fromString(const std::string& s);
 
@@ -125,10 +123,10 @@ private:
     std::string decodeSuitANSI_EXT(int c) const;
     std::string decodeSuitUnicode(int c) const;
 
-    static uint8_t ClubVal() { return 0; }
+    static uint8_t ClubVal()    { return 0; }
     static uint8_t DiamondVal() { return 1; }
-    static uint8_t HeartVal() { return 2; }
-    static uint8_t SpadeVal() { return 3; }
+    static uint8_t HeartVal()   { return 2; }
+    static uint8_t SpadeVal()   { return 3; }
 };
 
 }  // namespace pokerstove

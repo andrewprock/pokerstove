@@ -39,6 +39,7 @@ int PokerEvaluation::reducedCode() const
 
     if (_evalcode == 0)
         return 0;
+
     switch (type())
     {
         case NO_PAIR:
@@ -75,8 +76,7 @@ int PokerEvaluation::reducedCode2to7() const
             PokerEvaluation e(_evalcode);
             int kick1 = topRankTable[kickerBits()];
             int kick2 = topRankTable[kickerBits() ^ 0x01 << kick1];
-            int kick3 =
-                topRankTable[kickerBits() ^ 0x01 << kick1 ^ 0x01 << kick2];
+            int kick3 = topRankTable[kickerBits() ^ 0x01 << kick1 ^ 0x01 << kick2];
             int kbits = (0x01 << kick1) | (0x01 << kick2);
             if (kick1 < 10)
                 kbits |= (0x01 << kick3);
@@ -206,26 +206,12 @@ int PokerEvaluation::showdownCode() const
 int PokerEvaluation::type() const { return _evalcode >> VSHIFT; }
 
 int PokerEvaluation::kickerBits() const { return _evalcode & KICKER_MASK; }
-Rank PokerEvaluation::majorRank() const
-{
-    return Rank((_evalcode >> MAJOR_SHIFT) & 0x0F);
-}
-Rank PokerEvaluation::minorRank() const
-{
-    return Rank((_evalcode >> MINOR_SHIFT) & 0x0F);
-}
-void PokerEvaluation::setKickerBits(int k)
-{
-    _evalcode = (_evalcode & ~KICKER_MASK) | k;
-}
-void PokerEvaluation::setMajorRank(int r)
-{
-    _evalcode = (_evalcode & ~MAJOR_MASK) | r << MAJOR_SHIFT;
-}
-void PokerEvaluation::setMinorRank(int r)
-{
-    _evalcode = (_evalcode & ~MINOR_MASK) | r << MINOR_SHIFT;
-}
+Rank PokerEvaluation::majorRank() const { return Rank((_evalcode >> MAJOR_SHIFT) & 0x0F); }
+Rank PokerEvaluation::minorRank() const { return Rank((_evalcode >> MINOR_SHIFT) & 0x0F); }
+
+void PokerEvaluation::setKickerBits(int k) { _evalcode = (_evalcode & ~KICKER_MASK) | k; }
+void PokerEvaluation::setMajorRank(int r)  { _evalcode = (_evalcode & ~MAJOR_MASK) | r << MAJOR_SHIFT; }
+void PokerEvaluation::setMinorRank(int r)  { _evalcode = (_evalcode & ~MINOR_MASK) | r << MINOR_SHIFT; }
 
 // this converts the evaluation to one where
 // the ace is valued as low instead of high,
@@ -379,18 +365,18 @@ string PokerEvaluation::str() const
 
 string PokerEvaluation::toStringCannon() const
 {
-    const string highcard = "high card:    ";
-    const string onepair = "one pair:     ";
-    const string threeflush = "three flush:  ";
-    const string threestraight = "three str8:   ";
-    const string twopair = "two pair:     ";
-    const string trips = "trips:        ";
-    const string threestr8flush = "3 str8 flush: ";
-    const string straight = "straight:     ";
-    const string flush = "flush:        ";
-    const string fullhouse = "full house:   ";
-    const string quads = "quads:        ";
-    const string straightflush = "str8 flush:   ";
+  const string highcard       = "high card:    ";
+  const string onepair        = "one pair:     ";
+  const string threeflush     = "three flush:  ";
+  const string threestraight  = "three str8:   ";
+  const string twopair        = "two pair:     ";
+  const string trips          = "trips:        ";
+  const string threestr8flush = "3 str8 flush: ";
+  const string straight       = "straight:     ";
+  const string flush          = "flush:        ";
+  const string fullhouse      = "full house:   ";
+  const string quads          = "quads:        ";
+  const string straightflush  = "str8 flush:   ";
 
     string ret;
     int n = _evalcode;
@@ -507,8 +493,7 @@ void PokerEvaluation::generateLowballLookupA5()
             if (nbits == 5)
                 break;
         }
-        cout << boost::format("    %6d, // %s\n") % lowbits %
-                    toBitString(lowbits);
+        cout << boost::format("    %6d, // %s\n") % lowbits % toBitString(lowbits);
     }
     cout << "};\n";
 }
@@ -529,14 +514,12 @@ void PokerEvaluation::generateBottomRankMask()
                 break;
             }
         }
-        cout << boost::format("    %6d, // %s\n") % lowbits %
-                    toBitString(lowbits);
+        cout << boost::format("    %6d, // %s\n") % lowbits % toBitString(lowbits);
     }
     cout << "};\n";
 }
 
-std::ostream& operator<<(std::ostream& sout,
-                         const pokerstove::PokerEvaluation& e)
+std::ostream& operator<<(std::ostream& sout, const pokerstove::PokerEvaluation& e)
 {
     sout << e.str();
     return sout;

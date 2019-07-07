@@ -5,10 +5,10 @@
 #ifndef COMMON_ENUM_PARTITIONENUMERATOR_H_
 #define COMMON_ENUM_PARTITIONENUMERATOR_H_
 
-#include <boost/lexical_cast.hpp>
 #include <cstdint>
-#include <pokerstove/util/combinations.h>
 #include <vector>
+#include <boost/lexical_cast.hpp>
+#include <pokerstove/util/combinations.h>
 
 namespace pokerstove
 {
@@ -211,8 +211,7 @@ private:
         else if (n == 0)
         {
             size_t i = 0;
-            for (std::vector<size_t>::iterator it = _subsets[0].begin();
-                 it != _subsets[0].end(); it++)
+            for (auto it = _subsets[0].begin(); it != _subsets[0].end(); it++)
                 *it = i++;
         }
         _pcombos[n].reset();

@@ -19,9 +19,9 @@ namespace pokerstove
 
 ShowdownEnumerator::ShowdownEnumerator() {}
 
-vector<EquityResult> ShowdownEnumerator::calculateEquity(
-    const vector<CardDistribution>& dists, const CardSet& board,
-    boost::shared_ptr<PokerHandEvaluator> peval) const
+vector<EquityResult> ShowdownEnumerator::calculateEquity(const vector<CardDistribution>& dists,
+                                                         const CardSet& board,
+                                                         boost::shared_ptr<PokerHandEvaluator> peval) const
 {
     if (peval.get() == NULL)
         throw runtime_error("ShowdownEnumerator, null evaluator");
@@ -51,10 +51,10 @@ vector<EquityResult> ShowdownEnumerator::calculateEquity(
     SimpleDeck deck;
     CardSet dead;
     double weight;
-    vector<CardSet> ehands(ndists + nboards);
-    vector<size_t> parts(ndists + nboards);
-    vector<CardSet> cardPartitions(ndists + nboards);
-    vector<PokerHandEvaluation> evals(ndists);  // NO BOARD
+    vector<CardSet>             ehands         (ndists + nboards);
+    vector<size_t>              parts          (ndists + nboards);
+    vector<CardSet>             cardPartitions (ndists + nboards);
+    vector<PokerHandEvaluation> evals          (ndists);  // NO BOARD
 
     // copy quickness
     CardSet* copydest = &ehands[0];
@@ -73,14 +73,14 @@ vector<EquityResult> ShowdownEnumerator::calculateEquity(
             if (i < ndists)
             {
                 cardPartitions[i] = dists[i][o[i]];
-                parts[i] = handsize - cardPartitions[i].size();
-                weight *= dists[i][cardPartitions[i]];
+                parts[i]          = handsize - cardPartitions[i].size();
+                weight           *= dists[i][cardPartitions[i]];
             }
             else
             {
                 // this allows us to have board distributions in the future
                 cardPartitions[i] = board;
-                parts[i] = boardsize - cardPartitions[i].size();
+                parts[i]          = boardsize - cardPartitions[i].size();
             }
             disjoint = disjoint && dead.disjoint(cardPartitions[i]);
             dead |= cardPartitions[i];
@@ -102,11 +102,9 @@ vector<EquityResult> ShowdownEnumerator::calculateEquity(
                 // clause? A: need to rework tracking of whether a board is
                 // needed
                 if (nboards > 0)
-                    peval->evaluateShowdown(ehands, ehands[ndists], evals,
-                                            results, weight);
+                    peval->evaluateShowdown(ehands, ehands[ndists], evals, results, weight);
                 else
-                    peval->evaluateShowdown(ehands, board, evals, results,
-                                            weight);
+                    peval->evaluateShowdown(ehands, board, evals, results, weight);
             } while (pe.next());
         }
     } while (o.next());
