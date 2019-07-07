@@ -2,10 +2,10 @@
 #define __LASTBIT_H
 
 #include <cstdint>
-#include <Config.h>
 #include <pokerstove/util/utypes.h>
 
-#ifdef HAVE_BUILTIN_BITOPS
+// only support these built-ins for these two compilers
+#if defined(__clang__) || defined(__GNUC__)
 
 inline uint firstbit(uint64_t v) {
   // __builtin_clz(0) is undefined, so don't do that.
