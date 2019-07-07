@@ -7,7 +7,8 @@
 
 #include <cstdint>
 
-namespace pokerstove {
+namespace pokerstove
+{
 
 /* the tables defined in this file:
  *

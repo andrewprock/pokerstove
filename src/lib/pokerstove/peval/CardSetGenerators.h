@@ -4,11 +4,12 @@
 #ifndef PEVAL_CARDSETGENERATORS_H_
 #define PEVAL_CARDSETGENERATORS_H_
 
-#include <set>
 #include "Card.h"
 #include "CardSet.h"
+#include <set>
 
-namespace pokerstove {
+namespace pokerstove
+{
 
 /**
  * Create the set of all card sets where the size of each rank set has
