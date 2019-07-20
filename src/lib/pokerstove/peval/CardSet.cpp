@@ -1312,12 +1312,6 @@ size_t CardSet::rankColex() const
     return ret;
 }
 
-std::ostream& operator<<(std::ostream& sout, const pokerstove::CardSet& e)
-{
-    sout << e.str();
-    return sout;
-}
-
 vector<int> pokerstove::findSuitPermutation(const CardSet& source, const CardSet& dest)
 {
     vector<int> rot(4, -1);

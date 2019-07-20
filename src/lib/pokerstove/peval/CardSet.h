@@ -197,4 +197,13 @@ std::vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest)
 
 }  // namespace pokerstove
 
+/**
+ * our little printer
+ */
+inline std::ostream& operator<<(std::ostream& sout, const pokerstove::CardSet & e)
+{
+  sout << e.str();
+  return sout;
+}
+
 #endif  // PEVAL_CARDSET_H_
