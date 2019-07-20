@@ -17,10 +17,10 @@ template <typename T>
 std::string toBitString(T t)
 {
     std::string ret;
-    const int BYTE_SIZE = 8;
-    for (unsigned int i = 0; i < sizeof(T) * BYTE_SIZE; i++)
+    const int BYTE_SZ = 8;
+    for (unsigned int i = 0; i < sizeof(T) * BYTE_SZ; i++)
     {
-        if ((i % BYTE_SIZE) == 0)
+        if ((i % BYTE_SZ) == 0)
             ret += " ";
         if (t >> i & 0x01)
             ret += "1";
