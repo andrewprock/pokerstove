@@ -66,8 +66,8 @@ public:
         for (size_t i = 0; i < hand_candidates.size(); i++)
             for (size_t j = 0; j < board_candidates.size(); j++)
             {
-                CardSet meld(hand);
-                meld.insertRanks(board);
+                CardSet meld(hand_candidates[i]);
+                meld.insertRanks(board_candidates[j]);
                 PokerEvaluation e = meld.evaluateHighRanks();
                 if (e > eval)
                     eval = e;
