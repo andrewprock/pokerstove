@@ -132,7 +132,7 @@ However if you already have boost or gtest installed you need to adjust project 
 `Solution Setup -> C/C++ -> Preprocessor`: *BOOST_ALL_DYN_LINK* is defied to link against dynamic boost libs,
 remove this macro if you want to link against static boost libraries.
 
-What ever your setup is (vcpkg or manual), one additional step is to tell VS debugger where to look for DLL's that you compiled, to do so:
+What ever your setup is (vcpkg or manual), one additional step is to tell VS debugger where to look for DLL's that you compiled, to do so:\
 `Project properties -> Debugging -> Environment`: and input PATH, for example: `PATH=%PATH%;C:\dev\boost_1_72_0\stage\lib`
 
 Once all this is set up, simply open VS solution, select your configuration (x64/x86, Debug/Release) and hit "Build solution",
