@@ -102,26 +102,37 @@ example:
 
 ### Windows
 
-Getting boost to work under windows can be a bit of a challenge.
-One of the easier ways is to install precompiled librares.  There
-is a batch of them available at sourceforge. If you're working
-with Visual Studio 2010, you will probably need the 32 bit
-libraries.  [boost precomplied libraries]
-(http://sourceforge.net/projects/boost/files/boost-binaries/1.53.0/)
+pokerstove project includes Visual Studio 2019 project files located in
+"VisualStudio" sub folder.\
+VS Project files are adjusted to link against required `boost` and `gtest`
+3rd party libraries, and project inter dependencies are all set.
 
-Under windows, the cmake gui can be used to construct solution
-and project files for Visual Studio 2010.  To do this, browse
-source to locate the programs directory git/pokerstove/programs.
-Then create a build dir for the project.  At the bottom of the
-gui click Configure, then Generate.  You may have to edit the
-git/pokerstove/programs/CMakeLists.txt to point cmake to your
-installation of boost.
+For getting boost and gtest libraries the easiest way on Windows is to use [vcpkg](https://github.com/microsoft/vcpkg) package manager.
 
-Once you've done that, you should be able to select
+After reading vcpkg README file on the link above and perfoming easy initial setup all you need to do is first
+figure out the name of packages by typing:\
+`.\vcpkg search gtest` and\
+`.\vcpkg search boost`
 
-    Menu->Build->Build Solution
+to install them simply type following by replacing package name and it's version number for example:\
+`.\vcpkg install gtest` and\
+`.\vcpkg install boost-1.72`
 
-to build the sample program.
+That's it, Visual Studio will autmatically pick up your installed boost and gtest installed by vcpkg!
+
+However if you already have boost or gtest installed you need to adjust project settings in visual studio, To do so open Visual Studio solution and adjust following properties in property manager:
+
+`Solution Setup -> C/C++ -> General -> Additional include directories`: adjust path to your boost root directory.\
+`Solution Setup -> Linker -> Additional library directoris`: adjust path to your boost libs.\
+`Solution Setup -> C/C++ -> Preprocessor`: *BOOST_ALL_DYN_LINK* is defied to link against dynamic boost libs,
+remove this macro if you want to link against static boost libraries.
+
+Once all this is set up, simply open VS solution, select your configuration (x64/x86, Debug/Release) and hit "Build solution",
+found in VS menu:\
+`Build -> Build Solution`
+
+Otherwise if you use an older version of Visual Studio you can try to replicate existing VS project files
+manually by hand, then the rest of the process is the same as described above.
 
 
 ### OSX
