@@ -1,3 +1,76 @@
+# Original ignores
 *~
 build
 *.pyc
+
+# Visual studio settings
+.vs/
+
+#Visual Studio upgrade files
+*.htm
+*.html
+
+# Build Directories
+Build/
+Intermediate/
+
+# Precompiled Headers
+*.gch
+*.pch
+*.ipch
+
+# Visual Studio Files
+*.suo
+*.user
+
+# Visual Studio database files
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.idb
+*.pdb
+*.ipdb
+*.opensdf
+*.sdf
+
+# Visual Studio log files
+*.log
+*.tlog
+*.lastbuildstate
+
+# Visual Studio linker files
+*.ilk
+
+# Compiled Resource files
+*.res
+*.aps
+
+# Visual Studio browse files
+*.sbr
+*.bsc
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.iobj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.dll
+*.ipa

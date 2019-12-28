@@ -14,16 +14,16 @@
 #include <pokerstove/peval/Suit.h>  // needed for NUM_SUIT
 #include <pokerstove/util/lastbit.h>
 #include <string>
+#include <random>   // std::random_device
 
 namespace pokerstove
 {
 
 /**
  * used for removing cards from the deck
+ * upgrade to C++17: original code inherits from std::binary_function, removed in C++17
  */
-struct isLive : public std::binary_function<pokerstove::CardSet,
-                                            pokerstove::CardSet,
-                                            bool>
+struct isLive
 {
     bool operator()(const CardSet& c, const CardSet& dead) const
     {
@@ -104,7 +104,9 @@ public:
     void remove(const pokerstove::CardSet& cards)
     {
         int decr = CardSet(cards | dead()).size();
-        stable_partition(_deck.begin(), _deck.end(), bind2nd(isLive(), cards));
+
+        // upgrade to C++17: origianl code uses std::bind2nd, removed in C++17, instead use placeholder
+        stable_partition(_deck.begin(), _deck.end(), std::bind(isLive(), std::placeholders::_1, cards));
         _current = STANDARD_DECK_SIZE - decr;
     }
 
@@ -115,7 +117,11 @@ public:
 
     void shuffle()
     {
-        std::random_shuffle(_deck.begin(), _deck.end());
+        // upgrade to C++17: original code uses std::random_shuffle, deprecated in C++17
+        std::random_device rd;
+        std::mt19937 g(rd());
+
+        std::shuffle(_deck.begin(), _deck.end(), g);
         reset();  //_current = 0;
     }
 
