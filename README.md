@@ -118,6 +118,11 @@ to install them simply type following by replacing package name and it's version
 `.\vcpkg install gtest` and\
 `.\vcpkg install boost-1.72`
 
+Note: vcpkg will install/build 64 bit binaries for 64 bit machine, x32 bit for x86 machine, to explicitly request either of those,
+append: `:x86-windows` or `:x64-windows` to your command, for example to build 32 bit on 64 bit machine:\
+`.\vcpkg install gtest:x86-windows` and\
+`.\vcpkg install boost-1.72:x86-windows`
+
 That's it, Visual Studio will autmatically pick up your installed boost and gtest installed by vcpkg!
 
 However if you already have boost or gtest installed you need to adjust project settings in visual studio, To do so open Visual Studio solution and adjust following properties in property manager:
@@ -126,6 +131,9 @@ However if you already have boost or gtest installed you need to adjust project 
 `Solution Setup -> Linker -> Additional library directoris`: adjust path to your boost libs.\
 `Solution Setup -> C/C++ -> Preprocessor`: *BOOST_ALL_DYN_LINK* is defied to link against dynamic boost libs,
 remove this macro if you want to link against static boost libraries.
+
+What ever your setup is (vcpkg or manual), one additional step is to tell VS debugger where to look for DLL's that you compiled, to do so:
+`Project properties -> Debugging -> Environment`: and input PATH, for example: `PATH=%PATH%;C:\dev\boost_1_72_0\stage\lib`
 
 Once all this is set up, simply open VS solution, select your configuration (x64/x86, Debug/Release) and hit "Build solution",
 found in VS menu:\
