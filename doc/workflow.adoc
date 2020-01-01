@@ -1,0 +1,12 @@
+A sample session of a workflow:
+
+1. create distributions
+2. view distributions
+3. evaluate distributions
+4. view evaluations
+
+
+These should be chainable
+
+distribution creation utils should have multiple ...
+

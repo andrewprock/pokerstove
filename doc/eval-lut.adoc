@@ -1,0 +1,65 @@
+The current encoding looks like this:
+
+----
+     * the integer code is organized bitwise as:
+     *  21 0987654 32109876 54321098 76543210
+     *        TTTT MMMMmmmm BBAkkkkk kkkkkkkk
+     *
+     * T = type bits [0,12] (pair, trips, flush, etc...)
+     * M = major rank
+     * m = minor rank
+     * A = ace swings low bit 0/1
+     * k = kicker set
+     * . = unused bit
+     * B = badugi bits = N-1 cards in the badugi
+----
+
+This is larger than is absolutely necessary.  For large lookup
+tables, a 16-bit representation would be useful.  There are
+roughly 6k possible evaluations for five card poker.
+
+There are a couple of game related constratins that should be
+enforced.  That is, badugi hands should not be comparable to high
+hands.  The significant hand types are:
+
+* high
+* badugi
+* 2-7 lowball
+* A-5 lowball
+
+That accounts for two bits.
+
+The 16-bit format:
+
+----
+     * 54321098 76543210
+     * ~GGeeeee eeeeeeee
+     *
+     * h = high/low bit, indicates 2's complement of the eval
+     * G = Game bits
+     * e = eval bits
+----
+
+Each game uses the eval bits differently
+
+== badugi eval bits
+
+For badugi, there are 1820 four card hands.  This requires 11
+bits to store.  We use two bits to determine the number of cards
+in the badugi.
+
+----
+     * 54321098 76543210
+     * ~GGnneee eeeeeeee
+     *
+     * h = bit for lowball game
+     * G = Game code for badugi
+     * n = two bits for number of cards in badugi
+     * e = rank colex according to the number of ranks
+----
+
+== A-5 lowball eval bits
+
+For A-5 lowball, we require 14 bits to encode all the possible
+hands.  hand, one for each active rank.
+
