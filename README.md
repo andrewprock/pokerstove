@@ -47,12 +47,13 @@ installed on your platform of choice:
 
 * boost, version 1.46 or higher
 * cmake, version 2.4 or higher
+* gtest
 
 ### Linux
 
 To install the dependencies with apt get:
 
-    apt-get install libboost-all-dev cmake
+    apt-get install libboost-all-dev cmake libgtest-dev
 
 To build under linux using cmake, create a build directory,
 invoke cmake on the programs directory, then build.
