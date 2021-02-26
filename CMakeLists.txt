@@ -37,3 +37,10 @@ message(STATUS "Boost Libraries: ${Boost_LIBRARIES}")
 include_directories("${PROJECT_BINARY_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(src)
+
+# Add make install functionality
+install(TARGETS peval)
+install(TARGETS penum)
+install(TARGETS ps-colex)
+install(TARGETS ps-eval)
+install(TARGETS ps-lut)

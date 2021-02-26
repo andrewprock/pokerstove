@@ -46,7 +46,7 @@ In order to build the libraries you'll need the following
 installed on your platform of choice:
 
 * boost, version 1.46 or higher
-* cmake, version 2.4 or higher
+* cmake, version 3.14 or higher
 
 ### Linux
 
