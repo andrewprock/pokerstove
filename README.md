@@ -66,7 +66,7 @@ invoke cmake on the programs directory, then build.
 You should then be able to execute the simple command line
 example:
 
-    ~/cmake/programs$ ./programs/ps-eval/ps-eval
+    pokerstove/build $ ./bin/ps-eval
     Allowed options:
       -? [ --help ]          produce help message
       -g [ --game ] arg (=h) game to use for evaluation
