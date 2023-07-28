@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <array>
 #include <functional>
+#include <random>
 #include <pokerstove/peval/Card.h>
 #include <pokerstove/peval/CardSet.h>
 #include <pokerstove/peval/Rank.h>  // needed for NUM_RANK
@@ -47,6 +48,10 @@ public:
             _deck[i] = CardSet(Card(i));
         }
         reset();
+
+        std::random_device rd;
+        std::mt19937 g(rd());
+        _rand = g;
     }
 
     /**
@@ -104,7 +109,7 @@ public:
     void remove(const pokerstove::CardSet& cards)
     {
         int decr = CardSet(cards | dead()).size();
-        stable_partition(_deck.begin(), _deck.end(), bind2nd(isLive(), cards));
+        stable_partition(_deck.begin(), _deck.end(), bind(isLive(), std::placeholders::_1, cards));
         _current = STANDARD_DECK_SIZE - decr;
     }
 
@@ -115,7 +120,7 @@ public:
 
     void shuffle()
     {
-        std::random_shuffle(_deck.begin(), _deck.end());
+        std::shuffle(_deck.begin(), _deck.end(), _rand);
         reset();  //_current = 0;
     }
 
@@ -159,6 +164,9 @@ private:
     // these are the data which track info about the deck
     std::array<CardSet, STANDARD_DECK_SIZE> _deck;
     size_t _current;
+
+    // source of randomness
+    std::mt19937 _rand;
 };
 }  // namespace pokerstove
 

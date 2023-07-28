@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0)
 
 project(pokerstove)
 
@@ -7,7 +7,7 @@ project(pokerstove)
 #
 # TODO: This, ideally, should be per library requirement,
 #       but since all of them require C++11, the flag is set globally.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 # TODO: Remove the depricated register keywords
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register")
