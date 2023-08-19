@@ -114,8 +114,7 @@ public:
         // combine the subset candidates to create all possible sets of evaluations
         // at the river in omaha, this should produce (4c2)*(5c3) = 6*10 = 60 candidates
         for (uint i=0; i<hand_candidates.size(); i++)
-            for (uint j=0; j<board_candidates.size(); j++)
-            {
+            for (uint j=0; j<board_candidates.size(); j++) {
                 eval_candidates.push_back(hand_candidates[i] | board_candidates[j]);
             }
 
@@ -124,8 +123,7 @@ public:
         // there are more candidates, we just run through them updating
         // as we find better ones.
         eval[0] = ((eval_candidates[0]).*(_evalA))();
-        for (uint i=1; i<eval_candidates.size(); i++)
-        {
+        for (uint i=1; i<eval_candidates.size(); i++) {
             PokerEvaluation e = ((eval_candidates[i]).*(_evalA))();
             if (e > eval[0])
                 eval[0] = e;
