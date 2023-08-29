@@ -22,9 +22,7 @@ namespace pokerstove
 /**
  * used for removing cards from the deck
  */
-struct isLive : public std::binary_function<pokerstove::CardSet,
-                                            pokerstove::CardSet,
-                                            bool>
+struct isLive
 {
     bool operator()(const CardSet& c, const CardSet& dead) const
     {
