@@ -107,7 +107,7 @@ public:
     void remove(const pokerstove::CardSet& cards)
     {
         int decr = CardSet(cards | dead()).size();
-        stable_partition(_deck.begin(), _deck.end(), bind(isLive(), std::placeholders::_1, cards));
+        stable_partition(_deck.begin(), _deck.end(), std::bind(isLive(), std::placeholders::_1, cards));
         _current = STANDARD_DECK_SIZE - decr;
     }
 
