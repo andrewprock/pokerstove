@@ -26,6 +26,8 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Author: wan@google.com (Zhanyong Wan)
 
 // Google Mock - a framework for writing C++ mock classes.
 //
@@ -34,11 +36,9 @@
 #include "gmock/gmock-cardinalities.h"
 
 #include <limits.h>
-
 #include <ostream>  // NOLINT
 #include <sstream>
 #include <string>
-
 #include "gmock/internal/gmock-internal-utils.h"
 #include "gtest/gtest.h"
 
@@ -50,7 +50,8 @@ namespace {
 class BetweenCardinalityImpl : public CardinalityInterface {
  public:
   BetweenCardinalityImpl(int min, int max)
-      : min_(min >= 0 ? min : 0), max_(max >= min_ ? max : min_) {
+      : min_(min >= 0 ? min : 0),
+        max_(max >= min_ ? max : min_) {
     std::stringstream ss;
     if (min < 0) {
       ss << "The invocation lower bound must be >= 0, "
@@ -62,36 +63,36 @@ class BetweenCardinalityImpl : public CardinalityInterface {
       internal::Expect(false, __FILE__, __LINE__, ss.str());
     } else if (min > max) {
       ss << "The invocation upper bound (" << max
-         << ") must be >= the invocation lower bound (" << min << ").";
+         << ") must be >= the invocation lower bound (" << min
+         << ").";
       internal::Expect(false, __FILE__, __LINE__, ss.str());
     }
   }
 
   // Conservative estimate on the lower/upper bound of the number of
   // calls allowed.
-  int ConservativeLowerBound() const override { return min_; }
-  int ConservativeUpperBound() const override { return max_; }
+  virtual int ConservativeLowerBound() const { return min_; }
+  virtual int ConservativeUpperBound() const { return max_; }
 
-  bool IsSatisfiedByCallCount(int call_count) const override {
+  virtual bool IsSatisfiedByCallCount(int call_count) const {
     return min_ <= call_count && call_count <= max_;
   }
 
-  bool IsSaturatedByCallCount(int call_count) const override {
+  virtual bool IsSaturatedByCallCount(int call_count) const {
     return call_count >= max_;
   }
 
-  void DescribeTo(::std::ostream* os) const override;
+  virtual void DescribeTo(::std::ostream* os) const;
 
  private:
   const int min_;
   const int max_;
 
-  BetweenCardinalityImpl(const BetweenCardinalityImpl&) = delete;
-  BetweenCardinalityImpl& operator=(const BetweenCardinalityImpl&) = delete;
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(BetweenCardinalityImpl);
 };
 
 // Formats "n times" in a human-friendly way.
-inline std::string FormatTimes(int n) {
+inline internal::string FormatTimes(int n) {
   if (n == 1) {
     return "once";
   } else if (n == 2) {

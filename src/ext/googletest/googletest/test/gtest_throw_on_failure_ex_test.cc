@@ -26,16 +26,17 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Author: wan@google.com (Zhanyong Wan)
 
 // Tests Google Test's throw-on-failure mode with exceptions enabled.
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <stdexcept>
-
 #include "gtest/gtest.h"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdexcept>
 
 // Prints the given failure message and exits the program with
 // non-zero.  We use this instead of a Google Test assertion to
@@ -50,27 +51,28 @@ void Fail(const char* msg) {
 // Tests that an assertion failure throws a subclass of
 // std::runtime_error.
 void TestFailureThrowsRuntimeError() {
-  GTEST_FLAG_SET(throw_on_failure, true);
+  testing::GTEST_FLAG(throw_on_failure) = true;
 
   // A successful assertion shouldn't throw.
   try {
     EXPECT_EQ(3, 3);
-  } catch (...) {
+  } catch(...) {
     Fail("A successful assertion wrongfully threw.");
   }
 
   // A failed assertion should throw a subclass of std::runtime_error.
   try {
     EXPECT_EQ(2, 3) << "Expected failure";
-  } catch (const std::runtime_error& e) {
-    if (strstr(e.what(), "Expected failure") != nullptr) return;
+  } catch(const std::runtime_error& e) {
+    if (strstr(e.what(), "Expected failure") != NULL)
+      return;
 
     printf("%s",
            "A failed assertion did throw an exception of the right type, "
            "but the message is incorrect.  Instead of containing \"Expected "
            "failure\", it is:\n");
     Fail(e.what());
-  } catch (...) {
+  } catch(...) {
     Fail("A failed assertion threw the wrong type of exception.");
   }
   Fail("A failed assertion should've thrown but didn't.");

@@ -26,39 +26,42 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 //
-// The Google C++ Testing and Mocking Framework (Google Test)
+// Author: mheule@google.com (Markus Heule)
+//
+// The Google C++ Testing Framework (Google Test)
 
 #include "gtest/gtest-test-part.h"
 
-#include <ostream>
-#include <string>
-
-#include "gtest/internal/gtest-port.h"
+// Indicates that this translation unit is part of Google Test's
+// implementation.  It must come before gtest-internal-inl.h is
+// included, or there will be a compiler error.  This trick exists to
+// prevent the accidental inclusion of gtest-internal-inl.h in the
+// user's code.
+#define GTEST_IMPLEMENTATION_ 1
 #include "src/gtest-internal-inl.h"
+#undef GTEST_IMPLEMENTATION_
 
 namespace testing {
+
+using internal::GetUnitTestImpl;
 
 // Gets the summary of the failure message by omitting the stack trace
 // in it.
 std::string TestPartResult::ExtractSummary(const char* message) {
   const char* const stack_trace = strstr(message, internal::kStackTraceMarker);
-  return stack_trace == nullptr ? message : std::string(message, stack_trace);
+  return stack_trace == NULL ? message :
+      std::string(message, stack_trace);
 }
 
 // Prints a TestPartResult object.
 std::ostream& operator<<(std::ostream& os, const TestPartResult& result) {
-  return os << internal::FormatFileLocation(result.file_name(),
-                                            result.line_number())
-            << " "
-            << (result.type() == TestPartResult::kSuccess ? "Success"
-                : result.type() == TestPartResult::kSkip  ? "Skipped"
-                : result.type() == TestPartResult::kFatalFailure
-                    ? "Fatal failure"
-                    : "Non-fatal failure")
-            << ":\n"
-            << result.message() << std::endl;
+  return os
+      << result.file_name() << ":" << result.line_number() << ": "
+      << (result.type() == TestPartResult::kSuccess ? "Success" :
+          result.type() == TestPartResult::kFatalFailure ? "Fatal failure" :
+          "Non-fatal failure") << ":\n"
+      << result.message() << std::endl;
 }
 
 // Appends a TestPartResult to the array.
@@ -73,7 +76,7 @@ const TestPartResult& TestPartResultArray::GetTestPartResult(int index) const {
     internal::posix::Abort();
   }
 
-  return array_[static_cast<size_t>(index)];
+  return array_[index];
 }
 
 // Returns the number of TestPartResult objects in the array.
@@ -85,8 +88,8 @@ namespace internal {
 
 HasNewFatalFailureHelper::HasNewFatalFailureHelper()
     : has_new_fatal_failure_(false),
-      original_reporter_(
-          GetUnitTestImpl()->GetTestPartResultReporterForCurrentThread()) {
+      original_reporter_(GetUnitTestImpl()->
+                         GetTestPartResultReporterForCurrentThread()) {
   GetUnitTestImpl()->SetTestPartResultReporterForCurrentThread(this);
 }
 
@@ -97,7 +100,8 @@ HasNewFatalFailureHelper::~HasNewFatalFailureHelper() {
 
 void HasNewFatalFailureHelper::ReportTestPartResult(
     const TestPartResult& result) {
-  if (result.fatally_failed()) has_new_fatal_failure_ = true;
+  if (result.fatally_failed())
+    has_new_fatal_failure_ = true;
   original_reporter_->ReportTestPartResult(result);
 }
 

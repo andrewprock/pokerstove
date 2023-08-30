@@ -26,16 +26,16 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Author: wan@google.com (Zhanyong Wan)
 
 // Google Mock - a framework for writing C++ mock classes.
 //
 // This file tests the built-in cardinalities.
 
-#include <ostream>
-
 #include "gmock/gmock.h"
-#include "gtest/gtest-spi.h"
 #include "gtest/gtest.h"
+#include "gtest/gtest-spi.h"
 
 namespace {
 
@@ -52,16 +52,17 @@ using testing::MakeCardinality;
 
 class MockFoo {
  public:
-  MockFoo() = default;
+  MockFoo() {}
   MOCK_METHOD0(Bar, int());  // NOLINT
 
  private:
-  MockFoo(const MockFoo&) = delete;
-  MockFoo& operator=(const MockFoo&) = delete;
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(MockFoo);
 };
 
 // Tests that Cardinality objects can be default constructed.
-TEST(CardinalityTest, IsDefaultConstructable) { Cardinality c; }
+TEST(CardinalityTest, IsDefaultConstructable) {
+  Cardinality c;
+}
 
 // Tests that Cardinality objects are copyable.
 TEST(CardinalityTest, IsCopyable) {
@@ -119,7 +120,8 @@ TEST(AnyNumber, Works) {
 
   stringstream ss;
   c.DescribeTo(&ss);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called any number of times", ss.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called any number of times",
+                      ss.str());
 }
 
 TEST(AnyNumberTest, HasCorrectBounds) {
@@ -131,11 +133,9 @@ TEST(AnyNumberTest, HasCorrectBounds) {
 // Tests AtLeast(n).
 
 TEST(AtLeastTest, OnNegativeNumber) {
-  EXPECT_NONFATAL_FAILURE(
-      {  // NOLINT
-        AtLeast(-1);
-      },
-      "The invocation lower bound must be >= 0");
+  EXPECT_NONFATAL_FAILURE({  // NOLINT
+    AtLeast(-1);
+  }, "The invocation lower bound must be >= 0");
 }
 
 TEST(AtLeastTest, OnZero) {
@@ -148,7 +148,8 @@ TEST(AtLeastTest, OnZero) {
 
   stringstream ss;
   c.DescribeTo(&ss);
-  EXPECT_PRED_FORMAT2(IsSubstring, "any number of times", ss.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "any number of times",
+                      ss.str());
 }
 
 TEST(AtLeastTest, OnPositiveNumber) {
@@ -164,15 +165,18 @@ TEST(AtLeastTest, OnPositiveNumber) {
 
   stringstream ss1;
   AtLeast(1).DescribeTo(&ss1);
-  EXPECT_PRED_FORMAT2(IsSubstring, "at least once", ss1.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "at least once",
+                      ss1.str());
 
   stringstream ss2;
   c.DescribeTo(&ss2);
-  EXPECT_PRED_FORMAT2(IsSubstring, "at least twice", ss2.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "at least twice",
+                      ss2.str());
 
   stringstream ss3;
   AtLeast(3).DescribeTo(&ss3);
-  EXPECT_PRED_FORMAT2(IsSubstring, "at least 3 times", ss3.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "at least 3 times",
+                      ss3.str());
 }
 
 TEST(AtLeastTest, HasCorrectBounds) {
@@ -184,11 +188,9 @@ TEST(AtLeastTest, HasCorrectBounds) {
 // Tests AtMost(n).
 
 TEST(AtMostTest, OnNegativeNumber) {
-  EXPECT_NONFATAL_FAILURE(
-      {  // NOLINT
-        AtMost(-1);
-      },
-      "The invocation upper bound must be >= 0");
+  EXPECT_NONFATAL_FAILURE({  // NOLINT
+    AtMost(-1);
+  }, "The invocation upper bound must be >= 0");
 }
 
 TEST(AtMostTest, OnZero) {
@@ -201,7 +203,8 @@ TEST(AtMostTest, OnZero) {
 
   stringstream ss;
   c.DescribeTo(&ss);
-  EXPECT_PRED_FORMAT2(IsSubstring, "never called", ss.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "never called",
+                      ss.str());
 }
 
 TEST(AtMostTest, OnPositiveNumber) {
@@ -217,15 +220,18 @@ TEST(AtMostTest, OnPositiveNumber) {
 
   stringstream ss1;
   AtMost(1).DescribeTo(&ss1);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called at most once", ss1.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called at most once",
+                      ss1.str());
 
   stringstream ss2;
   c.DescribeTo(&ss2);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called at most twice", ss2.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called at most twice",
+                      ss2.str());
 
   stringstream ss3;
   AtMost(3).DescribeTo(&ss3);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called at most 3 times", ss3.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called at most 3 times",
+                      ss3.str());
 }
 
 TEST(AtMostTest, HasCorrectBounds) {
@@ -237,28 +243,22 @@ TEST(AtMostTest, HasCorrectBounds) {
 // Tests Between(m, n).
 
 TEST(BetweenTest, OnNegativeStart) {
-  EXPECT_NONFATAL_FAILURE(
-      {  // NOLINT
-        Between(-1, 2);
-      },
-      "The invocation lower bound must be >= 0, but is actually -1");
+  EXPECT_NONFATAL_FAILURE({  // NOLINT
+    Between(-1, 2);
+  }, "The invocation lower bound must be >= 0, but is actually -1");
 }
 
 TEST(BetweenTest, OnNegativeEnd) {
-  EXPECT_NONFATAL_FAILURE(
-      {  // NOLINT
-        Between(1, -2);
-      },
-      "The invocation upper bound must be >= 0, but is actually -2");
+  EXPECT_NONFATAL_FAILURE({  // NOLINT
+    Between(1, -2);
+  }, "The invocation upper bound must be >= 0, but is actually -2");
 }
 
 TEST(BetweenTest, OnStartBiggerThanEnd) {
-  EXPECT_NONFATAL_FAILURE(
-      {  // NOLINT
-        Between(2, 1);
-      },
-      "The invocation upper bound (1) must be >= "
-      "the invocation lower bound (2)");
+  EXPECT_NONFATAL_FAILURE({  // NOLINT
+    Between(2, 1);
+  }, "The invocation upper bound (1) must be >= "
+     "the invocation lower bound (2)");
 }
 
 TEST(BetweenTest, OnZeroStartAndZeroEnd) {
@@ -272,7 +272,8 @@ TEST(BetweenTest, OnZeroStartAndZeroEnd) {
 
   stringstream ss;
   c.DescribeTo(&ss);
-  EXPECT_PRED_FORMAT2(IsSubstring, "never called", ss.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "never called",
+                      ss.str());
 }
 
 TEST(BetweenTest, OnZeroStartAndNonZeroEnd) {
@@ -289,7 +290,8 @@ TEST(BetweenTest, OnZeroStartAndNonZeroEnd) {
 
   stringstream ss;
   c.DescribeTo(&ss);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called at most twice", ss.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called at most twice",
+                      ss.str());
 }
 
 TEST(BetweenTest, OnSameStartAndEnd) {
@@ -306,7 +308,8 @@ TEST(BetweenTest, OnSameStartAndEnd) {
 
   stringstream ss;
   c.DescribeTo(&ss);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called 3 times", ss.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called 3 times",
+                      ss.str());
 }
 
 TEST(BetweenTest, OnDifferentStartAndEnd) {
@@ -326,7 +329,8 @@ TEST(BetweenTest, OnDifferentStartAndEnd) {
 
   stringstream ss;
   c.DescribeTo(&ss);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called between 3 and 5 times", ss.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called between 3 and 5 times",
+                      ss.str());
 }
 
 TEST(BetweenTest, HasCorrectBounds) {
@@ -338,11 +342,9 @@ TEST(BetweenTest, HasCorrectBounds) {
 // Tests Exactly(n).
 
 TEST(ExactlyTest, OnNegativeNumber) {
-  EXPECT_NONFATAL_FAILURE(
-      {  // NOLINT
-        Exactly(-1);
-      },
-      "The invocation lower bound must be >= 0");
+  EXPECT_NONFATAL_FAILURE({  // NOLINT
+    Exactly(-1);
+  }, "The invocation lower bound must be >= 0");
 }
 
 TEST(ExactlyTest, OnZero) {
@@ -355,7 +357,8 @@ TEST(ExactlyTest, OnZero) {
 
   stringstream ss;
   c.DescribeTo(&ss);
-  EXPECT_PRED_FORMAT2(IsSubstring, "never called", ss.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "never called",
+                      ss.str());
 }
 
 TEST(ExactlyTest, OnPositiveNumber) {
@@ -368,15 +371,18 @@ TEST(ExactlyTest, OnPositiveNumber) {
 
   stringstream ss1;
   Exactly(1).DescribeTo(&ss1);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called once", ss1.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called once",
+                      ss1.str());
 
   stringstream ss2;
   c.DescribeTo(&ss2);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called twice", ss2.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called twice",
+                      ss2.str());
 
   stringstream ss3;
   Exactly(3).DescribeTo(&ss3);
-  EXPECT_PRED_FORMAT2(IsSubstring, "called 3 times", ss3.str());
+  EXPECT_PRED_FORMAT2(IsSubstring, "called 3 times",
+                      ss3.str());
 }
 
 TEST(ExactlyTest, HasCorrectBounds) {
@@ -385,25 +391,23 @@ TEST(ExactlyTest, HasCorrectBounds) {
   EXPECT_EQ(3, c.ConservativeUpperBound());
 }
 
-// Tests that a user can make their own cardinality by implementing
+// Tests that a user can make his own cardinality by implementing
 // CardinalityInterface and calling MakeCardinality().
 
 class EvenCardinality : public CardinalityInterface {
  public:
-  // Returns true if and only if call_count calls will satisfy this
-  // cardinality.
-  bool IsSatisfiedByCallCount(int call_count) const override {
+  // Returns true iff call_count calls will satisfy this cardinality.
+  virtual bool IsSatisfiedByCallCount(int call_count) const {
     return (call_count % 2 == 0);
   }
 
-  // Returns true if and only if call_count calls will saturate this
-  // cardinality.
-  bool IsSaturatedByCallCount(int /* call_count */) const override {
+  // Returns true iff call_count calls will saturate this cardinality.
+  virtual bool IsSaturatedByCallCount(int /* call_count */) const {
     return false;
   }
 
   // Describes self to an ostream.
-  void DescribeTo(::std::ostream* ss) const override {
+  virtual void DescribeTo(::std::ostream* ss) const {
     *ss << "called even number of times";
   }
 };

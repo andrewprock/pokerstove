@@ -28,6 +28,8 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // A sample program demonstrating using Google C++ testing framework.
+//
+// Author: wan@google.com (Zhanyong Wan)
 
 #include "sample2.h"
 
@@ -35,10 +37,10 @@
 
 // Clones a 0-terminated C string, allocating memory using new.
 const char* MyString::CloneCString(const char* a_c_string) {
-  if (a_c_string == nullptr) return nullptr;
+  if (a_c_string == NULL) return NULL;
 
   const size_t len = strlen(a_c_string);
-  char* const clone = new char[len + 1];
+  char* const clone = new char[ len + 1 ];
   memcpy(clone, a_c_string, len + 1);
 
   return clone;

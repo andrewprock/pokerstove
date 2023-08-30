@@ -29,21 +29,22 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-r"""Tests the text output of Google C++ Mocking Framework.
+"""Tests the text output of Google C++ Mocking Framework.
 
-To update the golden file:
-gmock_output_test.py --build_dir=BUILD/DIR --gengolden
-where BUILD/DIR contains the built gmock_output_test_ file.
-gmock_output_test.py --gengolden
-gmock_output_test.py
-
+SYNOPSIS
+       gmock_output_test.py --build_dir=BUILD/DIR --gengolden
+         # where BUILD/DIR contains the built gmock_output_test_ file.
+       gmock_output_test.py --gengolden
+       gmock_output_test.py
 """
 
-from io import open  # pylint: disable=redefined-builtin, g-importing-member
+__author__ = 'wan@google.com (Zhanyong Wan)'
+
 import os
 import re
 import sys
-from googlemock.test import gmock_test_utils
+
+import gmock_test_utils
 
 
 # The flag for generating the golden file
@@ -153,28 +154,20 @@ def GetNormalizedCommandOutputAndLeakyTests(cmd):
 
 
 class GMockOutputTest(gmock_test_utils.TestCase):
-
   def testOutput(self):
     (output, leaky_tests) = GetNormalizedCommandOutputAndLeakyTests(COMMAND)
     golden_file = open(GOLDEN_PATH, 'rb')
-    golden = golden_file.read().decode('utf-8')
+    golden = golden_file.read()
     golden_file.close()
-    # On Windows the repository might have been checked out with \r\n line
-    # endings, so normalize it here.
-    golden = ToUnixLineEnding(golden)
 
     # The normalized output should match the golden file.
-    self.assertEqual(golden, output)
+    self.assertEquals(golden, output)
 
     # The raw output should contain 2 leaked mock object errors for
     # test GMockOutputTest.CatchesLeakedMocks.
-    self.assertEqual(
-        [
-            'GMockOutputTest.CatchesLeakedMocks',
-            'GMockOutputTest.CatchesLeakedMocks',
-        ],
-        leaky_tests,
-    )
+    self.assertEquals(['GMockOutputTest.CatchesLeakedMocks',
+                       'GMockOutputTest.CatchesLeakedMocks'],
+                      leaky_tests)
 
 
 if __name__ == '__main__':
@@ -183,8 +176,5 @@ if __name__ == '__main__':
     golden_file = open(GOLDEN_PATH, 'wb')
     golden_file.write(output)
     golden_file.close()
-    # Suppress the error "googletest was imported but a call to its main()
-    # was never detected."
-    os._exit(0)
   else:
     gmock_test_utils.Main()
