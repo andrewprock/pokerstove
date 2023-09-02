@@ -26,8 +26,6 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// Author: wan@google.com (Zhanyong Wan)
 
 // Google Mock - a framework for writing C++ mock classes.
 //
@@ -42,18 +40,19 @@ using ::testing::Return;
 
 class FooInterface {
  public:
-  virtual ~FooInterface() {}
+  virtual ~FooInterface() = default;
   virtual void DoThis() = 0;
 };
 
 class MockFoo : public FooInterface {
  public:
-  MockFoo() {}
+  MockFoo() = default;
 
   MOCK_METHOD0(DoThis, void());
 
  private:
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(MockFoo);
+  MockFoo(const MockFoo&) = delete;
+  MockFoo& operator=(const MockFoo&) = delete;
 };
 
 TEST(LeakTest, LeakedMockWithExpectCallCausesFailureWhenLeakCheckingIsEnabled) {
