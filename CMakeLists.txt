@@ -7,7 +7,7 @@ project(pokerstove)
 #       but since all of them require C++11, the flag is set globally.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
-# TODO: Remove the depricated register keywords
+# TODO: Remove the deprecated register keywords
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register")
 
 # Set up gtest. This must be set up before any subdirectories are
@@ -27,7 +27,7 @@ find_package(Boost COMPONENTS program_options REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 message(STATUS "Boost Include: ${Boost_INCLUDE_DIR}")
-message(STATUS "Boost Libraries: ${Boost_LIBRARY_DIRS}")
+message(STATUS "Boost Library Dirs: ${Boost_LIBRARY_DIRS}")
 message(STATUS "Boost Libraries: ${Boost_LIBRARIES}")
 
 # Also search for includes in PROJECT_BINARY_DIR to find config.h.
