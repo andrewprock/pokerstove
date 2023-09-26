@@ -1,5 +1,5 @@
 
-Welcome!
+# Welcome!
 
 This directory contains the intaller for the offial long
 term stable version of PokerStove. You can download from
