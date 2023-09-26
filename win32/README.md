@@ -15,5 +15,5 @@ If you click on the installer directly, it will take you to a
 download page. To download, you can either click on the download icon
 or click the link to "view raw". 
 
-- Andrew
+&ndash; Andrew
 
