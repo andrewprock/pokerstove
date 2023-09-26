@@ -2,10 +2,10 @@
 Welcome!
 
 This directory contains the intaller for the offial long
-term stable version of PokerStove. You can down load from
-the link above or
-[click here]( https://github.com/andrewprock/pokerstove/raw/master/win32/PokerStoveSetup124.exe?raw=true)
-to download the installer.
+term stable version of PokerStove. You can download from
+the paged linked above or you can:
+
+[click here to download the installer]( https://github.com/andrewprock/pokerstove/raw/master/win32/PokerStoveSetup124.exe?raw=true)
 
 If you click on the installer directly, it will take you to a
 download page. To download, you can either click on the download icon
