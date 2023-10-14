@@ -94,7 +94,8 @@ vector<EquityResult> ShowdownEnumerator::calculateEquity(const vector<CardDistri
             do
             {
                 // we use memcpy here for a little speed bonus
-                memcpy(copydest, copysrc, ncopy);
+		// NOTE: this could break subclass semantics
+                memcpy((void*)copydest, copysrc, ncopy);
                 for (size_t p = 0; p < ndists + nboards; p++)
                     ehands[p] |= deck.peek(pe.getMask(p));
 
