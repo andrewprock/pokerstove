@@ -2,3 +2,5 @@
 build
 *.pyc
 *.vscode
+*.swp
+*.log

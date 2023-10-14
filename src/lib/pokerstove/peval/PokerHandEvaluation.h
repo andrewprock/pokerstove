@@ -9,6 +9,11 @@
 #include <iostream>
 #include "PokerEvaluation.h"
 
+/**
+ * The difference between a PokerEvaluation and a PokerHandEvaluation
+ * is that a PokerHandEvaluation supports split pot games where (up to) two
+ * evaluations are supported.
+ */
 namespace pokerstove
 {
   /**

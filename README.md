@@ -142,3 +142,28 @@ Or
 From there you can run the cmake gui as in windows.  This will create
 an XCode project which should compile the sample utility. Alternatively,
 follow the command  line `cmake` instructions in the [Linux section](#linux).
+
+# Python support
+
+Python support is done via swig integration. This has only been developed
+and tested for Ubuntu at this point in time.
+
+In order for python libraries to work, you will need to install:
+
+    suto apt install python3 swig
+
+If you would like to also build the Python library as well, append the
+directive when the first cmake invocation is run:
+
+    cmake -DCMAKE_BUILD_TYPE=Release -S \. -B build -DBUILD_PYTHON=ON
+
+Once you have built the project with Python support there will be a
+python loader file and a shared object file. To test run the script
+from the build directory:
+
+    PYTHONPATH=python/pokerstove/pyPeval/ ../src/lib/python/test-python
+
+For regular use you'll want to export the PYTHONPATH variable to your
+shell:
+
+    export PYTHONPATH=~/git/pokerstove/build/python/pokerstove/pyPeval

@@ -124,6 +124,21 @@ public:
 
     /**
      * peek at the set of cards defined by the mask
+     *
+     * The mask is the bitmask of the card positions you want to
+     * see. Bottom of the deck is 0b1, bottom two cards is 0b11,
+     * second from the bottom is 0b10.
+     *
+     * Deal is taken from the top of the deck, which slides from
+     * the end of the deck to the front as cards are used.
+     *
+     * Example deck state:
+     *
+     * Qc4s8h7hAcTs4dAs6c4c9hTh5c5h5dAh2sJc8sJh8dTc6sJsKs4h
+     * Kh9d2c3h2h7c3dQdAdQh3c2d6hQs6d7dTdKc7sKd / 9c5sJd9s8c3s
+     *
+     * In this deck, there are six dealt/dead cards, and hte
+     * top of the deck is the King of Diamonds.
      */
     CardSet peek(uint64_t mask) const
     {
@@ -135,8 +150,7 @@ public:
         CardSet ret;
 
         uint32_t lower = static_cast<uint32_t>(mask & UINT32_C(0xFFFFFFFF));
-        uint32_t upper =
-            static_cast<uint32_t>((mask & UINT64_C(0xFFFFFFFF00000000)) >> 32);
+        uint32_t upper = static_cast<uint32_t>((mask & UINT64_C(0xFFFFFFFF00000000)) >> 32);
 
         while (lower)
         {

@@ -47,10 +47,14 @@ namespace pokerstove
   public:
     PokerEvaluation ();
     explicit PokerEvaluation (int ecode); //!< for codes saved for later use, like in a file
+
+    // TODO: the implementation of this got lost at some point, rebuild with tests
+#if 0
     PokerEvaluation (int type,            //!< Manually create high hand evaluation
                      int major,
                      int minor,
                      int kickers);
+#endif
 
     std::string str () const;    //!< semantic meaning of the evaluation
     std::string bitstr () const; //!< bit string of the evaluation code. debugging.

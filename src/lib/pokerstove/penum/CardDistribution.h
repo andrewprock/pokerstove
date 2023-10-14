@@ -24,7 +24,7 @@ public:
      * set
      */
     CardDistribution();                             //!< use 0 cards for all elements
-    explicit CardDistribution(size_t n);            //!< use N cards for all elements
+    ///explicit CardDistribution(size_t n);         //!< use N cards for all elements, no implementation
     explicit CardDistribution(const CardSet& cs);
     CardDistribution(const CardDistribution& cd);
     CardDistribution& operator=(const CardDistribution& other);

@@ -9,6 +9,9 @@
 #include "Card.h"
 #include "CardSet.h"
 
+// This allows manipulation of the PokerHand object
+// without changing the set of cards in the hand.
+// If this breaks your application, comment this out.
 #define MUTABLE
 
 /*! \namespace
@@ -29,6 +32,11 @@ namespace pokerstove
    * This representation of cards is generally slow.  If speed is of
    * primary concern, a CardSet object should be used, either by
    * conversion (cardSet method) or in place of a PokerHand.
+   *
+   * The primary benefit of a PokerHand is that it will know about
+   * the order that cards were delivered to a hand which is needed
+   * for presenting hands in games like stud where upcards are
+   * delivered one round at a time.
    */
   class PokerHand
   {
@@ -76,32 +84,32 @@ namespace pokerstove
     /**
      * Append Card to hand.  Duplicates not appended.
      */
-    void append  (const Card & c);
+    void append (const Card & c);
 
     /**
      * Append Cards in CardSet to hand.  Order appended is arbitrary. Duplicates not appended.
      */
-    void append  (const CardSet& cs);
+    void append (const CardSet& cs);
 
     /**
      * Append Cards in PokerHand order.  Duplicates not appended.
      */
-    void append  (const PokerHand & h);
+    void append (const PokerHand & h);
 
     /**
      * If Card is in hand, remove it.  Shift cards to fill in hole.  O(size)
      */
-    void remove  (const Card& c);
+    void remove (const Card& c);
 
     /**
      * If Card is in hand, remove it.  Shift cards to fill in hole.  O(this.size*cs.size)
      */
-    void remove  (const CardSet& cs);
+    void remove (const CardSet& cs);
 
     /**
      * If Card is in hand, remove it.  Shift cards to fill in hole.  O(this.size*h.size)
      */
-    void remove  (const PokerHand & h);
+    void remove (const PokerHand & h);
 
     const Card& operator[] (size_t index) const;        //!< get const card by index,
           Card& operator[] (size_t index);              //!< get card by index,

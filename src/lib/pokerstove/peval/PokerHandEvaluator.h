@@ -12,8 +12,6 @@
 #include <string>
 #include <vector>
 
-const unsigned int BOARD_SIZE = 5;
-
 namespace pokerstove
 {
 /**

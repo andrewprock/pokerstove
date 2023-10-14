@@ -5,6 +5,9 @@
 #include <pokerstove/util/utypes.h>
 
 // only support these built-ins for these two compilers
+// TODO: consider porting to std::std::countl_zero, etc from
+// TODO: the <bit> library (c++20)
+// TODO: see: https://en.cppreference.com/w/cpp/types/endian
 #if defined(__clang__) || defined(__GNUC__)
 
 inline uint firstbit(uint64_t v)
