@@ -150,7 +150,7 @@ and tested for Ubuntu at this point in time.
 
 In order for python libraries to work, you will need to install:
 
-    suto apt install python3 swig
+    sudo apt install python3 swig
 
 If you would like to also build the Python library as well, append the
 directive when the first cmake invocation is run:
