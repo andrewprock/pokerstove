@@ -16,6 +16,7 @@ int main(int argc, char** argv)
         ("game,g",  po::value<string>()->default_value("h"),    "game to use for evaluation")
         ("board,b", po::value<string>(),                        "community cards for he/o/o8")
         ("hand,h",  po::value<vector<string>>(),                "a hand for evaluation")
+        ("dead,d", po::value<string>(),                         "dead cards for evaluation")
         ("quiet,q", "produces no output");
 
     // make hand a positional argument
@@ -41,6 +42,7 @@ int main(int argc, char** argv)
     // extract the options
     string game = vm["game"].as<string>();
     string board = vm.count("board") ? vm["board"].as<string>() : "";
+    string dead = vm.count("dead") ? vm["dead"].as<string>() : "";
     vector<string> hands = vm["hand"].as<vector<string>>();
 
     bool quiet = vm.count("quiet") > 0;
@@ -65,7 +67,7 @@ int main(int argc, char** argv)
     // calcuate the results and print them
     ShowdownEnumerator showdown;
     vector<EquityResult> results =
-        showdown.calculateEquity(handDists, CardSet(board), evaluator);
+        showdown.calculateEquity(handDists, CardSet(board), CardSet(dead), evaluator);
 
     double total = 0.0;
     for (const EquityResult& result : results)
