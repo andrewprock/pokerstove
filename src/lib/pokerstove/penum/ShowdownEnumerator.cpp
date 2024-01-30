@@ -21,6 +21,7 @@ ShowdownEnumerator::ShowdownEnumerator() {}
 
 vector<EquityResult> ShowdownEnumerator::calculateEquity(const vector<CardDistribution>& dists,
                                                          const CardSet& board,
+                                                         const CardSet& dead_cards,
                                                          boost::shared_ptr<PokerHandEvaluator> peval) const
 {
     if (peval.get() == NULL)
@@ -90,6 +91,7 @@ vector<EquityResult> ShowdownEnumerator::calculateEquity(const vector<CardDistri
         {
             deck.reset();
             deck.remove(dead);
+            deck.remove(dead_cards);
             PartitionEnumerator2 pe(deck.size(), parts);
             do
             {
