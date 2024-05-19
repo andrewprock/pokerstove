@@ -161,9 +161,9 @@ Once you have built the project with Python support there will be a
 python loader file and a shared object file. To test run the script
 from the build directory:
 
-    PYTHONPATH=python/pokerstove/pyPeval/ ../src/lib/python/test-python
+    PYTHONPATH=python/pokerstove/ ../src/lib/python/test-python
 
 For regular use you'll want to export the PYTHONPATH variable to your
 shell:
 
-    export PYTHONPATH=~/git/pokerstove/build/python/pokerstove/pyPeval
+    export PYTHONPATH=~/git/pokerstove/build/python/pokerstove/
