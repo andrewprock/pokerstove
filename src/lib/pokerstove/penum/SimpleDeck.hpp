@@ -114,7 +114,9 @@ public:
     /**
      * look at ith card from the top of the deck
      */
+#ifndef SWIG
     CardSet operator[](size_t i) const { return _deck[i]; }
+#endif
 
     void shuffle()
     {

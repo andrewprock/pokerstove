@@ -90,8 +90,10 @@ public:
     bool operator==(const Suit& s) const { return _suit == s._suit; }
     bool operator<=(const Suit& s) const { return _suit <= s._suit; }
     bool operator< (const Suit& s) const { return _suit <  s._suit; }
+#ifndef SWIG
     void operator++()                    { ++_suit; }
     void operator--()                    { --_suit; }
+#endif
 
 private:
     /**

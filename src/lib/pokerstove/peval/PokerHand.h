@@ -111,8 +111,10 @@ namespace pokerstove
      */
     void remove (const PokerHand & h);
 
+#ifndef SWIG
     const Card& operator[] (size_t index) const;        //!< get const card by index,
           Card& operator[] (size_t index);              //!< get card by index,
+#endif
 
     /**
      * Re-order the hand. This changes the order, but are considered
@@ -150,10 +152,12 @@ namespace pokerstove
 
 }  // namespace pokerstove
 
+#ifndef SWIG
 inline std::ostream& operator<<(std::ostream& sout, const pokerstove::PokerHand & h)
 {
   sout << h.str();
   return sout;
 }
+#endif
 
 #endif  // PEVAL_POKERHAND_H_

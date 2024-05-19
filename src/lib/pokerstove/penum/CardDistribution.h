@@ -27,7 +27,9 @@ public:
     ///explicit CardDistribution(size_t n);         //!< use N cards for all elements, no implementation
     explicit CardDistribution(const CardSet& cs);
     CardDistribution(const CardDistribution& cd);
+#ifndef SWIG
     CardDistribution& operator=(const CardDistribution& other);
+#endif
 
     virtual ~CardDistribution() {}                  //!< for the virtual methods
 
@@ -67,6 +69,7 @@ public:
      */
     size_t size() const;
 
+#ifndef SWIG
     /**
      * return the set of cards at index
      */
@@ -82,6 +85,7 @@ public:
      * array syntax.
      */
     double& operator[](const CardSet& cards);
+#endif
 
 private:
     const double& weight(const CardSet& cards) const;  // operator[]

@@ -95,8 +95,10 @@ public:
     bool operator<=(const Rank& r) const { return _rank <= r._rank; }
     bool operator< (const Rank& r) const { return _rank <  r._rank; }
     bool operator> (const Rank& r) const { return _rank >  r._rank; }
+#ifndef SWIG
     void operator++()                    { ++_rank; }
     void operator--()                    { --_rank; }
+#endif
 
 private:
     /**

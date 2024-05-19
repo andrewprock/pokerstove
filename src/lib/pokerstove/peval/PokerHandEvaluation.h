@@ -123,11 +123,13 @@ namespace pokerstove
   }
 }
 
+#ifndef SWIG
 inline std::ostream& operator<<(std::ostream& sout, const pokerstove::PokerHandEvaluation& e)
 {
   sout << e.str();
   return sout;
 }
+#endif
 
 
 #endif  // PEVAL_POKERHANDEVALUATION_H_

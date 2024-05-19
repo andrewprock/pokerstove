@@ -197,6 +197,7 @@ std::vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest)
 
 }  // namespace pokerstove
 
+#ifndef SWIG
 /**
  * our little printer
  */
@@ -205,5 +206,6 @@ inline std::ostream& operator<<(std::ostream& sout, const pokerstove::CardSet & 
   sout << e.str();
   return sout;
 }
+#endif
 
 #endif  // PEVAL_CARDSET_H_

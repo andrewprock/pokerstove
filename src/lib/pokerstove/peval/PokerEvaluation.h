@@ -122,8 +122,10 @@ namespace pokerstove
     bool operator<=(const PokerEvaluation& e) const { return _evalcode <= e._evalcode; }
     bool operator< (const PokerEvaluation& e) const { return _evalcode <  e._evalcode; }
     bool operator> (const PokerEvaluation& e) const { return _evalcode >  e._evalcode; }
+#ifndef SWIG
     void operator++()                    { ++_evalcode; }
     void operator--()                    { --_evalcode; }
+#endif
 
     std::string toStringCannon () const;
 
@@ -191,6 +193,8 @@ namespace pokerstove
 //
 // Extraction operators.
 //
+#ifndef SWIG
 std::ostream& operator<<(std::ostream& sout, const pokerstove::PokerEvaluation& e);
+#endif
 
 #endif  // PEVAL_POKEREVALUATION_H_
