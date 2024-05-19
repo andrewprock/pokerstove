@@ -20,10 +20,10 @@ namespace pokerstove
  */
 struct EquityResult
 {
-    double winShares;
-    double tieShares;
-    double equity;
-    double equity2;  // second moment of equity
+    double winShares; //!< a win is worth 1.0
+    double tieShares; //!< a two-way tie is worth 0.5, three-way 0.333, etc
+    double equity;    //!< equity for hand, compute via normalize()
+    double equity2;   //!<x` second moment of equity, not used
 
     explicit EquityResult()
         : winShares(0.0)
@@ -46,6 +46,24 @@ struct EquityResult
                           boost::lexical_cast<std::string>(equity) + " " +
                           boost::lexical_cast<std::string>(equity2);
         return ret;
+    }
+
+    double shares() {
+        return winShares + tieShares;
+    }
+
+    /**
+     * Use the existing shares to compute a normalized equity
+     */
+    static void normalize(std::vector<EquityResult>& results)
+    {
+        double shares = 0;
+        for (EquityResult result : results) {
+            shares += result.shares();
+        }
+        for (EquityResult& result : results) {
+            shares += result.equity = result.shares()/shares;
+        }
     }
 };
 
@@ -163,6 +181,15 @@ public:
                           std::vector<PokerHandEvaluation>& evals,
                           std::vector<EquityResult>& result,
                           double weight = 1.0) const;
+
+    /**
+     * Utility function to directly compute the equity between two hands.
+     *
+     * If no board is specified, and empty board is assumed.
+     */
+    double evaluateEquity(const pokerstove::CardSet& c1,
+                          const pokerstove::CardSet& c2,
+                          const pokerstove::CardSet& board=CardSet());
 
 protected:
     PokerHandEvaluator();

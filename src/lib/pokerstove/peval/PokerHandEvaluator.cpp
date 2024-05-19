@@ -94,3 +94,21 @@ void PokerHandEvaluator::evaluateShowdown(const vector<CardSet>& hands,
     }
     // display (hands, board, result);
 }
+
+double PokerHandEvaluator::evaluateEquity(
+    const pokerstove::CardSet& c1,
+    const pokerstove::CardSet& c2,
+    const pokerstove::CardSet& board)
+{
+    vector<EquityResult> results(2);
+    vector<PokerHandEvaluation> evals;
+    vector<CardSet> hands;
+    hands.push_back(c1);
+    hands.push_back(c2);
+    evals.push_back(evaluate(c1, board));
+    evals.push_back(evaluate(c2, board));
+
+    evaluateShowdown(hands, board, evals, results, 1.0);
+    EquityResult::normalize(results);
+    return results[0].equity;
+}
