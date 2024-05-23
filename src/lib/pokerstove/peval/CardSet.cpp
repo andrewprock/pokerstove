@@ -13,7 +13,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/math/special_functions/binomial.hpp>
 #include <cassert>
 #include <cstdio>
 #include <iostream>
@@ -1268,13 +1267,6 @@ Rank CardSet::bottomRank() const
     return Rank(botRankTable[RMASK()]);
 }
 
-double clampedChoose(int n, int m)
-{
-    if (n < m)
-        return 0;
-    return static_cast<size_t>(boost::math::binomial_coefficient<double>(n, m));
-}
-
 int CardSet::evaluateStraightOuts() const
 {
     int sval = straightTable[RMASK()];
@@ -1302,10 +1294,10 @@ size_t CardSet::rankColex() const
     int rbit = 0x01;
 
     for (int i = 0; i < 13; i++) {
-        if (rbit & c) ret += clampedChoose(slot++, sz++);
-        if (rbit & d) ret += clampedChoose(slot++, sz++);
-        if (rbit & h) ret += clampedChoose(slot++, sz++);
-        if (rbit & s) ret += clampedChoose(slot++, sz++);
+        if (rbit & c) ret += choose(slot++, sz++);
+        if (rbit & d) ret += choose(slot++, sz++);
+        if (rbit & h) ret += choose(slot++, sz++);
+        if (rbit & s) ret += choose(slot++, sz++);
         slot++;
         rbit <<= 1;
     }
@@ -1355,12 +1347,9 @@ size_t CardSet::colex() const
     size_t value = 0;
     for (size_t i = 0; i < cards.size(); i++) {
         size_t code = cards[i].code();
-#ifdef __AP_MATH__
-        value += tchoose(code, i + 1);
-#else
-        if (code >= i + 1)
-            value += static_cast<size_t>(boost::math::binomial_coefficient<double>(code, i + 1));
-#endif
+        if (code >= i + 1) {
+            value += static_cast<size_t>(choose(code, i + 1));
+        }
     }
     return value;
 }

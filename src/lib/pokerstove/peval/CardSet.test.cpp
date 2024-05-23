@@ -1,10 +1,10 @@
 #include "CardSet.h"
 #include <gtest/gtest.h>
 
+using namespace pokerstove;
+
 TEST(CardSetTest, StringConstructorToString)
 {
-    using namespace pokerstove;
-
     EXPECT_EQ("Ac", CardSet("Ac").str());
     EXPECT_EQ("As", CardSet("As").str());
     EXPECT_EQ("Qh", CardSet("qh").str());
@@ -16,8 +16,6 @@ TEST(CardSetTest, StringConstructorToString)
 
 TEST(CardSetTest, StringConstructorSize)
 {
-    using namespace pokerstove;
-
     EXPECT_EQ(1, CardSet("Ac").size());
     EXPECT_EQ(1, CardSet("qh").size());
     EXPECT_EQ(13, CardSet("2h3h4h5h6h7h8h9hThJhQhKhAh").size());
@@ -28,8 +26,6 @@ TEST(CardSetTest, StringConstructorSize)
 
 TEST(CardSetTest, Canonize)
 {
-    using namespace pokerstove;
-
     EXPECT_EQ(CardSet("2c3c"), CardSet("2c3c").canonize());
     EXPECT_EQ(CardSet("2c3c"), CardSet("2s3s").canonize());
     EXPECT_EQ(CardSet("4c3d2h"), CardSet("2s3h4c").canonize());
@@ -37,8 +33,6 @@ TEST(CardSetTest, Canonize)
 
 TEST(CardSetTest, CanonizeRanks)
 {
-    using namespace pokerstove;
-
     const CardSet AceCanon1("Ac");
     const CardSet AceCanon2("AcAd");
     const CardSet AceCanon3("AcAdAh");
@@ -75,8 +69,38 @@ TEST(CardSetTest, CanonizeRanks)
 
 TEST(CardSetTest, fill)
 {
-    using namespace pokerstove;
     CardSet all;
     all.fill();
     EXPECT_EQ(STANDARD_DECK_SIZE, all.size());
+}
+
+TEST(CardSetTest, colex)
+{
+    // first two one-card colex indexes
+    const CardSet zeroth("2c");
+    const CardSet first("3c");
+    EXPECT_EQ(zeroth.colex(), 0);
+    EXPECT_EQ(first.colex(), 1);
+
+    // first two two-card colex indexes
+    const CardSet zeroth2("2c3c");
+    const CardSet first2("2c4c");
+    EXPECT_EQ(zeroth2.colex(), 0);
+    EXPECT_EQ(first2.colex(), 1);
+
+    // order doesn't matter, but suits do
+    const CardSet kings1("KsKd");
+    const CardSet kings2("KdKs");
+    const CardSet kings3("KcKs");
+    EXPECT_EQ(kings1.colex(), 1249);
+    EXPECT_EQ(kings2.colex(), 1249);
+    EXPECT_EQ(kings3.colex(), 1236);
+
+    // other examples
+    const CardSet aces("AcAh");
+    const CardSet bigSlick("AdKh");
+    const CardSet brunson("Ts2c");
+    EXPECT_EQ(aces.colex(), 715);
+    EXPECT_EQ(bigSlick.colex(), 691);
+    EXPECT_EQ(brunson.colex(), 1081);
 }

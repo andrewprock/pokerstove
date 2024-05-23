@@ -49,7 +49,7 @@ public:
 
     uint64_t mask() const { return _cardmask; }             //!< 1 bit per card
 
-    std::vector<Card> cards() const;                        //!< break into Cards
+    std::vector<Card> cards() const;                        //!< returns cards in code sorted order
     std::vector<CardSet> cardSets() const;                  //!< break into one card/CardSet
 
     /**

@@ -7,11 +7,22 @@
 
 #include <algorithm>
 #include <boost/lexical_cast.hpp>
+#include <boost/math/special_functions/binomial.hpp>
 #include <pokerstove/util/lastbit.h>
 #include <pokerstove/util/utypes.h>
 
 namespace pokerstove
 {
+
+// simple wrapper around boost's implementatoin to allow 0c1, etc
+inline double choose(int n, int m)
+{
+    // 4c8 is zero, you can't select 8 things from 4 items
+    return (n < m)
+        ? 0
+        : static_cast<size_t>(boost::math::binomial_coefficient<double>(n, m));
+}
+
 /**
  * Generates the set of all N choose K combinations of K
  * indices less than N.

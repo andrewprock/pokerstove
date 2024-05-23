@@ -6,7 +6,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/math/special_functions/binomial.hpp>
 #include <iostream>
 #include <vector>
 #include <pokerstove/peval/Card.h>
@@ -80,7 +79,7 @@ void CardDistribution::fill(const CardSet& cs, int n)
     vector<Card> cards = cs.cards();
     int setsize = static_cast<int>(cards.size());
     combinations hands(setsize, n);
-    int vsize = boost::math::binomial_coefficient<double>(setsize, n);
+    int vsize = choose(setsize, n);
     clear();
     _handList.reserve(vsize);
 

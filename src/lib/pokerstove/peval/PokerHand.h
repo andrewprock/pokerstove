@@ -19,6 +19,7 @@
  */
 namespace pokerstove
 {
+  // Maximum mubmer of cards in a poker hand
   // we might possibly template the size here for performance
   // reasons, although if performance is an issue, it's probably
   // better to use a CardSet

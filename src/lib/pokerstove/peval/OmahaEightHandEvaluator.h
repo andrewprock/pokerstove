@@ -8,7 +8,7 @@
 #include "Holdem.h"
 #include "PokerEvaluationTables.h"
 #include "PokerHandEvaluator.h"
-#include <boost/math/special_functions/binomial.hpp>
+#include <pokerstove/util/combinations.h>
 
 inline int bottomRanks(int x, int n)
 {
@@ -70,7 +70,7 @@ public:
         // 4c2 combinations of hands cards,
         // board candidates are all Nc3 board candidates, where N is the size
         // of the board
-        double combos = boost::math::binomial_coefficient<double>(board.size(), 3);
+        double combos = choose(board.size(), 3);
         std::vector<CardSet> board_candidates(static_cast<size_t>(combos));
         std::vector<CardSet> hand_candidates(6);
         fillHands(hand_candidates, hand);
