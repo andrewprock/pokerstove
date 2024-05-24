@@ -110,9 +110,24 @@ public:
 
     /**
      * indexing utils
+     *
+     * see: https://en.wikipedia.org/wiki/Lexicographic_order#Colexicographic_order
      */
-    size_t colex() const;      //!< return a unique number based on cards
-    size_t rankColex() const;  //!< return a unique number based on ranks
+    size_t colex() const;           //!< return a unique number based on cards
+    size_t rankColex() const;       //!< return a unique number based on ranks
+
+    /**
+     * Recover the cards from a given colex, count of cards in lust must be specificed
+     */
+    static CardSet fromColex(size_t count, size_t colex);
+
+    /**
+     * Recover the cards from a given colex, count of cards in lust must be specificed
+     *
+     * The size of the deck is provided as the first argument, useful if missing cards,
+     * or a joker is in the deck.
+     */
+    static CardSet fromColex(size_t size, size_t count, size_t colex);
 
     /**
      * These are the basic building blocks of evaluation, they should

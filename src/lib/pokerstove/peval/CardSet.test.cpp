@@ -104,3 +104,24 @@ TEST(CardSetTest, colex)
     EXPECT_EQ(bigSlick.colex(), 691);
     EXPECT_EQ(brunson.colex(), 1081);
 }
+
+TEST(CardSetTest, fromColex)
+{
+    CardSet cards = CardSet::fromColex(7, 4, 22);
+    CardSet target(0x01<<0 | 0x01<<3 | 0x01<<4 | 0x01<<6);
+    EXPECT_EQ(cards, target);
+
+    const CardSet aces("AcAh");
+    const CardSet result = CardSet::fromColex(52, 2, aces.colex());
+    EXPECT_EQ(result,  aces);
+
+    const CardSet bigSlick("AdKh");
+    EXPECT_EQ(CardSet::fromColex(52, 2, bigSlick.colex()),  bigSlick);
+
+    const CardSet brunson("Ts2c");
+    EXPECT_EQ(CardSet::fromColex(52, 2, brunson.colex()),  brunson);
+
+    const CardSet fourCardZero("2c3c4c5c");
+    const CardSet result2 = CardSet::fromColex(4, 0);
+    EXPECT_EQ(result2,  fourCardZero);
+}

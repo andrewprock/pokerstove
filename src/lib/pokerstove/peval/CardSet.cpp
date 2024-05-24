@@ -1353,3 +1353,79 @@ size_t CardSet::colex() const
     }
     return value;
 }
+
+CardSet CardSet::fromColex(size_t count, size_t colex)
+{
+    return fromColex(STANDARD_DECK_SIZE, count, colex);
+}
+
+CardSet CardSet::fromColex(size_t items, size_t count, size_t colex)
+{
+    if (count == 0) {
+        return CardSet();
+    }
+    // Inputs:
+    // N = number of items (deck size)
+    // K = count of cards (hand size)
+    // V = value of the colex
+    //
+    // basic approach:
+    // we have a list of K = count cards
+    // from a deck of N = items cards
+    //
+    // 1. build the list of accumulated counts:
+    // (K-1)c(K-1), (K)c(K-1) ... (N-1)c(K-1)
+    // Note: sum I in K..N-1 of Ic(K-1) = NcK
+    // This series determines the bin that the last card
+    // in the colex lands in.
+    //
+    // For example, for a deck of 7 cards of hand size 4, the series is:
+    // 3c3, 4c3, 5c3, 6c3
+    //   1,   4,  10,  20
+    // And 1+4+10+20 = 35 = 7c4
+    // The partial sums of the series are: 1, 5, 15, 35
+    // This defines four ranges for the code of the last
+    // card as follows:
+    // 3: [0]
+    // 4: [1-4]
+    // 5: [5-14]
+    // 6: [15-34]
+    //
+    // 2. Scan the list to find the right bin for the colex value V.
+    // X is the value selected, and will be from the bin that holds the value V
+    // For example, if searching for the colex 22, then it would be found in the
+    // bin for the item 6, which was a value used in building the colex.
+    //
+    // 3. Once the last card has been recovered, the process then recurses with:
+    //      N := X        can't have any cards as big as X
+    //      K := K-1      one less card in colex
+    //      V := V-X      colex value reduced by X
+    size_t N = items;
+    size_t K = count;
+    size_t V = colex;
+
+    // build list for bin ranges, note that we we prepend the list
+    // with a 0 entry to simplify logic for selecting bin values
+    size_t total = 0;
+    vector<size_t> bins;
+    bins.push_back(0); // store zero to make updating V easier
+    for (int n =  K-1; n<=N-1; n++) {
+        size_t bin = choose(n, K-1);
+        total += bin;
+        bins.push_back(total);
+    }
+    // we have the bins of the biggest index, find the right bin.
+    // instead of doing binary search, we just scan
+    size_t X = -1;
+    for (int i=1; i< bins.size()+1; i++) {
+        if (bins[i] > V) {
+            X = (i-1) + (K-1);
+            V = V - bins[i-1];
+            break;
+        }
+    }
+    CardSet found(ONE64<<X);
+
+    // use the found card and recurse for the rest
+    return found | fromColex(X, K-1, V);
+}
