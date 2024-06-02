@@ -1427,5 +1427,5 @@ CardSet CardSet::fromColex(size_t items, size_t count, size_t colex)
     CardSet found(ONE64<<X);
 
     // use the found card and recurse for the rest
-    return fromColex(X, K-1, V) | found
+    return fromColex(X, K-1, V) | found;
 }
