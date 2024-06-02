@@ -1394,7 +1394,7 @@ CardSet CardSet::fromColex(size_t items, size_t count, size_t colex)
     // 2. Scan the list to find the right bin for the colex value V.
     // X is the value selected, and will be from the bin that holds the value V
     // For example, if searching for the colex 22, then it would be found in the
-    // bin for the item 6, which was a value used in building the colex.
+    // bin for the item 6, which is the largest value used in building the colex.
     //
     // 3. Once the last card has been recovered, the process then recurses with:
     //      N := X        can't have any cards as big as X
@@ -1409,7 +1409,7 @@ CardSet CardSet::fromColex(size_t items, size_t count, size_t colex)
     size_t total = 0;
     vector<size_t> bins;
     bins.push_back(0); // store zero to make updating V easier
-    for (int n =  K-1; n<=N-1; n++) {
+    for (int n = K-1; n<=N-1; n++) {
         size_t bin = choose(n, K-1);
         total += bin;
         bins.push_back(total);
@@ -1427,5 +1427,5 @@ CardSet CardSet::fromColex(size_t items, size_t count, size_t colex)
     CardSet found(ONE64<<X);
 
     // use the found card and recurse for the rest
-    return found | fromColex(X, K-1, V);
+    return fromColex(X, K-1, V) | found
 }
