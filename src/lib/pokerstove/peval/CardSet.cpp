@@ -150,6 +150,7 @@ void CardSet::fromString(const string& instr)
             i -= 1;
             continue;
         }
+
         int code = Rank::rank_code(instr[i]) +
                    Suit::suit_code(instr[i + 1]) * Rank::NUM_RANK;
         uint64_t mask = (ONE64 << code);

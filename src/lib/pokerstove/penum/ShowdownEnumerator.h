@@ -22,6 +22,7 @@ public:
     std::vector<EquityResult>
     calculateEquity(const std::vector<CardDistribution>& dists,
                     const CardSet& board,
+                    const CardSet& dead_cards,
                     boost::shared_ptr<PokerHandEvaluator> peval) const;
 };
 }  // namespace pokerstove
