@@ -32,10 +32,8 @@
 %}
 
 // take care of some shared pointer issues
-// TODO: migrate to std::shared_ptr
-%include <boost_shared_ptr.i>
+%include <std_shared_ptr.i>
 %shared_ptr(pokerstove::PokerHandEvaluator)
-
 
 %include "pokerstove/peval/Rank.h"
 %include "pokerstove/peval/Suit.h"

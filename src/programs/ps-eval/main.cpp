@@ -46,8 +46,7 @@ int main(int argc, char** argv)
     bool quiet = vm.count("quiet") > 0;
 
     // allocate evaluator and create card distributions
-    boost::shared_ptr<PokerHandEvaluator> evaluator =
-        PokerHandEvaluator::alloc(game);
+    std::shared_ptr<PokerHandEvaluator> evaluator = PokerHandEvaluator::alloc(game);
     vector<CardDistribution> handDists;
     for (const string& hand : hands)
     {

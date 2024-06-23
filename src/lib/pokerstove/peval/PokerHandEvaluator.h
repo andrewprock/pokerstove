@@ -8,7 +8,7 @@
 #include "CardSet.h"
 #include "PokerHandEvaluation.h"
 #include <boost/lexical_cast.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -98,7 +98,7 @@ public:
      * - 'e'    stud/8
      * - 'b'    badugi
      */
-    typedef boost::shared_ptr<PokerHandEvaluator> eval_ptr;
+    typedef std::shared_ptr<PokerHandEvaluator> eval_ptr;
     static eval_ptr alloc(const std::string& strid);
 
     /**

@@ -21,7 +21,7 @@ ShowdownEnumerator::ShowdownEnumerator() {}
 
 vector<EquityResult> ShowdownEnumerator::calculateEquity(const vector<CardDistribution>& dists,
                                                          const CardSet& board,
-                                                         boost::shared_ptr<PokerHandEvaluator> peval) const
+                                                         std::shared_ptr<PokerHandEvaluator> peval) const
 {
     if (peval.get() == NULL)
         throw runtime_error("ShowdownEnumerator, null evaluator");

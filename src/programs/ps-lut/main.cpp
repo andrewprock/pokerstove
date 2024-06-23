@@ -1,6 +1,5 @@
 #include <boost/format.hpp>
 #include <boost/program_options.hpp>
-#include <boost/shared_ptr.hpp>
 #include <iostream>
 #include <pokerstove/peval/Card.h>
 #include <pokerstove/peval/CardSet.h>
