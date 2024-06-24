@@ -167,3 +167,7 @@ For regular use you'll want to export the PYTHONPATH variable to your
 shell:
 
     export PYTHONPATH=~/git/pokerstove/build/python/pokerstove/
+
+# Breaking changes
+
+Version 1.2 will migrate from boost::shared_ptr to std::shared_ptr, breaking API compatibility.
