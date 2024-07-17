@@ -149,7 +149,7 @@ public:
     /**
      * used to add "draws" to draw games
      */
-    virtual void setNumDraws(size_t sz)
+    virtual void setNumDraws(size_t)
     {
         throw std::runtime_error("not implemented");
     }
