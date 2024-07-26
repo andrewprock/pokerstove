@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.0)
-
 # build the test
 file(GLOB test_sources *.test.cpp)
 add_executable(util_tests ${test_sources})

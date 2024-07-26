@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(pokerstove)
 
@@ -23,11 +23,10 @@ enable_testing()
 #
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
-find_package(Boost COMPONENTS program_options REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
+find_package(Boost CONFIG COMPONENTS program_options REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
-message(STATUS "Boost Include: ${Boost_INCLUDE_DIR}")
-message(STATUS "Boost Library Dirs: ${Boost_LIBRARY_DIRS}")
+message(STATUS "Boost Include: ${Boost_INCLUDE_DIRS}")
 message(STATUS "Boost Libraries: ${Boost_LIBRARIES}")
 
 # Also search for includes in PROJECT_BINARY_DIR to find config.h.
