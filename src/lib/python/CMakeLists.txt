@@ -28,6 +28,15 @@ swig_add_library(${PS_TARGET}
   LANGUAGE python
   OUTPUT_DIR ${PYTHON_PROJECT_DIR}
   SOURCES pokerstove.i)
+add_library(${PROJECT_NAMESPACE}::${PS_TARGET} ALIAS ${PS_TARGET})
+
+# note: macOS is APPLE and also UNIX !
+if(APPLE)
+  set_property(TARGET ${PS_TARGET} APPEND PROPERTY
+    LINK_FLAGS "-flat_namespace -undefined suppress"
+    )
+endif()
+
 
 # This is done to ensure that the .py wrapper and the .so file are in the
 # same location so that a properly set PYTHONPATH will pick them up.
