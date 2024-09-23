@@ -9,7 +9,7 @@ if(UNIX AND NOT APPLE)
   list(APPEND CMAKE_SWIG_FLAGS "-DSWIGWORDSIZE64")
 endif()
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
-list(APPEND CMAKE_SWIG_FLAGS "-py3" "-DPY3")
+list(APPEND CMAKE_SWIG_FLAGS "-DPY3")
 
 ### wrapping code below
 
@@ -46,6 +46,9 @@ set(LIBRARY_OUTPUT_PATH    ${CMAKE_BINARY_DIR}/python/${PYTHON_PROJECT})
 
 message(STATUS "PYTHON_PROJECT ${PYTHON_PROJECT_DIR}")
 message(STATUS "swig_add_library OUTPUT_DIR ${PYTHON_PROJECT_DIR}/${PS_TARGET}")
+
+file(GENERATE OUTPUT ${PYTHON_PROJECT_DIR}/__init__.py
+     CONTENT "__version__ = \"${PROJECT_VERSION}\"\nfrom .pokerstove import *\n")
 
 # This file is nested within the library source dir, so
 # look to the parent directory for the include files. The

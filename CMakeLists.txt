@@ -1,17 +1,19 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(pokerstove)
+project(
+    pokerstove
+    VERSION "1.2"
+    LANGUAGES CXX)
 
-# TODO: This flags only works for GCC compatible compilers (Clang, Intel).
-# TODO: This, ideally, should be per library requirement,
-#       but since all of them require C++11, the flag is set globally.
+#include(GNUInstallDirs)
+
+# set up some global compiler opions
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
-
-# TODO: Remove the deprecated register keywords
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register")
 
 # Set up gtest. This must be set up before any subdirectories are
 # added which will use gtest.
+# TODO: clean this up a bit, maybe make this optional?
 add_subdirectory(src/ext/googletest)
 include_directories(${GTEST_INCLUDE_DIRS})
 link_directories(${GTEST_LIBS_DIR})
@@ -45,8 +47,8 @@ add_subdirectory(src/lib)
 add_subdirectory(src/programs)
 
 # Add make install functionality
-install(TARGETS peval)
-install(TARGETS penum)
-install(TARGETS ps-colex)
-install(TARGETS ps-eval)
-install(TARGETS ps-lut)
+#install(TARGETS peval)
+#install(TARGETS penum)
+#install(TARGETS ps-colex)
+#install(TARGETS ps-eval)
+#install(TARGETS ps-lut)

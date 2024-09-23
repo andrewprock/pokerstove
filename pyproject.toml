@@ -1,0 +1,21 @@
+[build-system]
+requires = ["scikit-build-core", "swig"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pokerstove"
+version = "1.2"
+
+[tool.scikit-build]
+build-dir = "_build"
+wheel.packages = ["_build/python/pokerstove"]
+cmake.version = ">=3.5"
+cmake.build-type = "Release"
+build.targets = ["pokerstove"]
+install.components = ["pokerstove"]
+# build.verbose = true
+# logging.level = "DEBUG"
+
+[tool.scikit-build.cmake.define]
+BUILD_PYTHON = "ON"
+

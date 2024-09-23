@@ -156,6 +156,7 @@ If you would like to also build the Python library as well, append the
 directive when the first cmake invocation is run:
 
     cmake -DCMAKE_BUILD_TYPE=Release -S \. -B build -DBUILD_PYTHON=ON
+    cmake --build build --target all test -j 16
 
 Once you have built the project with Python support there will be a
 python loader file and a shared object file. To test run the script
@@ -167,6 +168,19 @@ For regular use you'll want to export the PYTHONPATH variable to your
 shell:
 
     export PYTHONPATH=~/git/pokerstove/build/python/pokerstove/
+
+## Python wheel package
+
+There is also a `pyproject.toml` file which can be used to create an
+installable wheel for the pythong package. The commands below can be
+used to build/install/verify the package.
+
+    pipx run build
+    python3 -m venv venv
+    . venv/bin/activate
+    pip install dist/pokerstove-1.2-cp310-cp310-linux_x86_64.whl
+    python src/lib/python/test-python
+    deactivate
 
 # Breaking changes
 

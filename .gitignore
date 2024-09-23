@@ -1,5 +1,7 @@
 *~
 build
+_build
+dist
 *.pyc
 *.vscode
 *.swp
