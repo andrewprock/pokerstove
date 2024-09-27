@@ -44,3 +44,9 @@ jobs:
     - name: Build Wheel
       run: pipx run build
 
+    - name: Install Wheel
+      run: pip install dist/pokerstove-*.whl 
+
+    - name: Test Wheel
+      run: python src/lib/python/test-python
+
