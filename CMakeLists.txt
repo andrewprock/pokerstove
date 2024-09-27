@@ -14,7 +14,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register")
 # Set up gtest. This must be set up before any subdirectories are
 # added which will use gtest.
 # TODO: clean this up a bit, maybe make this optional?
-add_subdirectory(src/ext/googletest)
 include_directories(${GTEST_INCLUDE_DIRS})
 link_directories(${GTEST_LIBS_DIR})
 add_definitions("-fPIC")
@@ -36,19 +35,24 @@ include_directories("${PROJECT_BINARY_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# This controls whether or not to build the python bridge
-if(BUILD_PYTHON)
-    add_subdirectory(src/lib/python)
-endif()
 
 # add the actual code
 include_directories(src/lib)
 add_subdirectory(src/lib)
-add_subdirectory(src/programs)
 
-# Add make install functionality
-#install(TARGETS peval)
-#install(TARGETS penum)
-#install(TARGETS ps-colex)
-#install(TARGETS ps-eval)
-#install(TARGETS ps-lut)
+# This controls whether or not we are building the python
+# binaries, and possibly the wheel file.
+# TODO: add a separate option for building the wheel vs. python
+if(BUILD_PYTHON)
+    add_subdirectory(src/lib/python)
+else()
+    # none of these are needed in the wheel file
+    add_subdirectory(src/programs)
+    add_subdirectory(src/ext/googletest)
+    # Add make install functionality
+    install(TARGETS peval)
+    install(TARGETS penum)
+    install(TARGETS ps-colex)
+    install(TARGETS ps-eval)
+    install(TARGETS ps-lut)
+endif()

@@ -171,6 +171,9 @@ shell:
 
 ## Python wheel package
 
+You will need to install pipx to build with scikit-build-core, using
+apt on Ubuntu and brew on MacOS.
+
 There is also a `pyproject.toml` file which can be used to create an
 installable wheel for the pythong package. The commands below can be
 used to build/install/verify the package.
@@ -178,7 +181,7 @@ used to build/install/verify the package.
     pipx run build
     python3 -m venv venv
     . venv/bin/activate
-    pip install dist/pokerstove-1.2-cp310-cp310-linux_x86_64.whl
+    pip install dist/pokerstove-*.whl
     python src/lib/python/test-python
     deactivate
 

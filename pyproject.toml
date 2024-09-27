@@ -13,6 +13,7 @@ cmake.version = ">=3.5"
 cmake.build-type = "Release"
 build.targets = ["pokerstove"]
 install.components = ["pokerstove"]
+sdist.exclude = ["src/programs", "android", "win32", "src/ext", "doc", ".*"]
 # build.verbose = true
 # logging.level = "DEBUG"
 
