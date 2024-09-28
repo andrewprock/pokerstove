@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.18)
 
 # find swig and python and configure them
 set(CMAKE_SWIG_FLAGS)
+set(UseSWIG_MODULE_VERSION 2)
 find_package(SWIG REQUIRED)
 include(UseSWIG)
 
@@ -26,9 +27,12 @@ set_property(SOURCE pokerstove.i PROPERTY SWIG_MODULE_NAME ${PS_TARGET})
 swig_add_library(${PS_TARGET}
   TYPE MODULE
   LANGUAGE python
-  OUTPUT_DIR ${PYTHON_PROJECT_DIR}
   SOURCES pokerstove.i)
 add_library(${PROJECT_NAMESPACE}::${PS_TARGET} ALIAS ${PS_TARGET})
+
+install(TARGETS ${PS_TARGET} DESTINATION . COMPONENT python)
+get_property(_support_files TARGET ${PS_TARGET} PROPERTY SWIG_SUPPORT_FILES)
+install(FILES "${_support_files}" DESTINATION . COMPONENT python)
 
 # note: macOS is APPLE and also UNIX !
 if(APPLE)

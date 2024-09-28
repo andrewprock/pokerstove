@@ -179,8 +179,7 @@ installable wheel for the pythong package. The commands below can be
 used to build/install/verify the package.
 
     pipx run build
-    python3 -m venv venv
-    . venv/bin/activate
+    python3 -m venv venv && . venv/bin/activate
     pip install dist/pokerstove-*.whl
     python src/lib/python/test-python
     deactivate

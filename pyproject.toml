@@ -7,16 +7,12 @@ name = "pokerstove"
 version = "1.2"
 
 [tool.scikit-build]
-build-dir = "_build"
-wheel.packages = ["_build/python/pokerstove"]
-cmake.version = ">=3.5"
-cmake.build-type = "Release"
+build-dir = "_build/{wheel_tag}"
+wheel.packages = []
+cmake.version = ">=3.15"
 build.targets = ["pokerstove"]
-install.components = ["pokerstove"]
+install.components = ["python"]
 sdist.exclude = ["src/programs", "android", "win32", "src/ext", "doc", ".*"]
-# build.verbose = true
-# logging.level = "DEBUG"
-
 [tool.scikit-build.cmake.define]
 BUILD_PYTHON = "ON"
 
