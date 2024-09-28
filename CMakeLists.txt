@@ -43,9 +43,11 @@ add_subdirectory(src/lib)
 # This controls whether or not we are building the python
 # binaries, and possibly the wheel file.
 # TODO: add a separate option for building the wheel vs. python
-if(BUILD_PYTHON)
+if(BUILD_PYTHON OR BUILD_WHEEL)
     add_subdirectory(src/lib/python)
-else()
+endif()
+
+if(NOT BUILD_WHEEL)
     # none of these are needed in the wheel file
     add_subdirectory(src/programs)
     add_subdirectory(src/ext/googletest)

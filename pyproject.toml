@@ -14,5 +14,5 @@ build.targets = ["pokerstove"]
 install.components = ["python"]
 sdist.exclude = ["src/programs", "android", "win32", "src/ext", "doc", ".*"]
 [tool.scikit-build.cmake.define]
-BUILD_PYTHON = "ON"
+BUILD_WHEEL = "ON"
 

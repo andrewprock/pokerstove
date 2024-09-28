@@ -2,6 +2,7 @@
 
 %include <stdint.i>
 %include <std_string.i>
+%include <std_vector.i>
 
 // NOTE: game evaluators are available through the
 //       PokerHandEvaluator factory
@@ -30,6 +31,9 @@
 #include "pokerstove/penum/SimpleDeck.hpp"
 #include "pokerstove/penum/CardDistribution.h"
 %}
+
+%template(CardVector) std::vector<pokerstove::Card>;
+%template(PokerEvaluationVector) std::vector<pokerstove::PokerEvaluation>;
 
 // take care of some shared pointer issues
 %include <std_shared_ptr.i>

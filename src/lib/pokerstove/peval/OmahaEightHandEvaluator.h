@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id: OmahaEightHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
 #ifndef PEVAL_OMAHAEIGHTHANDEVALUATOR_H_
 #define PEVAL_OMAHAEIGHTHANDEVALUATOR_H_
@@ -69,22 +68,27 @@ public:
         // generate the possible sub hands, player hand candidates are all
         // 4c2 combinations of hands cards,
         // board candidates are all Nc3 board candidates, where N is the size
-        // of the board
+        // of the board.
+        // If we have 0 cards, that is one case (no board). The case of 1 and
+        // two card boards is also supported for various test cases and outliers.
         double combos = choose(board.size(), 3);
+        if (combos == 0) combos = 1;
+
         std::vector<CardSet> board_candidates(static_cast<size_t>(combos));
         std::vector<CardSet> hand_candidates(6);
         fillHands(hand_candidates, hand);
         fillBoards(board_candidates, board);
 
         for (size_t i = 0; i < hand_candidates.size(); i++)
+        {
             for (size_t j = 0; j < board_candidates.size(); j++)
             {
                 PokerEvaluation e =
-                    CardSet(hand_candidates[i] | board_candidates[j])
-                        .evaluateHigh();
+                    CardSet(hand_candidates[i] | board_candidates[j]).evaluateHigh();
                 if (e > eval[0])
                     eval[0] = e;
             }
+        }
 
         // evaluate the low using brec's technique, see:
         // http://groups.google.com/group/rec.gambling.poker/msg/e8a3a7698d51f04a?dmode=source
@@ -202,7 +206,21 @@ public:
                 // fall through
 
             case 3:
-                candidates[0] = (clist[0] | clist[1] | clist[2]);
+                candidates[0] = clist[0] | clist[1] | clist[2];
+                break;
+
+            case 2:
+                candidates[0] = clist[0] | clist[1];
+                break;
+
+            case 1:
+                candidates[0] = clist[0];
+                break;
+
+            case 0:
+                candidates[0] = CardSet();
+                break;
+
         }
     }
 

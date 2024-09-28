@@ -7,6 +7,7 @@
 
 #include <stdexcept>
 #include <iostream>
+#include <vector>
 #include "PokerEvaluation.h"
 
 /**
@@ -58,6 +59,20 @@ namespace pokerstove
     bool highlow() const
     {
       return eval2 != PokerEvaluation();
+    }
+
+    int size() const
+    {
+      return highlow() ? 2 : 1;
+    }
+
+    std::vector<PokerEvaluation> evals() const
+    {
+      std::vector<PokerEvaluation> evals;
+      evals.push_back(eval1);
+      if (highlow())
+        evals.push_back(eval2);
+      return evals;
     }
 
     bool empty() const

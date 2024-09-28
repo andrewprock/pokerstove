@@ -178,9 +178,8 @@ There is also a `pyproject.toml` file which can be used to create an
 installable wheel for the pythong package. The commands below can be
 used to build/install/verify the package.
 
-    pipx run build
-    python3 -m venv venv && . venv/bin/activate
-    pip install dist/pokerstove-*.whl
+    git clean -fxd && pipx run build
+    python3 -m venv venv && . venv/bin/activate && pip install dist/pokerstove-*.whl
     python src/lib/python/test-python
     deactivate
 

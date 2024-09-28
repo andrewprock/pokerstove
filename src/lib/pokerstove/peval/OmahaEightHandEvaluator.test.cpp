@@ -12,6 +12,42 @@ TEST(OmahaEightHandEvaluator, Construct)
     EXPECT_EQ(5, eval.boardSize());
 }
 
+TEST(OmahaEightHandEvaluator, NoBoard)
+{
+    OmahaEightHandEvaluator oeval;
+    // KQ high and 44, with no low
+    CardSet c1("2c3cKhQd");
+    CardSet c2("4c5c4hTc");
+    CardSet board;
+
+    int KQbits = 0x01 << Rank::rank_code('K') | 0x01 << Rank::rank_code('Q');
+    EXPECT_EQ(0, oeval.evaluateHand(c1, board).low().code());
+    EXPECT_EQ(NO_PAIR, oeval.evaluateHand(c1, board).eval().type());
+    EXPECT_EQ(KQbits, oeval.evaluateHand(c1, board).eval().kickerBits());
+
+    EXPECT_EQ(0, oeval.evaluateHand(c2, board).low().code());
+    EXPECT_EQ(ONE_PAIR, oeval.evaluateHand(c2, board).eval().type());
+    EXPECT_EQ(Rank::Four(), oeval.evaluateHand(c2, board).eval().majorRank());
+}
+
+TEST(OmahaEightHandEvaluator, OneCardBoard)
+{
+    OmahaEightHandEvaluator oeval;
+    // KQ high and 44, with no low
+    CardSet c1("2c3cKhQd");
+    CardSet c2("4c5c4hTc");
+    CardSet board("Ks");
+
+    int KQbits = 0x01 << Rank::rank_code('K') | 0x01 << Rank::rank_code('Q');
+    EXPECT_EQ(0, oeval.evaluateHand(c1, board).low().code());
+    EXPECT_EQ(ONE_PAIR, oeval.evaluateHand(c1, board).eval().type());
+    EXPECT_EQ(Rank::King(), oeval.evaluateHand(c1, board).eval().majorRank());
+
+    EXPECT_EQ(0, oeval.evaluateHand(c2, board).low().code());
+    EXPECT_EQ(ONE_PAIR, oeval.evaluateHand(c2, board).eval().type());
+    EXPECT_EQ(Rank::Four(), oeval.evaluateHand(c2, board).eval().majorRank());
+}
+
 TEST(OmahaEightHandEvaluator, SplitPot)
 {
     OmahaEightHandEvaluator eval;
