@@ -42,6 +42,27 @@ string Rank::str() const
     return "?";
 }
 
+string Rank::rankStr() const
+{
+    switch (_rank)
+    {
+        case RANK_TWO:      return "Two";
+        case RANK_THREE:    return "Three";
+        case RANK_FOUR:     return "Four";
+        case RANK_FIVE:     return "Five";
+        case RANK_SIX:      return "Six";
+        case RANK_SEVEN:    return "Seven";
+        case RANK_EIGHT:    return "Eight";
+        case RANK_NINE:     return "Nine";
+        case RANK_TEN:      return "Ten";
+        case RANK_JACK:     return "Jack";
+        case RANK_QUEEN:    return "Queen";
+        case RANK_KING:     return "King";
+        case RANK_ACE:      return "Ace";
+    }
+    return "?";
+}
+
 void Rank::fromString(const string& c)
 {
     int code = rank_code(c[0]);

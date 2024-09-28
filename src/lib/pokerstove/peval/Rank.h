@@ -78,6 +78,12 @@ public:
     std::string str() const;
 
     /**
+     * Encode rank as a string.  A string of length one from [2-9TJQKA]
+     * will be returned.
+     */
+    std::string rankStr() const;
+
+    /**
      * Parse from input string. Only the first letter of the input
      * string is examined, and must be in [2-9tTjJqQkKaA] for a valid
      * Rank object to be created.

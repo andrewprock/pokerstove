@@ -127,7 +127,20 @@ namespace pokerstove
     void operator--()                    { --_evalcode; }
 #endif
 
+    /**
+     * Structured output suitable for fixed with tables
+     */
     std::string toStringCannon () const;
+
+    /**
+     * More user friendly string.
+     */
+    std::string toStringPretty () const;
+
+    /**
+     * Just the type of hand as a string.
+    */
+    std::string handType() const;
 
   private:
     // table generation code, these should not be in this class.  make them private for now

@@ -296,6 +296,25 @@ string PokerEvaluation::makeRankString(int r, bool acelow) const
     return rank.str();
 }
 
+std::string PokerEvaluation::handType() const
+{
+    switch (type()) {
+        case  0: return "No Pair";
+        case  1: return "One Pair";
+        case  2: return "Three Flush";
+        case  3: return "Three Straight";
+        case  4: return "Two Pair";
+        case  5: return "Three Of A Kind";
+        case  6: return "Three Straight Flush";
+        case  7: return "Straight";
+        case  8: return "Flush";
+        case  9: return "Full House";
+        case 10: return "Four Of A Kind";
+        case 11: return "Straight Flush";
+        default: return "Unknown Type";
+    }
+}
+
 string PokerEvaluation::strKickers(int n) const
 {
     string out;
@@ -365,18 +384,18 @@ string PokerEvaluation::str() const
 
 string PokerEvaluation::toStringCannon() const
 {
-  const string highcard       = "high card:    ";
-  const string onepair        = "one pair:     ";
-  const string threeflush     = "three flush:  ";
-  const string threestraight  = "three str8:   ";
-  const string twopair        = "two pair:     ";
-  const string trips          = "trips:        ";
-  const string threestr8flush = "3 str8 flush: ";
-  const string straight       = "straight:     ";
-  const string flush          = "flush:        ";
-  const string fullhouse      = "full house:   ";
-  const string quads          = "quads:        ";
-  const string straightflush  = "str8 flush:   ";
+    const string highcard       = "high card:    ";
+    const string onepair        = "one pair:     ";
+    const string threeflush     = "three flush:  ";
+    const string threestraight  = "three str8:   ";
+    const string twopair        = "two pair:     ";
+    const string trips          = "trips:        ";
+    const string threestr8flush = "3 str8 flush: ";
+    const string straight       = "straight:     ";
+    const string flush          = "flush:        ";
+    const string fullhouse      = "full house:   ";
+    const string quads          = "quads:        ";
+    const string straightflush  = "str8 flush:   ";
 
     string ret;
     int n = _evalcode;
@@ -465,6 +484,120 @@ string PokerEvaluation::toStringCannon() const
 
     string ranks = topr + botr + kick;
     ret = (boost::format("%s %-5s") % hand % ranks).str();
+
+    return ret;
+}
+
+string PokerEvaluation::toStringPretty() const
+{
+    const string highcard       = "High card: ";
+    const string onepair        = "One pair: ";
+    const string threeflush     = "Three flush: ";
+    const string threestraight  = "Three straight: ";
+    const string twopair        = "Two pair: ";
+    const string trips          = "Three of a kind: ";
+    const string threestr8flush = "Three straight flush: ";
+    const string straight       = "Straight: ";
+    const string flush          = "Flush: ";
+    const string fullhouse      = "Full house: ";
+    const string quads          = "Four of a kind: ";
+    const string straightflush  = "Straight flush: ";
+
+    string ret;
+    int n = _evalcode;
+
+    if (isFlipped())
+    {
+        PokerEvaluation e(_evalcode);
+        e.flip();
+        return e.toStringPretty();
+    }
+
+    string hand;
+    string topr;
+    string botr;
+    string kick;
+
+    int val = n >> 24;
+    switch (val)
+    {
+        case NO_PAIR:
+            hand += highcard;
+            kick += strKickers(n);
+            break;
+
+        case ONE_PAIR:
+            hand += onepair;
+            topr += Rank(strTop(n)).rankStr() + "s";
+            if (strKickers(n).size() == 1)
+                kick += ", " + strKickers(n) + " kicker";
+            if (strKickers(n).size() > 1)
+                kick += ", " + strKickers(n) + " kickers";
+            break;
+
+        case THREE_FLUSH:
+            hand += threeflush;
+            kick += strKickers(n);
+            break;
+
+        case THREE_STRAIGHT:
+            hand += threestraight;
+            topr += " to the " + Rank(strTop(n)).rankStr();
+            break;
+
+        case TWO_PAIR:
+            hand += twopair;
+            topr += Rank(strTop(n)).rankStr() + "s and ";
+            botr += strBot(n) + "s";
+            if (strKickers(n).size() == 1)
+                kick += ", " + strKickers(n) + " kicker";
+            break;
+
+        case THREE_OF_A_KIND:
+            hand += trips;
+            topr += Rank(strTop(n)).rankStr() + "s";
+            if (strKickers(n).size() == 1)
+                kick += ", " + strKickers(n) + " kicker";
+            if (strKickers(n).size() > 1)
+                kick += ", " + strKickers(n) + " kickers";
+            break;
+
+        case THREE_STRAIGHT_FLUSH:
+            hand += threestr8flush;
+            topr += " to the " + Rank(strTop(n)).rankStr();
+            break;
+
+        case STRAIGHT:
+            hand += straight;
+            topr += " to the " + Rank(strTop(n)).rankStr();
+            break;
+
+        case FLUSH:
+            hand += flush;
+            topr += strKickers(n);
+            break;
+
+        case FULL_HOUSE:
+            hand += fullhouse;
+            topr += Rank(strTop(n)).rankStr() + "s over ";
+            botr += Rank(strBot(n)).rankStr() + "s";
+            break;
+
+        case FOUR_OF_A_KIND:
+            hand += quads;
+            topr += Rank(strTop(n)).rankStr() + "s";
+            if (strKickers(n).size() > 0)
+                kick += ", " + strKickers(n) + " kicker";
+            break;
+
+        case STRAIGHT_FLUSH:
+            hand += straightflush;
+            kick += " to the " + Rank(strTop(n)).rankStr();
+            break;
+    }
+
+    string ranks = topr + botr + kick;
+    ret = (boost::format("%s%-5s") % hand % ranks).str();
 
     return ret;
 }
