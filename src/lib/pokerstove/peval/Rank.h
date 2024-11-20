@@ -117,7 +117,9 @@ private:
      * to these functions to friends.
      */
     void    encode(uint8_t c) { _rank = c%NUM_RANK; }          // was encode
+public:
     uint8_t code() const      { return _rank; }
+private:
     int     rankBit() const   { return 0x01 << _rank; }
 
     static bool isRankChar(char c);

@@ -6,6 +6,7 @@ r2 = Rank(4)
 r3 = Rank('4')
 print('-- rank --')
 print(r1, r2, r3)
+s = {r1, r2, r3}
 
 s1 = Suit()
 s2 = Suit(2)
@@ -18,6 +19,8 @@ c2 = Card(2)
 c3 = Card('As')
 print('-- cards --')
 print(c1, c2, c3)
+s = {c1, c2, c3}
+l = [c1, c2, c3]
 
 cs1 = CardSet()
 cs2 = CardSet(0x8E)
@@ -27,6 +30,7 @@ cs5 = CardSet('Ac8dKc')
 print('-- card sets --')
 print('empty card set: ', cs1)
 print(cs2, cs3, cs4)
+s = {cs1, cs2, cs3, cs4, cs5}
 
 e1 = PokerEvaluation()
 e2 = PokerEvaluation(26214408)
@@ -97,5 +101,4 @@ print('holdem: ', pocket, flop)
 print('dealt (dead): ', dead)
 print('deck: ', d)
 
-print('-- card distribution --')
 

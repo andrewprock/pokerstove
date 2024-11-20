@@ -1,13 +1,11 @@
 PokerStove
 ==========
 
-[![OpenHUB Metrics](https://www.openhub.net/p/pokerstove/widgets/project_thin_badge.gif)](https://www.openhub.net/p/pokerstove)
+Code available at: https://github.com/andrewprock/pokerstove
 
-PokerStove is a highly hand optimized C++ poker hand evaluation library.  The Win32 Hold'em
-GUI was first released in 2002, and has been available as freeware since
-it's first release.
+PokerStove is a highly hand optimized C++ poker hand evaluation library.
 
-The core libraries of pokerstove are being open sourced.  The project is
+The core libraries of pokerstove have been open sourced.  The project is
 currently in the process of reviewing and publishing the code.  As code is
 reviewed and code sanitized further commits will be added.
 
@@ -162,7 +160,7 @@ Once you have built the project with Python support there will be a
 python loader file and a shared object file. To test run the script
 from the build directory:
 
-    PYTHONPATH=python/pokerstove/ ../src/lib/python/test-python
+    PYTHONPATH=build/python/pokerstove/ ./src/lib/python/test-python
 
 For regular use you'll want to export the PYTHONPATH variable to your
 shell:
@@ -179,7 +177,8 @@ installable wheel for the pythong package. The commands below can be
 used to build/install/verify the package.
 
     git clean -fxd && pipx run build
-    python3 -m venv venv && . venv/bin/activate && pip install dist/pokerstove-*.whl
+    python3 -m venv venv && . venv/bin/activate
+    pip install dist/pokerstove-*.whl
     python src/lib/python/test-python
     deactivate
 

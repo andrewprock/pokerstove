@@ -49,6 +49,12 @@ public:
 
     uint64_t mask() const { return _cardmask; }             //!< 1 bit per card
 
+    /**
+     * needed for SWIG, this will truncate if sizeof(long) < 8 bytes. This should be ok
+     * as hashes are not expected to be unique for python.
+     */
+    long getHash() { return (long)_cardmask; }
+
     std::vector<Card> cards() const;                        //!< returns cards in code sorted order
     std::vector<CardSet> cardSets() const;                  //!< break into one card/CardSet
 

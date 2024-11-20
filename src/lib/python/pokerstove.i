@@ -55,16 +55,22 @@
 
 // support __repr__() with extension boilerplate
 %extend pokerstove::Rank {
-std::string __repr__()
-{
+std::string __repr__() {
     return $self->str();
+}
+
+long __hash__() {
+    return (long)$self->code();
 }
 }
 
 %extend pokerstove::Suit {
-std::string __repr__()
-{
+std::string __repr__() {
     return $self->str();
+}
+
+long __hash__() {
+    return (long)$self->code();
 }
 }
 
@@ -73,12 +79,21 @@ std::string __repr__()
 {
     return $self->str();
 }
+
+long __hash__() {
+    return (long)$self->code();
+}
 }
 
 %extend pokerstove::CardSet {
-std::string __repr__()
-{
+std::string __repr__() {
     return $self->str();
+}
+
+// this will truncate if sizeof(long) < 8 bytes. This should be ok
+// as hashes are not expected to be unique for python.
+long __hash__() {
+    return (long)$self->mask();
 }
 }
 

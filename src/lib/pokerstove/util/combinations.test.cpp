@@ -20,7 +20,7 @@ TEST(Combinations, time_boost)
     for (int i=0; i<6000; i++) {
         for (int k=0; k<10; k++) {
             for (int n=k; n<10; n++) {
-                static_cast<size_t>(boost::math::binomial_coefficient<double>(n, k));
+                (void)static_cast<size_t>(boost::math::binomial_coefficient<double>(n, k));
             }
         }
     }
