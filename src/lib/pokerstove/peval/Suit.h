@@ -95,13 +95,14 @@ public:
     void operator--()                    { --_suit; }
 #endif
 
+    uint8_t code() const        { return _suit; }
+
 private:
     /**
      * We break encapsulation with these methods.  To limit the
      * effects of leakage, we limit access to these functions to
      * friends.
      */
-    uint8_t code() const        { return _suit; }
     void    encode(uint8_t c)   { _suit = c; }
     int     suitBit() const     { return 0x01 << _suit * 3; }
 
