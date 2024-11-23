@@ -26,7 +26,7 @@ std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc (const string & in
 {
   string strid = input;
   boost::algorithm::to_lower(strid); // modifies str
-  std::shared_ptr<PokerHandEvaluator> ret;
+  std::shared_ptr<PokerHandEvaluator> ret = nullptr;
   switch (strid[0])
     {
     case 'h':		//     hold'em
@@ -111,6 +111,8 @@ std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc (const string & in
       ret.reset (new BadugiHandEvaluator);
       break;
 
+    default:
+      return ret;
     }
 
   ret->_subclassID = strid;
