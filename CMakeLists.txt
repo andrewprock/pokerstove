@@ -11,11 +11,6 @@ project(
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register")
 
-# Set up gtest. This must be set up before any subdirectories are
-# added which will use gtest.
-# TODO: clean this up a bit, maybe make this optional?
-include_directories(${GTEST_INCLUDE_DIRS})
-link_directories(${GTEST_LIBS_DIR})
 add_definitions("-fPIC")
 enable_testing()
 
